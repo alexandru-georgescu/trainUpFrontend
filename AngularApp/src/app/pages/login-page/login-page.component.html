@@ -1,16 +1,23 @@
 <form id="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-    <div>
-        <label> Email </label>
-        <input type="text" placeholder="username" formControlName="email" autocomplete="username"/>
+    <div class="form-group flex">
+        <!-- <label> Email </label> -->
+        <i class="fa fa-user icon" aria-hidden="true"></i>
+        <input type="text" placeholder="email" formControlName="email" autocomplete="email"/>
+        <span *ngIf="submitted && controls.email.errors?.required"> Email is required. </span>
     </div>
 
-    <div>
-        <label> Password </label>
+    <div class="form-group flex">
+        <!-- <label> Password </label> -->
+        <i class="fa fa-lock icon" aria-hidden="true"></i>
         <input type="password" placeholder="password" formControlName="password" autocomplete="current-password"/>
+        <span *ngIf="submitted && controls.password.errors?.required"> Password is required. </span>
     </div>
-
 
     <button type="submit">Login</button>
+    <span *ngIf="wrongInput">Wrong email or password. Try again!</span>
+    <div class="text-container">
+        <span>You don't have an account?&nbsp;</span>
+        <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+    </div>
 
 </form>
