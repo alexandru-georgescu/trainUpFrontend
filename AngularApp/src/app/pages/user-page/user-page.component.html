@@ -11,16 +11,13 @@
           </tr>
         </thead>
         <tbody>
-          user: {{user | async}}
-          <div *ngIf="user | async as users ">
-            <tr *ngFor="let usr of users">
-              <td>{{ usr.email }}</td>
-              <td>{{ usr.firstName }}</td>
-              <td>{{ usr.lastName }}</td>
-              <td>{{ usr.password }}</td>
-              <td *ngFor="let course of usr.courses">{{ course.courseName }}</td>
-            </tr>
-        </div>
+          <tr *ngIf="user!==undefined">
+            <td>{{ user.email }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.password }}</td>
+            <td *ngFor="let course of user.courses">{{ course.courseName }}</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -16,7 +16,7 @@ export class LoginPageComponent implements OnInit {
   
   
   loginForm : FormGroup;
-  user : User[];
+  user : User;
   submitted = false;
   wrongInput = false;
 
@@ -52,7 +52,7 @@ export class LoginPageComponent implements OnInit {
     let url = 'http://localhost:8080/login?username=' + this.controls.email.value + '&password=' + this.controls.password.value;
     this.userService.findAll(url).subscribe(data => {
       this.user = data;
-      if (this.user == null) {
+      if (this.user == null || this.user == undefined) {
         this.controls.email.setValue('');
         this.controls.password.setValue('');
         this.submitted = false;
@@ -60,7 +60,7 @@ export class LoginPageComponent implements OnInit {
         
       } else {
         this.router.navigate(['/user']);
-        this.shareUser.getUserData(this.user);
+        this.shareUser.setUserData(this.user);
       }
     });
   }

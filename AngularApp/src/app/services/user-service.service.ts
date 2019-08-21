@@ -9,8 +9,8 @@ export class UserService {
   constructor(private http: HttpClient) { 
   }
 
-  public findAll(usersUrl: string) : Observable<User[]> {
-    return this.http.get<User[]>(usersUrl);
+  public findAll(usersUrl: string) : Observable<User> {
+    return this.http.get<User>(usersUrl);
   }
 
   // public save (user:User) {

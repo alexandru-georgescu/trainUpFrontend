@@ -11,12 +11,12 @@ import { ShareServiceService } from 'src/app/services/share-service.service';
 export class UserPageComponent implements OnInit {
 
 
-  user: User[];
+  user: User;
 
-  constructor(private shareUser: ShareServiceService) { }
+  constructor(private shareUser: ShareServiceService) { 
+    this.user = shareUser.getUserData();
+  }
 
   ngOnInit() {
-    this.shareUser.getUserData$.subscribe((data) => {this.user = data, console.log(this.user)});
-    console.log(this.user); 
   }
 }

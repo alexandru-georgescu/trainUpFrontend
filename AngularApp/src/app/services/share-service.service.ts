@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { User } from '../models/user';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ShareServiceService {
   
-  getUserData$: Observable<any>;
-  private getUserDataSubject = new Subject<any>();
+  userData : User;
 
   constructor() {
-      this.getUserData$ = this.getUserDataSubject.asObservable();
+      this.userData = undefined;
   }
 
-  getUserData(data) {
-      this.getUserDataSubject.next(data);
+  setUserData(user: User){
+    this.userData= user;
+  }
+  getUserData(){
+    return this.userData;
   }
 }
