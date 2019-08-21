@@ -8,21 +8,13 @@ import { UserService } from './services/user-service.service';
 import { LoginPageComponent } from './pages/login-page/login-page.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
-import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
-import { UserPageComponent } from './pages/user-page/user-page.component';
-import { ShareServiceService } from './services/share-service.service';
-
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     TestPageComponent,
     LoginPageComponent,
-    RegisterPageComponent,
-    NotFoundPageComponent,
-    UserPageComponent
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +23,7 @@ import { ShareServiceService } from './services/share-service.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, ShareServiceService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
