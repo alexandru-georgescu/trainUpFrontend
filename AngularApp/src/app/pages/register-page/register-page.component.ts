@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -15,7 +16,8 @@ export class RegisterPageComponent implements OnInit {
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
     
    }
 
@@ -36,7 +38,7 @@ export class RegisterPageComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.registerForm.invalid || this.controls.password.value != this.controls.cPassword.value) { 
+    if (this.registerForm.invalid) { 
       return; 
     }
     
@@ -45,6 +47,7 @@ export class RegisterPageComponent implements OnInit {
     console.log(this.controls.password.value);
     
     this.register();
+    this.router.navigate(['/login']);
   }
   
   register() {
