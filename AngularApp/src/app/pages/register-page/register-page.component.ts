@@ -42,10 +42,6 @@ export class RegisterPageComponent implements OnInit {
       return; 
     }
     
-    console.log('Submit button Works');
-    console.log(this.controls.email.value);
-    console.log(this.controls.password.value);
-    
     this.register();
     this.router.navigate(['/login']);
   }
@@ -58,7 +54,6 @@ export class RegisterPageComponent implements OnInit {
                '&confPassword=' + this.controls.cPassword.value;
      this.userService.findAll(url).subscribe(data => {
        this.user = data;
-       console.log(this.user);
      });
   }
 
