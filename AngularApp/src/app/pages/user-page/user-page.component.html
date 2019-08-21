@@ -1,0 +1,27 @@
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th> 
+            <th scope="col">Courses</th>
+          </tr>
+        </thead>
+        <tbody>
+          user: {{user | async}}
+          <div *ngIf="user | async as users ">
+            <tr *ngFor="let usr of users">
+              <td>{{ usr.email }}</td>
+              <td>{{ usr.firstName }}</td>
+              <td>{{ usr.lastName }}</td>
+              <td>{{ usr.password }}</td>
+              <td *ngFor="let course of usr.courses">{{ course.courseName }}</td>
+            </tr>
+        </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
