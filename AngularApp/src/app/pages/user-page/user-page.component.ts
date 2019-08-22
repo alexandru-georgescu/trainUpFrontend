@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { ShareServiceService } from 'src/app/services/share-service.service';
+import { Router } from '@angular/router';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 
 @Component({
@@ -13,10 +14,24 @@ export class UserPageComponent implements OnInit {
 
   user: User;
 
-  constructor(private shareUser: ShareServiceService) { 
-    this.user = shareUser.getUserData();
+  constructor(private router: Router,
+              private loginPage : LoginPageComponent,
+            ) { 
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    this.logout();
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.loginPage.loggedIn = false;
+    localStorage.setItem('loggedIn','false');
+    this.loginPage.alreadyLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 }

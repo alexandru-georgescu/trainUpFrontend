@@ -4,12 +4,14 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-  { path: 'user', component: UserPageComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginPageComponent},
   { path: 'register', component: RegisterPageComponent},
+  { path: 'user', canActivate: [AuthGuard], component: UserPageComponent},
   { path: '**', component : NotFoundPageComponent}
 
 ];

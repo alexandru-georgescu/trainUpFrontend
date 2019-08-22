@@ -10,8 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
-import { ShareServiceService } from './services/share-service.service';
-
+import { AuthGuard } from './auth.guard';
 
 
 
@@ -31,7 +30,7 @@ import { ShareServiceService } from './services/share-service.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, ShareServiceService],
+  providers: [AuthGuard, UserService, LoginPageComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
