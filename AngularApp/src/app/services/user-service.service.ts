@@ -24,10 +24,6 @@ export class UserService {
     const httpOptions = {
       headers: headers_object
     };
-    console.log("sadasdas");
-    console.log(headers_object.get('Content-Type'));
-    console.log(headers_object.get('Authorization'));
-    console.log(headers_object);
     return this.http.post<User>(Consts.backUrl + 'user/register', data, httpOptions);
   }
 

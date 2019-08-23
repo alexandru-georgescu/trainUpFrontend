@@ -44,8 +44,7 @@ export class RegisterPageComponent implements OnInit {
     }
 
     let user = new User(this.controls.email.value, this.controls.firstName.value, this.controls.lastName.value, this.controls.password.value);
-    console.log(user);
-     this.userService.register(user).subscribe(data => {
+    this.userService.register(user).subscribe(data => {
        this.user = data;
        if (this.user == null) {
           this.alreadyRegistered = true;
