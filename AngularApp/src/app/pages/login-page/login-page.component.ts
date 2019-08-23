@@ -3,9 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service.service';
 import { Router } from '@angular/router';
-import { ShareServiceService } from 'src/app/services/share-service.service';
-
-
 
 @Component({
   selector: 'app-login-page',
@@ -16,15 +13,18 @@ export class LoginPageComponent implements OnInit {
   
   
   loginForm : FormGroup;
-  user : User[];
+  user : User;
+  currentUser : User;
   submitted = false;
   wrongInput = false;
+  alreadyLoggedIn = false;
+  loggedIn = false;
 
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private router: Router,
-              private shareUser: ShareServiceService) {
+              private router: Router
+              ) {
     
    }
 
@@ -38,8 +38,6 @@ export class LoginPageComponent implements OnInit {
   get controls() {
     return this.loginForm.controls;
   }
-  
-
 
   onSubmit() {
     this.submitted = true;   
@@ -49,18 +47,27 @@ export class LoginPageComponent implements OnInit {
   }
   
   login() {
-    let url = 'http://localhost:8080/login?username=' + this.controls.email.value + '&password=' + this.controls.password.value;
-    this.userService.findAll(url).subscribe(data => {
+    let user = new User(this.controls.email.value, null, null, this.controls.password.value);
+    this.userService.login(user).subscribe(data => {
       this.user = data;
-      if (this.user == null) {
+      if (this.user == null || this.user == undefined) {
         this.controls.email.setValue('');
         this.controls.password.setValue('');
         this.submitted = false;
-        this.wrongInput = true;
-        
+        this.wrongInput = true;        
       } else {
-        this.router.navigate(['/user']);
-        this.shareUser.getUserData(this.user);
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (this.currentUser != null && this.currentUser.email == this.user.email) {
+          this.alreadyLoggedIn = true;
+          this.loggedIn = true;
+          localStorage.setItem('loggedIn','true');
+
+        } else {
+          this.loggedIn = true;
+          localStorage.setItem('loggedIn','true');
+          localStorage.setItem('currentUser', JSON.stringify(this.user));
+          this.router.navigate(['/user']);
+        }
       }
     });
   }

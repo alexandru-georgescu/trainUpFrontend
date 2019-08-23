@@ -1,9 +1,9 @@
+You are logged in as:
 <div class="card my-5">
     <div class="card-body">
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Password</th> 
@@ -11,17 +11,19 @@
           </tr>
         </thead>
         <tbody>
-          user: {{user | async}}
-          <div *ngIf="user | async as users ">
-            <tr *ngFor="let usr of users">
-              <td>{{ usr.email }}</td>
-              <td>{{ usr.firstName }}</td>
-              <td>{{ usr.lastName }}</td>
-              <td>{{ usr.password }}</td>
-              <td *ngFor="let course of usr.courses">{{ course.courseName }}</td>
-            </tr>
-        </div>
+          <tr *ngIf="user!==undefined">
+            <td>{{ user.firstName }} {{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.password }}</td>
+            <td *ngFor="let course of user.courses">{{ course.courseName }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
+</div>
+
+<form (ngSubmit)="onSubmit()">
+  <div>
+      <button type="submit">Logout</button>
   </div>
+</form>

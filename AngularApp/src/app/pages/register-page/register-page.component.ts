@@ -12,8 +12,9 @@ import { Router } from '@angular/router';
 export class RegisterPageComponent implements OnInit {
 
   registerForm : FormGroup;
-  user : User[];
+  user : User;
   submitted = false;
+  alreadyRegistered = false;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
@@ -41,25 +42,18 @@ export class RegisterPageComponent implements OnInit {
     if (this.registerForm.invalid) { 
       return; 
     }
-    
-    console.log('Submit button Works');
-    console.log(this.controls.email.value);
-    console.log(this.controls.password.value);
-    
-    this.register();
-    this.router.navigate(['/login']);
-  }
-  
-  register() {
-     let url = 'http://localhost:8080/register?email=' + this.controls.email.value +
-               '&firstName=' + this.controls.firstName.value +
-               '&lastName=' + this.controls.lastName.value + 
-               '&password=' + this.controls.password.value +
-               '&confPassword=' + this.controls.cPassword.value;
-     this.userService.findAll(url).subscribe(data => {
+
+    let user = new User(this.controls.email.value, this.controls.firstName.value, this.controls.lastName.value, this.controls.password.value);
+    console.log(user);
+     this.userService.register(user).subscribe(data => {
        this.user = data;
-       console.log(this.user);
+       if (this.user == null) {
+          this.alreadyRegistered = true;
+          return;
+       }
+       this.router.navigate(['/login']);
      });
+    
   }
 
 }
