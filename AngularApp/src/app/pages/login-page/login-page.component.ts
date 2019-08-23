@@ -47,9 +47,8 @@ export class LoginPageComponent implements OnInit {
   }
   
   login() {
-    
-    let url = 'http://localhost:8080/login?username=' + this.controls.email.value + '&password=' + this.controls.password.value;
-    this.userService.findAll(url).subscribe(data => {
+    let user = new User(this.controls.email.value, null, null, this.controls.password.value);
+    this.userService.login(user).subscribe(data => {
       this.user = data;
       if (this.user == null || this.user == undefined) {
         this.controls.email.setValue('');

@@ -41,10 +41,10 @@
         <div class="form-group flex">
             <div class="col">
                 <i class="fa fa-lock icon" aria-hidden="true"></i>
-                <input type="password" placeholder="Password" formControlName="password" autocomplete="off" pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}"/>
+                <input type="password" placeholder="Password" formControlName="password" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
                 <span *ngIf="submitted && controls.password.errors" class="invalid-feedback">
                     <span *ngIf="controls.password.errors.required">Password is required!</span>
-                    <span *ngIf="controls.password.errors.pattern">Password must contain at least one uppercase letter, one lowercase letter, one number and 6 or more characters!</span>
+                    <span *ngIf="controls.password.errors.pattern">Password must contain at least one uppercase letter, one lowercase letter, one number and 8 or more characters!</span>
                 </span>
             </div>
         </div>
@@ -58,6 +58,7 @@
                 </span>
             </div>
         </div>
+        <div *ngIf="alreadyRegistered" class="wrong-input">This e-mail is already registered!</div>
             <div class="register-button">
                 <button type="submit" class="button"><span>Register</span></button>
             </div>
