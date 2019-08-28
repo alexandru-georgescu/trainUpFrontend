@@ -1,0 +1,53 @@
+* {
+    font-family: 'Aleo', serif;
+}
+
+table {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+  
+  /* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.left_column {
+    position: absolute;
+    left: 50%;
+    width: 50%; 
+    height: 100%;
+    /* background-color: lightblue; */
+    background-position: 0 0; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+.fx-grayscale-logo {
+    width: 350px;
+    height: 350px;
+    margin-top: 20%;
+}
+
+.container-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mat-raised-button {
+    display: block;
+    margin: auto;
+    font-family: 'Aleo', serif;
+}

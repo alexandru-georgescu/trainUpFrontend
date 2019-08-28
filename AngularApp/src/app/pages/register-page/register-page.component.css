@@ -91,3 +91,36 @@
     color: red;
     margin-top: 10px;
 }
+
+.btn {
+    background-color:transparent !important;
+    text-transform: none;
+    text-decoration: none;
+    color: black;
+    box-shadow: none;
+    padding: 0cm;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.btn:hover {
+    box-shadow: none;
+}
+
+
+input:not([type]),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default), 
+input[type=email]:not(.browser-default), 
+input[type=url]:not(.browser-default), 
+input[type=time]:not(.browser-default), 
+input[type=date]:not(.browser-default), 
+input[type=datetime]:not(.browser-default), 
+input[type=datetime-local]:not(.browser-default), 
+input[type=tel]:not(.browser-default), 
+input[type=number]:not(.browser-default), 
+input[type=search]:not(.browser-default), 
+textarea.materialize-textarea {
+    width: 80%;
+    margin: 0 0 10px 0;
+}

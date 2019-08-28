@@ -40,9 +40,9 @@
     margin-left: 5px;
 }
 
-.btn-link {
-    padding: 0;
-}
+/* .btn-link {
+    padding: 10px;
+} */
 
 .login-button, .button {
     display: flex;
@@ -92,4 +92,19 @@
     justify-content: center;
     font-family: 'Aleo', serif;
     color: red;
+}
+
+.btn {
+    background-color:transparent !important;
+    text-transform: none;
+    text-decoration: none;
+    color: black;
+    box-shadow: none;
+    padding: 0cm;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.btn:hover {
+    box-shadow: none;
 }
