@@ -45,8 +45,8 @@ export class PmPageComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCourseComponent, {
-      width: '800px',
-      height: '300px',
+      width: '560px',
+      height: '350px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

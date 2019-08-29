@@ -24,9 +24,9 @@ import { ModalComponent } from './pages/tm-page/modal/modal.component';
 import { PmPageComponent } from './pages/pm-page/pm-page.component';
 import { SlidePanelComponent } from './pages/pm-page/slide-panel/slide-panel.component';
 import { AddCourseComponent } from './pages/pm-page/add-course/add-course.component';
-
-
-
+import { CourseService } from './services/course-service.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -61,9 +61,11 @@ import { AddCourseComponent } from './pages/pm-page/add-course/add-course.compon
     MatFormFieldModule,
     MatPaginatorModule, 
     MatTableModule, 
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [AuthGuard, UserService, LoginPageComponent],
+  providers: [AuthGuard, UserService, LoginPageComponent, CourseService],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent, AddCourseComponent]
 })
