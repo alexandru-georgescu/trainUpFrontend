@@ -1,0 +1,54 @@
+* {
+    font-family: 'Aleo', serif;
+}
+.inputs__container {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    margin-top: 50px;
+}
+
+.input {
+    width: 300px;
+    height: 35px;
+    border: 1px solid #9b9b9b;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 0 5px;
+    margin-bottom: 25px;
+    margin: 0 auto;
+}
+
+.input1 {
+    width: 300px;
+    height: 35px;
+    border: 1px solid #9b9b9b;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 0 5px;
+    margin-bottom: 25px;
+    margin-left: 100px;
+}
+
+.input--big {
+    width: 100%;
+}
+
+.modal__buttons {
+    display: flex;
+    margin-top: 25px;
+    justify-content: space-around;
+}
+
+.title {
+    margin-bottom: 15px;
+}
+
+.cancel-btn {
+    background-color:#ff6347;
+    font-family: 'Aleo', serif;
+}
+.add-btn {
+    background-color: #98fb98;
+    font-family: 'Aleo', serif;
+}
