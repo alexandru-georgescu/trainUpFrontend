@@ -11,9 +11,11 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { AuthGuard } from './auth.guard';
-
-
-
+import { TmPageComponent } from './pages/tm-page/tm-page.component';
+import { MatExpansionModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatTableModule, MatSortModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from 'src/material.module';
+import { ModalComponent } from './pages/tm-page/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -22,16 +24,27 @@ import { AuthGuard } from './auth.guard';
     LoginPageComponent,
     RegisterPageComponent,
     NotFoundPageComponent,
-    UserPageComponent
+    UserPageComponent,
+    TmPageComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatExpansionModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    MatFormFieldModule,
+    MatPaginatorModule, 
+    MatTableModule, 
+    MatSortModule
   ],
   providers: [AuthGuard, UserService, LoginPageComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

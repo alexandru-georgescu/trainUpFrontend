@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 * {
     margin: 0px; 
     padding: 0px; 
@@ -7,4 +8,8 @@ body {
     background: white;
     width: 100%;
     height: 100vh;
+}
+
+.mat-sort-header-container {
+    justify-content: center;
 }
