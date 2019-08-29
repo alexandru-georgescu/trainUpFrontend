@@ -10,10 +10,12 @@ export class User {
     courses: Course[];
 
     constructor (email : string,
+        type : string,
         firstName : string,
         lastName : string,
         password : string) {
             this.email = email;
+            this.type = type;
             this.firstName = firstName;
             this.lastName = lastName;
             this.password = password;
