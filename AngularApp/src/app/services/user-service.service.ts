@@ -64,7 +64,6 @@ export class UserService {
     const httpOptions = {
       headers: headers_object
     };
-    console.log(data);
     return this.http.post<User>(Consts.backUrl + 'user/wish', data, httpOptions);
   }
 
