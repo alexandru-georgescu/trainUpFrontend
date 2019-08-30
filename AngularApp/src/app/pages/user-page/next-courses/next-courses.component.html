@@ -9,6 +9,7 @@
                     <th scope="col">Start Date</th>
                     <th scope="col">End Date</th>
                     <th scope="col">Project Manager</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,7 @@
                   <td>{{ course.startDate }}</td>
                   <td>{{ course.endDate }}</td>
                   <td>{{ course.projectManager }}</td>
+                  <td> <button (click)="rowClick(course)"> Wish to enroll </button> </td>
                   </tr>
               </tbody>
         </table>

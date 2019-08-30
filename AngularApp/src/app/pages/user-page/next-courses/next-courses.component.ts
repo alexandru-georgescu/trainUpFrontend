@@ -20,9 +20,14 @@ export class NextCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.share.currentMessage.subscribe(data => this.user = JSON.parse(data));
-
-    this.userService.getFutureCourses().subscribe(data => {this.courses = data, console.log(this.courses)});
+    this.userService.getFutureCourses().subscribe(data => {this.courses = data});
     
+  }
+
+  rowClick(course: Course): void {
+    this.userService.addWishToEnroll(this.user, course).subscribe(data => this.user = data);
+    localStorage.setItem('currentUser', JSON.stringify(this.user));
+
   }
 
 }

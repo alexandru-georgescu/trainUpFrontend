@@ -12,11 +12,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>{{ user.firstName }} {{ user.lastName }} </td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.courses.courseName }}</td>
-                    <!-- <td *ngFor="let course of user.courses">{{ course.courseName }}</td> -->
+                <tr *ngFor="let course of courses">
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.capacity }}</td>
+                    <td>{{ course.actualCapacity }}</td>
+                    <td>{{ course.startDate }}</td>
+                    <td>{{ course.endDate }}</td>
+                    <td>{{ course.projectManager }}</td>
                 </tr>
             </tbody>
         </table>
