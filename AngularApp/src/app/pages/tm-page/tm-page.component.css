@@ -15,3 +15,22 @@
 table {
     display: inline;
 }
+
+/* LogOutButton */
+.userDetailsContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+
+.mat-icon-button {
+    width:0%;
+}
+
+.mat-menu-item {
+    background-color: none !important;
+}
+
+button.mat-menu-item{
+    background-color: white;
+}
