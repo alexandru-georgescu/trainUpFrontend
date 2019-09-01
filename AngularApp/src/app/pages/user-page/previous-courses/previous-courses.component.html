@@ -1,26 +1,22 @@
-<div class="card my-5">
-    <div class="card-body">
-        <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Course Name</th>
-                    <th scope="col">Capacity</th>
-                    <th scope="col">Available</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Project Manager</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let course of courses">
-                    <td>{{ course.courseName }}</td>
-                    <td>{{ course.capacity }}</td>
-                    <td>{{ course.actualCapacity }}</td>
-                    <td>{{ course.startDate }}</td>
-                    <td>{{ course.endDate }}</td>
-                    <td>{{ course.projectManager }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<table matSort (matSortChange)="sortData($event)" class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th mat-sort-header="courseName">Course Name</th>
+            <th mat-sort-header="capacity">Capacity</th>
+            <th mat-sort-header="actualCapacity">Available</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Project Manager</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of sortedData">
+            <td>{{ course.courseName }}</td>
+            <td>{{ course.capacity }}</td>
+            <td>{{ course.actualCapacity }}</td>
+            <td>{{ course.startDate }}</td>
+            <td>{{ course.endDate }}</td>
+            <td>{{ course.projectManager }}</td>
+        </tr>
+    </tbody>
+</table>

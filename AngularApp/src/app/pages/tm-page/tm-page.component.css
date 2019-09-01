@@ -1,9 +1,9 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 
-* {
+/* * {
     font-family: 'Aleo', serif;
-}
+} */
 
 .all-container {
     text-align: center;
@@ -33,4 +33,8 @@ table {
 
 button.mat-menu-item{
     background-color: white;
+}
+
+button:focus {
+    outline:0;
 }
