@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { UserService } from 'src/app/services/user-service.service';
 import { LoginPageComponent } from '../login-page/login-page.component';
 import { Router } from '@angular/router';
+import { Course } from 'src/app/models/course';
 
 @Component({
   selector: 'app-tm-page',
@@ -18,6 +19,8 @@ export class TmPageComponent implements OnInit {
   users: User[];
   sortedData: User[];
   user: User;
+  course: Course;
+  sentUser : User; //userul primit ca raspuns de la backend
   
   constructor(public dialog: MatDialog, 
     private userService: UserService,
@@ -46,7 +49,6 @@ export class TmPageComponent implements OnInit {
     
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.userService.getTMUsers(this.user.email).subscribe(data => {
-      
       this.users = data,
       this.sortedData = this.users.slice();
     });
@@ -63,9 +65,27 @@ export class TmPageComponent implements OnInit {
     this.loginPage.alreadyLoggedIn = false;
     this.router.navigate(['/login']);
   }
+
+  yesClick(user: User, course: Course): void {
+    this.userService.addWaitToEnroll(user, course).subscribe(data => this.sentUser = data);
+    this.userService.getTMUsers(this.user.email).subscribe(data => {
+      this.users = data,
+      this.sortedData = this.users.slice();
+      console.log('1');
+
+    });
+  }
+
+  noClick(user: User, course: Course): void {
+    this.userService.refuseToEnroll(user, course).subscribe(data => this.sentUser = data);
+    this.userService.getTMUsers(this.user.email).subscribe(data => {
+      this.users = data,
+      this.sortedData = this.users.slice();
+      console.log('2');
+    });
+  }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
-

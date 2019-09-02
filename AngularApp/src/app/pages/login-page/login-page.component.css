@@ -2,12 +2,6 @@
     margin-bottom: 10px;
 }
 
-.container-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .login-logo-container {
     background-color: lightblue;
     margin-bottom: 50px; 
@@ -16,11 +10,11 @@
 .fx-grayscale-logo {
     width: 350px;
     height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
-/* .content {
-    width: 350px;
-} */
 
 .icon {
     font-size: 24px;
@@ -39,10 +33,6 @@
     position: absolute;
     margin-left: 5px;
 }
-
-/* .btn-link {
-    padding: 10px;
-} */
 
 .login-button, .button {
     display: flex;
@@ -107,4 +97,22 @@
 
 .btn:hover {
     box-shadow: none;
+}
+
+.userDetailsContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+
+.mat-icon-button {
+    width:0%;
+}
+
+.mat-menu-item {
+    background-color: none !important;
+}
+ 
+button.mat-menu-item{
+    background-color: white;
 }

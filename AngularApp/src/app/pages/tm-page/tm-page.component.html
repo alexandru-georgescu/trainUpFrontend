@@ -43,8 +43,10 @@
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
           <td>{{ course.courseName }}</td>
-          <td><button type="button" class="btn btn-success">Yes</button><button type="button"
-              class="btn btn-danger">No</button></td>
+          <td>
+            <button type="button" class="btn btn-success" (click)="yesClick(user, course)">Yes</button>
+            <button type="button" class="btn btn-danger" (click)="noClick(user, course)">No</button>
+          </td>
         </tr>
       </ng-container>
     </tbody>

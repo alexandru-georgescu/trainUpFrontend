@@ -33,17 +33,6 @@ export class UserService {
     return this.http.post<User>(Consts.backUrl + 'user/login', data, httpOptions);
   }
 
-  public getFutureCourses(): Observable<Course[]> {
-    let headers_object = new HttpHeaders();
-    headers_object = headers_object.append('Content-Type', 'application/json');
-    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
-
-    const httpOptions = {
-      headers: headers_object
-    };
-    return this.http.get<Course[]>(Consts.backUrl + 'course', httpOptions);
-  }
-
   public addCourse(data: Course): Observable<Course> {
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
@@ -89,6 +78,17 @@ export class UserService {
     return this.http.post<Course[]>(Consts.backUrl + 'course/isBefore', data, httpOptions);
   }
 
+  public getFutureCourses(): Observable<Course[]> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.get<Course[]>(Consts.backUrl + 'course/isFuture', httpOptions);
+  }
+
   public getTMUsers(data : String): Observable<User[]> {
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
@@ -98,5 +98,29 @@ export class UserService {
       headers: headers_object
     };
     return this.http.get<User[]>(Consts.backUrl + 'user/findByLeader?leader=' + data, httpOptions);
+  }
+  
+  public addWaitToEnroll(user : User, course: Course) : Observable<User> {
+    let data = JSON.stringify({user : user, course : course});
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<User>(Consts.backUrl + 'user/waitToEnroll', data, httpOptions);
+  }
+
+  public refuseToEnroll(user : User, course: Course) : Observable<User> {
+    let data = JSON.stringify({user : user, course : course});
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<User>(Consts.backUrl + 'user/refuseToEnroll', data, httpOptions);
   }
 }

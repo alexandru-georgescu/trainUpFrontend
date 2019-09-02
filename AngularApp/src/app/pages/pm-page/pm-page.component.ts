@@ -41,8 +41,8 @@ export class PmPageComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.users = new Array();
-    let user1 = new User('a.b@trainup.com', 'USER', 'a', 'b', 'Alex1234', [], 't.m@trainup.com', []);
-    let user2 = new User('c.d@trainup.com', 'USER', 'c', 'd', 'Alex1234', [], 't.m@trainup.com', []);
+    let user1 = new User('a.b@trainup.com', 'USER', 'a', 'b', 'Alex1234', [], 't.m@trainup.com', [], []);
+    let user2 = new User('c.d@trainup.com', 'USER', 'c', 'd', 'Alex1234', [], 't.m@trainup.com', [], []);
 
     this.users.push(user1);
     this.users.push(user2);

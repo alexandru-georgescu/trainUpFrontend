@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent implements OnInit {
-  
-  
-  loginForm : FormGroup;
-  user : User;
-  currentUser : User;
+
+
+  loginForm: FormGroup;
+  user: User;
+  currentUser: User;
   submitted = false;
   wrongInput = false;
   alreadyLoggedIn = false;
@@ -22,17 +22,21 @@ export class LoginPageComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService,
-              private router: Router
-              ) {
-    
-   }
+    private userService: UserService,
+    private router: Router
+  ) {
+
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
-      });
+    });
+    if (localStorage.getItem('loggedIn') == 'true') {
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      this.loggedIn = Boolean(localStorage.getItem('loggedIn'));
+    }
   }
 
   get controls() {
@@ -40,48 +44,70 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;   
+    this.submitted = true;
     if (this.controls.email.value != '' && this.controls.password.value != '') {
       this.login();
-    } 
+    }
   }
-  
+
   login() {
-    let user = new User(this.controls.email.value,null, null, null, this.controls.password.value, [], 't.m@trainup.com', []);
+    let user = new User(this.controls.email.value, null, null, null, this.controls.password.value, [], 't.m@trainup.com', [], []);
     this.userService.login(user).subscribe(data => {
       this.user = data;
       if (this.user == null || this.user == undefined) {
         this.controls.email.setValue('');
         this.controls.password.setValue('');
         this.submitted = false;
-        this.wrongInput = true;        
+        this.wrongInput = true;
       } else {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (this.currentUser != null && this.currentUser.email == this.user.email) {
           this.alreadyLoggedIn = true;
           this.loggedIn = true;
-          localStorage.setItem('loggedIn','true');
+          localStorage.setItem('loggedIn', 'true');
 
         }
-        else if (this.user.type === "PM"){
+        else if (this.user.type === "PM") {
           this.loggedIn = true;
-          localStorage.setItem('loggedIn','true');
+          localStorage.setItem('loggedIn', 'true');
           localStorage.setItem('currentUser', JSON.stringify(this.user));
           this.router.navigate(['/pm']);
         }
         else if (this.user.type === "USER") {
           this.loggedIn = true;
-          localStorage.setItem('loggedIn','true');
+          localStorage.setItem('loggedIn', 'true');
           localStorage.setItem('currentUser', JSON.stringify(this.user));
-          this.router.navigate(['/user']);
+          this.router.navigate(['/user/curr']);
         }
-        else if (this.user.type === "TM"){
+        else if (this.user.type === "TM") {
           this.loggedIn = true;
-          localStorage.setItem('loggedIn','true');
+          localStorage.setItem('loggedIn', 'true');
           localStorage.setItem('currentUser', JSON.stringify(this.user));
           this.router.navigate(['/tm']);
         }
       }
     });
+  }
+
+  goToMyPage() {
+    if (this.user.type == 'USER') {
+      this.router.navigate(['/user']);
+    }
+
+    if (this.user.type == 'TM') {
+      this.router.navigate(['/tm']);
+    }
+
+    if (this.user.type == 'PM') {
+      this.router.navigate(['/pm']);
+    }
+  }
+
+  logOut() {
+    localStorage.removeItem('currentUser');
+    this.loggedIn = false;
+    localStorage.setItem('loggedIn', 'false');
+    this.alreadyLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 }

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service.service';
 import { Router } from '@angular/router';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 @Component({
   selector: 'app-register-page',
@@ -15,10 +16,13 @@ export class RegisterPageComponent implements OnInit {
   user : User;
   submitted = false;
   alreadyRegistered = false;
+  loggedIn = false;
+
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private loginPage : LoginPageComponent) {
     
    }
 
@@ -30,6 +34,12 @@ export class RegisterPageComponent implements OnInit {
       password: ['', Validators.required],
       cPassword: ['', Validators.required]
       });
+      if (localStorage.getItem('loggedIn') == 'true') {
+        this.user = JSON.parse(localStorage.getItem('currentUser'));
+        this.loginPage.loggedIn = Boolean(localStorage.getItem('loggedIn'));
+        this.loggedIn = Boolean(localStorage.getItem('loggedIn'));
+
+      }
   }
 
   get controls() {
@@ -43,7 +53,7 @@ export class RegisterPageComponent implements OnInit {
       return; 
     }
 
-    let user = new User(this.controls.email.value, 'USER', this.controls.firstName.value, this.controls.lastName.value, this.controls.password.value, [], 't.m@trainup.com', []);
+    let user = new User(this.controls.email.value, 'USER', this.controls.firstName.value, this.controls.lastName.value, this.controls.password.value, [], 't.m@trainup.com', [], []);
     this.userService.register(user).subscribe(data => {
        this.user = data;
        if (this.user == null) {
@@ -53,6 +63,30 @@ export class RegisterPageComponent implements OnInit {
        this.router.navigate(['/login']);
      });
     
+  }
+
+  goToMyPage() {
+    if (this.user.type == 'USER') {
+      this.router.navigate(['/user']);
+    }
+
+    if (this.user.type == 'TM') {
+      this.router.navigate(['/tm']);
+    }
+
+    if (this.user.type == 'PM') {
+      this.router.navigate(['/pm']);
+    }
+  }
+
+  logOut() {
+    localStorage.removeItem('currentUser');
+    this.loginPage.loggedIn = false;
+    this.loggedIn = false;
+    localStorage.setItem('loggedIn', 'false');
+    this.loginPage.alreadyLoggedIn = false;
+    this.loggedIn = false;
+    this.router.navigate(['/login']);
   }
 
 }

@@ -2,12 +2,6 @@
     margin-bottom: 10px;
 }
 
-.container-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .login-logo-container {
     background-color: lightblue;
     margin-bottom: 50px;
@@ -16,6 +10,9 @@
 .fx-grayscale-logo {
     width: 350px;
     height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .icon {
@@ -123,4 +120,22 @@ input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
     width: 80%;
     margin: 0 0 10px 0;
+}
+
+.userDetailsContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+
+.mat-icon-button {
+    width:0%;
+}
+
+.mat-menu-item {
+    background-color: none !important;
+}
+ 
+button.mat-menu-item{
+    background-color: white;
 }
