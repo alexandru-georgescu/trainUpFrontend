@@ -3,6 +3,8 @@ import { User } from 'src/app/models/user';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material';
 import { AddCourseComponent } from './add-course/add-course.component';
+import { Router } from '@angular/router';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 
 @Component({
@@ -11,10 +13,13 @@ import { AddCourseComponent } from './add-course/add-course.component';
   styleUrls: ['./pm-page.component.css']
 })
 export class PmPageComponent implements OnInit {
+  user: User;
   users: User[];
   sortedData: User[];
-  
-  constructor(public dialog: MatDialog) {}
+
+  constructor(public dialog: MatDialog,
+    private router: Router,
+    private loginPage: LoginPageComponent) { }
 
   sortData(sort: Sort) {
     const data = this.users.slice();
@@ -34,11 +39,12 @@ export class PmPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.users = new Array();
-    let user = new User('a.b@trainup.com','USER', 'a', 'b', 'Alex1234');
-    let user2 = new User('c.d@trainup.com','USER', 'c', 'd', 'Alex1234');
+    let user1 = new User('a.b@trainup.com', 'USER', 'a', 'b', 'Alex1234', [], 't.m@trainup.com', []);
+    let user2 = new User('c.d@trainup.com', 'USER', 'c', 'd', 'Alex1234', [], 't.m@trainup.com', []);
 
-    this.users.push(user);
+    this.users.push(user1);
     this.users.push(user2);
     this.sortedData = this.users.slice();
   }
@@ -51,6 +57,18 @@ export class PmPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  onSubmit() {
+    this.logout();
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.loginPage.loggedIn = false;
+    localStorage.setItem('loggedIn', 'false');
+    this.loginPage.alreadyLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 
 
