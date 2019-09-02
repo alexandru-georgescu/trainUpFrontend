@@ -10,6 +10,7 @@ export class User {
     courses: Course[];
     leader: string;
     wishToEnroll: Course[];
+    waitToEnroll: Course[];
 
     constructor (email: string,
         type: string,
@@ -18,7 +19,8 @@ export class User {
         password : string,
         courses: Course[],
         leader: string,
-        wishToEnroll: Course[]) {
+        wishToEnroll: Course[],
+        waitToEnroll: Course[]) {
             this.email = email;
             this.type = type;
             this.firstName = firstName;
@@ -27,6 +29,7 @@ export class User {
             this.courses = courses;
             this.leader = leader;
             this.wishToEnroll = wishToEnroll;
+            this.waitToEnroll = waitToEnroll;
         }
 
 }
