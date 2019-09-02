@@ -3,7 +3,7 @@
     font-size: 15px;
 }
 
-.title {
+/* .title {
     font-size: 30px;
 }
 
@@ -35,7 +35,7 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0 5px;
-    height: 140px;
+    height: 100px;
 }
 
 .modal__buttons {
@@ -48,3 +48,16 @@
     background-color: gainsboro;
     font-family: 'Aleo', serif;
 }
+
+
+.mat-form-field {
+    width: 100%;
+}
+
+.time {
+    width: 40%;
+}
+
+.inputs_container {
+    justify-content: space-around;
+} */

@@ -47,7 +47,7 @@ export class LoginPageComponent implements OnInit {
   }
   
   login() {
-    let user = new User(this.controls.email.value,null, null, null, this.controls.password.value);
+    let user = new User(this.controls.email.value, null, null, null, this.controls.password.value, null, null, null);
     this.userService.login(user).subscribe(data => {
       this.user = data;
       if (this.user == null || this.user == undefined) {

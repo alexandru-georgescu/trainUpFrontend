@@ -35,8 +35,8 @@ export class PmPageComponent implements OnInit {
 
   ngOnInit() {
     this.users = new Array();
-    let user = new User('a.b@trainup.com','USER', 'a', 'b', 'Alex1234');
-    let user2 = new User('c.d@trainup.com','USER', 'c', 'd', 'Alex1234');
+    let user = new User('a.b@trainup.com','USER', 'a', 'b', 'Alex1234', null, null, null);
+    let user2 = new User('c.d@trainup.com','USER', 'c', 'd', 'Alex1234', null, null, null);
 
     this.users.push(user);
     this.users.push(user2);

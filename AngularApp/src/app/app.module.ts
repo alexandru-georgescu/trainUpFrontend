@@ -16,7 +16,7 @@ import { NextCoursesComponent } from './pages/user-page/next-courses/next-course
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatNativeDateModule, MatDatepickerModule } from '@angular/material';
 import { TmPageComponent } from './pages/tm-page/tm-page.component';
 import { MatExpansionModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatTableModule, MatSortModule} from '@angular/material';
 import { MaterialModule } from 'src/material.module';
@@ -24,9 +24,6 @@ import { ModalComponent } from './pages/tm-page/modal/modal.component';
 import { PmPageComponent } from './pages/pm-page/pm-page.component';
 import { SlidePanelComponent } from './pages/pm-page/slide-panel/slide-panel.component';
 import { AddCourseComponent } from './pages/pm-page/add-course/add-course.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -61,7 +58,9 @@ import { AddCourseComponent } from './pages/pm-page/add-course/add-course.compon
     MatFormFieldModule,
     MatPaginatorModule, 
     MatTableModule, 
-    MatSortModule
+    MatSortModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [AuthGuard, UserService, LoginPageComponent],
   bootstrap: [AppComponent],

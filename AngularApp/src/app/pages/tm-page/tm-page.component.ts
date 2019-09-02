@@ -2,13 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from 'src/app/pages/tm-page/modal/modal.component';
 import { User } from 'src/app/models/user';
-import {MatSort} from '@angular/material/sort';
+import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-const USERS: User[] = [
-  {id: 1, email: 'a.b@trainup.com', firstName: 'a', lastName: 'b', password: 'Alex1234', type: 'basic', courses: []},
-  {id: 2, email: 'b.c@trainup.com', firstName: 'b', lastName: 'c', password: 'Alex1234', type: 'basic', courses: []},
-];
+import { UserService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-tm-page',
@@ -17,26 +13,39 @@ const USERS: User[] = [
 })
 export class TmPageComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {}
+  users: User[];
+  sortedData: User[];
+  user: User;
   
-  displayedColumns: string[] = ['courses', 'firstName', 'lastName', 'email'];
-  dataSource = new MatTableDataSource(USERS);
+  constructor(public dialog: MatDialog, private userService: UserService) {}
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  sortData(sort: Sort) {
+    const data = this.users.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'firstName': return compare(a.firstName, b.firstName, isAsc);
+        case 'lastName': return compare(a.lastName, b.lastName, isAsc);
+        case 'email': return compare(a.email, b.email, isAsc);
+        default: return 0;
+      }
+    });
+  }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      width: '48%',
-      height: '85%',
-      position: {right: '1%'},
-      hasBackdrop: false,
-      disableClose: false
+    
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.userService.getTMUsers(this.user.email).subscribe(data => {
+      this.users = data,
+      this.sortedData = this.users.slice();
     });
-
   }
+}
 
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

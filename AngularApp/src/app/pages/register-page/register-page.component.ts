@@ -34,7 +34,7 @@ export class RegisterPageComponent implements OnInit {
 
   get controls() {
     return this.registerForm.controls;
-}
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -43,7 +43,7 @@ export class RegisterPageComponent implements OnInit {
       return; 
     }
 
-    let user = new User(this.controls.email.value, 'USER', this.controls.firstName.value, this.controls.lastName.value, this.controls.password.value);
+    let user = new User(this.controls.email.value, 'USER', this.controls.firstName.value, this.controls.lastName.value, this.controls.password.value, null, null, null);
     this.userService.register(user).subscribe(data => {
        this.user = data;
        console.log(this.user);
