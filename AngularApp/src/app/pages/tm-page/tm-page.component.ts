@@ -67,22 +67,22 @@ export class TmPageComponent implements OnInit {
   }
 
   yesClick(user: User, course: Course): void {
-    this.userService.addWaitToEnroll(user, course).subscribe(data => this.sentUser = data);
-    this.userService.getTMUsers(this.user.email).subscribe(data => {
-      this.users = data,
-      this.sortedData = this.users.slice();
-      console.log('1');
-
-    });
+    this.userService.addWaitToEnroll(user, course).subscribe(data => {
+      this.sentUser = data;
+      this.userService.getTMUsers(this.user.email).subscribe(data => {
+        this.users = data,
+        this.sortedData = this.users.slice();
+        console.log('1');
+      });});
   }
 
   noClick(user: User, course: Course): void {
-    this.userService.refuseToEnroll(user, course).subscribe(data => this.sentUser = data);
-    this.userService.getTMUsers(this.user.email).subscribe(data => {
-      this.users = data,
-      this.sortedData = this.users.slice();
-      console.log('2');
-    });
+    this.userService.refuseToEnroll(user, course).subscribe(data => {this.sentUser = data;
+      this.userService.getTMUsers(this.user.email).subscribe(data => {
+        this.users = data,
+        this.sortedData = this.users.slice();
+        console.log('2');
+      });});
   }
 }
 
