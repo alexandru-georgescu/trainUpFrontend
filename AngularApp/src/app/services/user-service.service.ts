@@ -78,7 +78,7 @@ export class UserService {
     return this.http.post<Course[]>(Consts.backUrl + 'course/isBefore', data, httpOptions);
   }
 
-  public getFutureCourses(): Observable<Course[]> {
+  public getFutureCourses(user : User): Observable<Course[]> {
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
     headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
@@ -86,7 +86,7 @@ export class UserService {
     const httpOptions = {
       headers: headers_object
     };
-    return this.http.get<Course[]>(Consts.backUrl + 'course/isFuture', httpOptions);
+    return this.http.post<Course[]>(Consts.backUrl + 'course/isFuture', user, httpOptions);
   }
 
   public getTMUsers(data : String): Observable<User[]> {
