@@ -49,7 +49,6 @@ export class TmPageComponent implements OnInit {
     
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.userService.getTMUsers(this.user.email).subscribe(data => {
-      
       this.users = data,
       this.sortedData = this.users.slice();
     });
@@ -69,16 +68,24 @@ export class TmPageComponent implements OnInit {
 
   yesClick(user: User, course: Course): void {
     this.userService.addWaitToEnroll(user, course).subscribe(data => this.sentUser = data);
-    //localStorage.setItem('currentUser', JSON.stringify(this.user));
+    this.userService.getTMUsers(this.user.email).subscribe(data => {
+      this.users = data,
+      this.sortedData = this.users.slice();
+      console.log('1');
+
+    });
   }
 
   noClick(user: User, course: Course): void {
     this.userService.refuseToEnroll(user, course).subscribe(data => this.sentUser = data);
-    //localStorage.setItem('currentUser', JSON.stringify(this.user));
+    this.userService.getTMUsers(this.user.email).subscribe(data => {
+      this.users = data,
+      this.sortedData = this.users.slice();
+      console.log('2');
+    });
   }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
-

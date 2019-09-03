@@ -12,6 +12,7 @@ export class User {
     wishToEnroll: Course[];
     waitToEnroll: Course[];
 
+
     constructor (email: string,
         type: string,
         firstName: string,
@@ -20,7 +21,8 @@ export class User {
         courses: Course[],
         leader: string,
         wishToEnroll: Course[],
-        waitToEnroll: Course[]) {
+        waitToEnroll: Course[],
+        ) {
             this.email = email;
             this.type = type;
             this.firstName = firstName;
