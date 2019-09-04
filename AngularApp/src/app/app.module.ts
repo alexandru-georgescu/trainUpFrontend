@@ -24,8 +24,7 @@ import { ModalComponent } from './pages/tm-page/modal/modal.component';
 import { PmPageComponent } from './pages/pm-page/pm-page.component';
 import { AddCourseComponent } from './pages/pm-page/add-course/add-course.component';
 import { CourseService } from './services/course-service.service';
-
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -62,7 +61,8 @@ import { CourseService } from './services/course-service.service';
     MatTableModule, 
     MatSortModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ToastrModule.forRoot(),
 
 
   ],

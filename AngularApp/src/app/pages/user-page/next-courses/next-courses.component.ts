@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { Course } from 'src/app/models/course';
 import { UserService } from 'src/app/services/user-service.service';
 import { Sort } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-next-courses',
@@ -16,9 +17,9 @@ export class NextCoursesComponent implements OnInit {
   courses: Course[];
   sortedData: Course[];
 
-
   constructor(private share: ShareService,
     private userService: UserService,
+    private toastr: ToastrService
   ) { }
 
   sortData(sort: Sort) {
@@ -41,21 +42,29 @@ export class NextCoursesComponent implements OnInit {
   ngOnInit() {
     this.share.currentMessage.subscribe(data => {
       this.user = JSON.parse(data);
-      this.userService.getFutureCourses(this.user).subscribe(data =>  {
-        this.courses = data , this.sortedData = this.courses.slice();
+      this.userService.getFutureCourses(this.user).subscribe(data => {
+        this.courses = data, this.sortedData = this.courses.slice();
       });
     });
-    
+
   }
 
   rowClick(course: Course): void {
     this.userService.addWishToEnroll(this.user, course).subscribe(data => {
       this.user = data;
-      this.userService.getFutureCourses(this.user).subscribe(data =>  {
-        this.courses = data , this.sortedData = this.courses.slice();
+      this.userService.getFutureCourses(this.user).subscribe(data => {
+        this.courses = data, this.sortedData = this.courses.slice();
         localStorage.setItem('currentUser', JSON.stringify(this.user));
-      });});
-
+      });
+    },
+      error => {
+        this.toastr.error("Failed request", "Fail!", {
+          timeOut: 3000
+        })
+      },
+      () => this.toastr.success("Your request has been sent", "Success!", {
+        timeOut: 2000
+      }));
   }
 
 }
