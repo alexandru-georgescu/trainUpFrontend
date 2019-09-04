@@ -19,6 +19,7 @@ export class LoginPageComponent implements OnInit {
   wrongInput = false;
   alreadyLoggedIn = false;
   loggedIn = false;
+  needToactivateAccount = false;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -29,12 +30,18 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.submitted = false;
+    this.wrongInput = false;
+    this.alreadyLoggedIn = false;
+    this.loggedIn = false;
+    this.needToactivateAccount = false;
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
     if (localStorage.getItem('loggedIn') == 'true') {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.loggedIn = Boolean(localStorage.getItem('loggedIn'));
     }
   }
@@ -59,55 +66,39 @@ export class LoginPageComponent implements OnInit {
         this.controls.password.setValue('');
         this.submitted = false;
         this.wrongInput = true;
+        this.alreadyLoggedIn = false;
+        this.needToactivateAccount = false;
       } else {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (this.currentUser != null && this.currentUser.email == this.user.email) {
-          this.alreadyLoggedIn = true;
-          this.loggedIn = true;
-          localStorage.setItem('loggedIn', 'true');
+        this.needToactivateAccount = !this.user.enable;
+        this.wrongInput = false;
+        if (this.needToactivateAccount === false) {
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          if (this.currentUser != null && this.currentUser.email == this.user.email && this.currentUser.password == this.user.password) {
+            this.alreadyLoggedIn = true;
+            this.loggedIn = true;
+            localStorage.setItem('loggedIn', 'true');
 
-        }
-        else if (this.user.type === "PM") {
-          this.loggedIn = true;
-          localStorage.setItem('loggedIn', 'true');
-          localStorage.setItem('currentUser', JSON.stringify(this.user));
-          this.router.navigate(['/pm']);
-        }
-        else if (this.user.type === "USER") {
-          this.loggedIn = true;
-          localStorage.setItem('loggedIn', 'true');
-          localStorage.setItem('currentUser', JSON.stringify(this.user));
-          this.router.navigate(['/user/curr']);
-        }
-        else if (this.user.type === "TM") {
-          this.loggedIn = true;
-          localStorage.setItem('loggedIn', 'true');
-          localStorage.setItem('currentUser', JSON.stringify(this.user));
-          this.router.navigate(['/tm']);
+          }
+          else if (this.user.type === "PM") {
+            this.loggedIn = true;
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify(this.user));
+            this.router.navigate(['/pm']);
+          }
+          else if (this.user.type === "USER") {
+            this.loggedIn = true;
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify(this.user));
+            this.router.navigate(['/user/curr']);
+          }
+          else if (this.user.type === "TM") {
+            this.loggedIn = true;
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify(this.user));
+            this.router.navigate(['/tm']);
+          }
         }
       }
     });
-  }
-
-  goToMyPage() {
-    if (this.user.type == 'USER') {
-      this.router.navigate(['/user']);
-    }
-
-    if (this.user.type == 'TM') {
-      this.router.navigate(['/tm']);
-    }
-
-    if (this.user.type == 'PM') {
-      this.router.navigate(['/pm']);
-    }
-  }
-
-  logOut() {
-    localStorage.removeItem('currentUser');
-    this.loggedIn = false;
-    localStorage.setItem('loggedIn', 'false');
-    this.alreadyLoggedIn = false;
-    this.router.navigate(['/login']);
   }
 }

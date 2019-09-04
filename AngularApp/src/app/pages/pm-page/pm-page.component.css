@@ -1,9 +1,4 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
- 
-/* :host {
-    display: block;
-    text-align: center; 
-  } */
   
   button {
     font-size: 15px;
@@ -24,7 +19,17 @@
     margin: 0 auto;
   }
 
-  .btn {
+  mat-panel-description {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .btn-succes {
+    width: 60px;
+    padding: 0px;
+  }
+
+  .btn-danger {
     width: 60px;
     padding: 0px;
   }
@@ -56,8 +61,30 @@ button:focus {
   outline:0;
 }
 
-/* span {
+.add-btn-container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.btn-primary {
+  width: 150px;
+  height: 40px;
+}
+
+.font-kkt {
   font-family: Roboto,"Helvetica Neue",sans-serif !important;
   font-size: 14px !important;
   font-weight: 500 !important;
-} */
+}
+
+.toast-title {
+  font-family: Roboto,"Helvetica Neue",sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.toast-message {
+  font-family: Roboto,"Helvetica Neue",sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}

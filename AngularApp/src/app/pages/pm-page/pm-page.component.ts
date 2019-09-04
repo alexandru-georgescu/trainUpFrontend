@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Course } from 'src/app/models/course';
 import { CourseService } from 'src/app/services/course-service.service';
 import { UserService } from 'src/app/services/user-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -22,14 +23,15 @@ export class PmPageComponent implements OnInit {
   usersList: User[][];
   courses : Course[];
   sortedData: User[][];
-
+  sentUser: User;
 
   
   constructor(public dialog: MatDialog,
               private loginPage : LoginPageComponent,
               private router : Router,
               private courseService : CourseService,
-              private userService : UserService) {}
+              private userService : UserService,
+              private toastr : ToastrService) {}
 
   sortData(sort: Sort) {
     this.usersList.forEach( (el, index) => {
@@ -49,6 +51,77 @@ export class PmPageComponent implements OnInit {
     });
     })
     
+  }
+
+  yesClick(user: User, course: Course): void {
+    this.userService.acceptCourse(user, course).subscribe(data => {
+      this.sentUser = data;
+      this.courseService.getPmCourses(this.user).subscribe(data => {
+        this.courses = data;
+        this.usersList = new Array(this.courses.length);
+        this.sortedData = new Array(this.courses.length);
+
+        this.courses.forEach((course, index) => {
+          this.usersList[index] = new Array();
+          this.sortedData[index] = new Array();
+          this.userService.getWaitUserCourses(course).subscribe(result => {
+            this.usersList[index] = this.usersList[index].concat(result);
+            // console.log(this.usersList[index]);
+            this.sortedData[index] = this.usersList[index].slice();
+          });
+        });
+      },
+        error => {
+          this.toastr.error("Failed request", "Fail!", {
+            timeOut: 3000
+          })
+        }
+      );
+    },
+      error => {
+        this.toastr.error("Failed request", "Fail!", {
+          timeOut: 3000
+        })
+      },
+      () => this.toastr.success("Your request has been sent", "Success!", {
+        timeOut: 2000
+      }))
+  }
+
+
+  noClick(user: User, course: Course): void {
+    this.userService.denyCourse(user, course).subscribe(data => {
+      this.sentUser = data;
+      this.courseService.getPmCourses(this.user).subscribe(data => {
+        this.courses = data;
+        this.usersList = new Array(this.courses.length);
+        this.sortedData = new Array(this.courses.length);
+
+        this.courses.forEach((course, index) => {
+          this.usersList[index] = new Array();
+          this.sortedData[index] = new Array();
+          this.userService.getWaitUserCourses(course).subscribe(result => {
+            this.usersList[index] = this.usersList[index].concat(result);
+            // console.log(this.usersList[index]);
+            this.sortedData[index] = this.usersList[index].slice();
+          });
+        });
+      },
+        error => {
+          this.toastr.error("Failed request", "Fail!", {
+            timeOut: 3000
+          })
+        }
+      );
+    },
+      error => {
+        this.toastr.error("Failed request", "Fail!", {
+          timeOut: 3000
+        })
+      },
+      () => this.toastr.success("Your request has been sent", "Success!", {
+        timeOut: 2000
+      }))
   }
 
   ngOnInit() {

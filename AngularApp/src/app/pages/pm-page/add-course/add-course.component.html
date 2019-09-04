@@ -10,30 +10,30 @@
                                 <mat-error *ngIf="submitted && controls.name.errors" class="invalid-feedback">Enter the course name</mat-error>
                     </mat-form-field>
                     <mat-form-field class="space-needed2">
-                            <input matInput placeholder="Capacity" formControlName="capacity">
-                                <mat-error *ngIf="submitted && controls.capacity.errors" class="invalid-feedback" >Enter the capacity</mat-error>
+                            <input matInput placeholder="Capacity" formControlName="capacity" pattern="^[0-9]*$">
+                                <mat-error *ngIf="submitted && controls.capacity.errors?.required" class="invalid-feedback" >Enter the capacity</mat-error>
+                                <mat-error *ngIf="controls.capacity.errors?.pattern" class="invalid-feedback" >Enter a valid number</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="right_container">
                     <mat-form-field>
-                            <input matInput [matDatepicker]="picker" placeholder="Choose Start Date" formControlName="startDate">
-                                <mat-error *ngIf="submitted && controls.startDate.errors" class="invalid-feedback"></mat-error>
+                            <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Choose Start Date" formControlName="startDate">
+                                <mat-error *ngIf="submitted && controls.startDate.errors" class="invalid-feedback">Choose a starting date</mat-error>
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field class="space-needed1">
-                            <input matInput [matDatepicker]="picker2" placeholder="Choose End Date" formControlName="endDate">
-                                <mat-error *ngIf="submitted && controls.endDate.errors" class="invalid-feedback"></mat-error>
+                            <input matInput [min]="controls.startDate.value" [matDatepicker]="picker2" placeholder="Choose End Date" formControlName="endDate" [errorStateMatcher]="matcher">
+                                <mat-error *ngIf="submitted && controls.endDate.errors" class="invalid-feedback">Choose an ending date</mat-error>
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
                 </div>
+                <div class="modal__buttons">
+                    <button class="cancel-btn" mat-button (click)="onNoClick()">Cancel</button>
+                    <button class="add-btn" mat-button (click)="onClick()">Add</button>
+                </div>
                 </form>
-            </div>
-            <div class="modal__buttons">
-              <button class="cancel-btn" mat-button (click)="onNoClick()">Cancel</button>
-              <button class="add-btn" mat-button (click)="onClick()">Add</button>
-
             </div>
         </div>
     </div>

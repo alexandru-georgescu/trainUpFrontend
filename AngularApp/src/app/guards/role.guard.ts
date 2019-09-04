@@ -1,30 +1,28 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivate } from '@angular/router';
-import { User } from './models/user';
+import { User } from '../models/user';
 import { Location } from '@angular/common';
 
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
 
   user : User;
-  bool : boolean;
+  loggedIn : boolean;
 
   constructor (private router : Router,
     private location: Location) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
       if (localStorage.getItem('loggedIn') == 'true') {
-        this.bool = true;
+        this.loggedIn = true;
       } else {
-        this.bool = false;
+        this.loggedIn = false;
       }
-
-      
 
       this.user = JSON.parse(localStorage.getItem('currentUser'));
 
-      if (this.bool == false) {
+      if (this.loggedIn == false) {
         this.router.navigate(['/']);
       }
 
@@ -39,6 +37,8 @@ export class AuthGuard implements CanActivate {
       if (this.user.type == 'TM' && next.url.pop().path == 'tm') {
         return true;
       }
+
+      
 
       this.location.back();
       return false;

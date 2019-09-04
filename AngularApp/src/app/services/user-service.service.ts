@@ -123,4 +123,52 @@ export class UserService {
     };
     return this.http.post<User[]>(Consts.backUrl + 'user/findWaitByCourse', course, httpOptions);
   }
+
+  public acceptCourse(user : User, course: Course) : Observable<User> {
+    let data = JSON.stringify({user : user, course : course});
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<User>(Consts.backUrl + 'user/acceptFromWait', data, httpOptions);
+  }
+
+  public denyCourse(user : User, course: Course) : Observable<User> {
+    let data = JSON.stringify({user : user, course : course});
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<User>(Consts.backUrl + 'user/rejectFromWait', data, httpOptions);
+  }
+
+  public getUser(data : String): Observable<User> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.get<User>(Consts.backUrl + 'user/findByName?name=' + data, httpOptions);
+  }
+
+  public resetPassword(user : User) : Observable<User> {
+    let data = JSON.stringify({user : user});
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<User>(Consts.backUrl + 'trainup/reset_pass', data, httpOptions);
+  }
 }
+
