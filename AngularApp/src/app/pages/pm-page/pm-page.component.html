@@ -1,45 +1,65 @@
-<slide-panel [activePane]="isTopVisible ? 'top' : 'bottom'">
-    <div topPane>Cursul de smecherie</div>
-    <div bottomPane>BOTTOM</div>
-</slide-panel>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
 
-  <button (click)="isTopVisible = !isTopVisible">
-    Switch me !
-  </button>
+</head>
 
 
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-       <mat-panel-title>
-          Cursul de smecherie
-       </mat-panel-title>
-       <mat-panel-description>
-          Check potential participants
-       </mat-panel-description>
-    </mat-expansion-panel-header>
+<!-- LogOut Button -->
+<div class='userDetailsContainer'>
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+      <mat-icon>account_circle</mat-icon>
+      <span style="font-weight: 500;font-size: 14px; font-family: Roboto;">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <form (ngSubmit)="onSubmit()">
+        <div>
+          <button mat-menu-item type="submit">
+            <span>Log out</span>
+          </button>
+        </div>
+      </form>
+    </mat-menu>
+  </div>
+</div>
 
-    <table matSort (matSortChange)="sortData($event)" class="table table-hover">
-        <thead class="thead-dark">
-        <tr>
-            <th mat-sort-header="firstName">First Name</th>
-            <th mat-sort-header="lastName">Last Name</th>
-            <th mat-sort-header="email">E-mail</th>
-            <th>Confirmation</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of sortedData">
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.email }}</td>
-            <td><button type="button" class="btn btn-success">Accept</button><button type="button" class="btn btn-danger">Deny</button></td>
-        </tr>
-        </tbody>
-    </table>
+<mat-accordion>
 
-    <div>
-        <button mat-raised-button (click)="openDialog()">Add Course</button>
-    </div>
 
- </mat-expansion-panel>
- 
+<mat-expansion-panel *ngFor="let course of courses; let i = index">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{course.courseName}}
+    </mat-panel-title>
+    <mat-panel-description>
+      Check potential participants
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <table matSort (matSortChange)="sortData($event)" class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th mat-sort-header="firstName">First Name</th>
+        <th mat-sort-header="lastName">Last Name</th>
+        <th mat-sort-header="email">E-mail</th>
+        <th>Confirmation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of sortedData[i]">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td><button type="button" class="btn btn-success">Accept</button><button type="button"
+            class="btn btn-danger">Deny</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+</mat-expansion-panel>
+</mat-accordion> 
+
+<div>
+  <button mat-raised-button (click)="openDialog()">Add Course</button>
+</div>

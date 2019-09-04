@@ -1,53 +1,38 @@
-* {
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+/* * {
     font-family: 'Aleo', serif;
+} */
+
+.all-container {
+    text-align: center;
+    margin: 0 auto;
 }
 
 table {
-    text-align: center;
-    margin: 0 auto;
-    width: 100%;
-    margin-top: 5%;
-    margin-left: 5%;
+    display: inline;
 }
 
-.column {
-    float: left;
-    width: 50%;
-    height: 100%;
-}
-  
-  /* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.left_column {
-    position: absolute;
-    left: 50%;
-    width: 50%; 
-    height: 100%;
-    /* background-color: lightblue; */
-    background-position: 0 0; 
-    background-repeat: no-repeat; 
-    background-size: cover;
-}
-
-.fx-grayscale-logo {
-    width: 350px;
-    height: 350px;
-    margin-top: 20%;
-}
-
-.container-center {
+/* LogOutButton */
+.userDetailsContainer {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-right: 15px;
 }
 
-.mat-raised-button {
-    display: block;
-    margin: auto;
-    font-family: 'Aleo', serif;
+.mat-icon-button {
+    width:0%;
+}
+
+.mat-menu-item {
+    background-color: none !important;
+}
+
+button.mat-menu-item{
+    background-color: white;
+}
+
+button:focus {
+    outline:0;
 }
