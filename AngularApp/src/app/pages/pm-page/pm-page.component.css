@@ -1,36 +1,15 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
  
-:host {
+/* :host {
     display: block;
     text-align: center; 
-  }
+  } */
   
   button {
     font-size: 15px;
     margin-top: 0 auto;
     margin-right: 5px;
     text-align: center;
-  }
-
-  slide-panel {
-    border: 6px solid #FF6060;
-    max-width: 1500px;
-    height: 350px;
-    margin: 0 auto;
-  }
-
-  slide-panel div {
-    font: 20px sans-serif;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-   slide-panel .panes {
-    border: 6px dashed #4990E2;
-    box-sizing: border-box;
   }
 
   ul {
@@ -76,3 +55,9 @@ button.mat-menu-item{
 button:focus {
   outline:0;
 }
+
+/* span {
+  font-family: Roboto,"Helvetica Neue",sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+} */

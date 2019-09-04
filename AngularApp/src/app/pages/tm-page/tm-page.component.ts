@@ -72,7 +72,6 @@ export class TmPageComponent implements OnInit {
       this.userService.getTMUsers(this.user.email).subscribe(data => {
         this.users = data,
         this.sortedData = this.users.slice();
-        console.log('1');
       });});
   }
 
@@ -81,7 +80,6 @@ export class TmPageComponent implements OnInit {
       this.userService.getTMUsers(this.user.email).subscribe(data => {
         this.users = data,
         this.sortedData = this.users.slice();
-        console.log('2');
       });});
   }
 }

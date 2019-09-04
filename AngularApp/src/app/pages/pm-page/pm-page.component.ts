@@ -3,8 +3,12 @@ import { User } from 'src/app/models/user';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material';
 import { AddCourseComponent } from './add-course/add-course.component';
-import { Router } from '@angular/router';
 import { LoginPageComponent } from '../login-page/login-page.component';
+import { Router } from '@angular/router';
+import { Course } from 'src/app/models/course';
+import { CourseService } from 'src/app/services/course-service.service';
+import { UserService } from 'src/app/services/user-service.service';
+
 
 
 @Component({
@@ -13,21 +17,28 @@ import { LoginPageComponent } from '../login-page/login-page.component';
   styleUrls: ['./pm-page.component.css']
 })
 export class PmPageComponent implements OnInit {
-  user: User;
-  users: User[];
-  sortedData: User[];
+  user : User;
+  users : User[];
+  usersList: User[][];
+  courses : Course[];
+  sortedData: User[][];
 
+
+  
   constructor(public dialog: MatDialog,
-    private router: Router,
-    private loginPage: LoginPageComponent) { }
+              private loginPage : LoginPageComponent,
+              private router : Router,
+              private courseService : CourseService,
+              private userService : UserService) {}
 
   sortData(sort: Sort) {
-    const data = this.users.slice();
+    this.usersList.forEach( (el, index) => {
+      const data = el;
     if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
+      this.sortedData[index] = data;
       return;
     }
-    this.sortedData = data.sort((a, b) => {
+    this.sortedData[index] = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'firstName': return compare(a.firstName, b.firstName, isAsc);
@@ -36,23 +47,32 @@ export class PmPageComponent implements OnInit {
         default: return 0;
       }
     });
+    })
+    
   }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.users = new Array();
-    let user1 = new User('a.b@trainup.com', 'USER', 'a', 'b', 'Alex1234', [], 't.m@trainup.com', [], [], []);
-    let user2 = new User('c.d@trainup.com', 'USER', 'c', 'd', 'Alex1234', [], 't.m@trainup.com', [], [], []);
+    this.courseService.getPmCourses(this.user).subscribe(data => {
+      this.courses = data;
+      this.usersList = new Array(this.courses.length);
+      this.sortedData = new Array(this.courses.length);
 
-    this.users.push(user1);
-    this.users.push(user2);
-    this.sortedData = this.users.slice();
+      this.courses.forEach((course, index) => {
+        this.usersList[index] = new Array();
+        this.sortedData[index] = new Array();
+        this.userService.getWaitUserCourses(course).subscribe(result => {
+          this.usersList[index] = this.usersList[index].concat(result);
+          console.log(this.usersList[index]);
+          this.sortedData[index] = this.usersList[index].slice();
+      })});
+    });
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCourseComponent, {
-      width: '800px',
-      height: '300px',
+      width: '560px',
+      height: '350px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,9 +91,9 @@ export class PmPageComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+

@@ -1,7 +1,8 @@
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+
 </head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 <!-- LogOut Button -->
@@ -9,7 +10,7 @@
   <div>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
       <mat-icon>account_circle</mat-icon>
-      <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+      <span style="font-weight: 500;font-size: 14px; font-family: Roboto;">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
     </button>
     <mat-menu #menu="matMenu">
       <form (ngSubmit)="onSubmit()">
@@ -23,24 +24,13 @@
   </div>
 </div>
 
+<mat-accordion>
 
 
-
-
-<slide-panel [activePane]="isTopVisible ? 'top' : 'bottom'">
-  <div topPane>Cursul de smecherie</div>
-  <div bottomPane>BOTTOM</div>
-</slide-panel>
-
-<button (click)="isTopVisible = !isTopVisible">
-  Switch me !
-</button>
-
-
-<mat-expansion-panel>
+<mat-expansion-panel *ngFor="let course of courses; let i = index">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      Cursul de smecherie
+      {{course.courseName}}
     </mat-panel-title>
     <mat-panel-description>
       Check potential participants
@@ -57,7 +47,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of sortedData">
+      <tr *ngFor="let user of sortedData[i]">
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.email }}</td>
@@ -67,8 +57,9 @@
     </tbody>
   </table>
 
-  <div>
-    <button mat-raised-button (click)="openDialog()">Add Course</button>
-  </div>
-
 </mat-expansion-panel>
+</mat-accordion> 
+
+<div>
+  <button mat-raised-button (click)="openDialog()">Add Course</button>
+</div>
