@@ -32,8 +32,8 @@ export class ForgotPasswordComponent implements OnInit {
     this.userService.getUser(this.controls.email.value).subscribe(data => {
       this.user = data;
       console.log(data);
+      this.userService.resetPassword(this.user).subscribe(data => console.log(data));
     });
-    this.userService.resetPassword(this.user).subscribe(data => console.log(data));
   }
 
 }

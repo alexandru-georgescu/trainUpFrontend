@@ -160,7 +160,6 @@ export class UserService {
   }
 
   public resetPassword(user : User) : Observable<User> {
-    let data = JSON.stringify({user : user});
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
     headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
@@ -168,7 +167,7 @@ export class UserService {
     const httpOptions = {
       headers: headers_object
     };
-    return this.http.post<User>(Consts.backUrl + 'trainup/reset_pass', data, httpOptions);
+    return this.http.post<User>(Consts.backUrl + 'trainup/reset_pass', user, httpOptions);
   }
 }
 
