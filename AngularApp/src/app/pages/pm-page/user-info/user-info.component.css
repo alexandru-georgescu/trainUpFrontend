@@ -1,0 +1,32 @@
+* {
+    font-family: 'Aleo', serif;
+}
+.inputs__container {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    margin-top: 50px;
+}
+
+.space-needed1 {
+    margin-left: 100px;
+}
+
+.space-needed2 {
+    margin-left: 125px;
+}
+
+.modal__buttons {
+    display: flex;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.title {
+    margin-bottom: 15px;
+}
+
+.cancel-btn {
+    background-color:#ff6347;
+    font-family: 'Aleo', serif;
+}

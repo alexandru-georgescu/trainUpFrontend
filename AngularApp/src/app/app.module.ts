@@ -27,6 +27,7 @@ import { CourseService } from './services/course-service.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './guards/auth.guard';
 import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forgot-password.component';
+import { UserInfoComponent } from './pages/pm-page/user-info/user-info.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forg
     ModalComponent,
     PmPageComponent,
     AddCourseComponent,
-    ForgotPasswordComponent 
+    ForgotPasswordComponent,
+    UserInfoComponent 
   ],
   imports: [
     BrowserModule,
@@ -69,8 +71,8 @@ import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forg
 
 
   ],
-  providers: [RoleGuard, UserService, LoginPageComponent, CourseService, AuthGuard],
+  providers: [RoleGuard, UserService, LoginPageComponent, CourseService, AuthGuard, PmPageComponent],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent, AddCourseComponent]
+  entryComponents: [ModalComponent, AddCourseComponent, UserInfoComponent]
 })
 export class AppModule { }
