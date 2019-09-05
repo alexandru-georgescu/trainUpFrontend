@@ -10,12 +10,14 @@ import { CurrentCoursesComponent } from './pages/user-page/current-courses/curre
 import { NextCoursesComponent } from './pages/user-page/next-courses/next-courses.component';
 import { TmPageComponent } from './pages/tm-page/tm-page.component';
 import { PmPageComponent } from './pages/pm-page/pm-page.component';
+import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginPageComponent},
   { path: 'register', component: RegisterPageComponent},
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'tm', canActivate: [AuthGuard], component: TmPageComponent },
   { path: 'pm', canActivate: [AuthGuard], component: PmPageComponent },
   { path: 'user', canActivate: [AuthGuard], component: UserPageComponent, 

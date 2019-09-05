@@ -1,6 +1,4 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-
-
 /* * {
     font-family: 'Aleo', serif;
 } */
@@ -35,4 +33,9 @@ button.mat-menu-item{
 
 button:focus {
     outline:0;
+    background-color: transparent !important;
+}
+
+td {
+    text-align: center;
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SlidePanelComponent } from './slide-panel.component';
+import { ForgotPasswordComponent } from './forgot-password.component';
 
-describe('SlidePanelComponent', () => {
-  let component: SlidePanelComponent;
-  let fixture: ComponentFixture<SlidePanelComponent>;
+describe('ForgotPasswordComponent', () => {
+  let component: ForgotPasswordComponent;
+  let fixture: ComponentFixture<ForgotPasswordComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SlidePanelComponent ]
+      declarations: [ ForgotPasswordComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SlidePanelComponent);
+    fixture = TestBed.createComponent(ForgotPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -32,6 +32,8 @@
         <th mat-sort-header="firstName">First Name</th>
         <th mat-sort-header="lastName">Last Name</th>
         <th mat-sort-header="email">E-mail</th>
+        <th mat-sort-header="ongoing_courses">Ongoing courses</th>
+        <th mat-sort-header="rejected_courses">Rejected courses</th>
         <th mat-sort-header="course">Wish to enroll course</th>
         <th>Enroll</th>
       </tr>
@@ -42,6 +44,8 @@
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.courses.length }}</td>
+          <td>{{ user.rejectedList.length }}</td>
           <td>{{ course.courseName }}</td>
           <td>
             <button type="button" class="btn btn-success" (click)="yesClick(user, course)">Yes</button>
