@@ -1,7 +1,7 @@
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
 </head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 <!-- LogOut Button -->
@@ -9,20 +9,20 @@
   <div>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
       <mat-icon>account_circle</mat-icon>
-      <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+      <span style="font-weight: 500;font-size: 14px; font-family: Roboto;">Logged in as: {{user.firstName}}
+        {{ user.lastName }}</span>
     </button>
     <mat-menu #menu="matMenu">
       <form (ngSubmit)="onSubmit()">
         <div>
           <button mat-menu-item type="submit">
-            <span>Log out</span>
+            <span style="font-weight: 400; font-size: 14px; font-family: Roboto;">Log out</span>
           </button>
         </div>
       </form>
     </mat-menu>
   </div>
 </div>
-
 
 
 <div class="all-container">
@@ -32,6 +32,8 @@
         <th mat-sort-header="firstName">First Name</th>
         <th mat-sort-header="lastName">Last Name</th>
         <th mat-sort-header="email">E-mail</th>
+        <th mat-sort-header="ongoing_courses">Ongoing courses</th>
+        <th mat-sort-header="rejected_courses">Rejected courses</th>
         <th mat-sort-header="course">Wish to enroll course</th>
         <th>Enroll</th>
       </tr>
@@ -42,6 +44,8 @@
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.courses.length }}</td>
+          <td>{{ user.rejectedList.length }}</td>
           <td>{{ course.courseName }}</td>
           <td>
             <button type="button" class="btn btn-success" (click)="yesClick(user, course)">Yes</button>

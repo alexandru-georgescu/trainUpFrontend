@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ModalComponent } from 'src/app/pages/tm-page/modal/modal.component';
 import { User } from 'src/app/models/user';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Sort } from '@angular/material/sort';
 import { UserService } from 'src/app/services/user-service.service';
 import { LoginPageComponent } from '../login-page/login-page.component';
 import { Router } from '@angular/router';
@@ -42,6 +40,8 @@ export class TmPageComponent implements OnInit {
         case 'firstName': return compare(a.firstName, b.firstName, isAsc);
         case 'lastName': return compare(a.lastName, b.lastName, isAsc);
         case 'email': return compare(a.email, b.email, isAsc);
+        case 'ongoing_courses': return compare(a.courses.length, b.courses.length, isAsc);
+        case 'rejected_courses': return compare(a.rejectedList.length, b.rejectedList.length, isAsc);
         default: return 0;
       }
     });

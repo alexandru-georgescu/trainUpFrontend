@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
-import { AuthGuard } from './auth.guard';
+import { RoleGuard } from './guards/role.guard';
 import { PreviousCoursesComponent } from './pages/user-page/previous-courses/previous-courses.component';
 import { CurrentCoursesComponent } from './pages/user-page/current-courses/current-courses.component';
 import { NextCoursesComponent } from './pages/user-page/next-courses/next-courses.component';
@@ -25,6 +25,8 @@ import { PmPageComponent } from './pages/pm-page/pm-page.component';
 import { AddCourseComponent } from './pages/pm-page/add-course/add-course.component';
 import { CourseService } from './services/course-service.service';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthGuard } from './guards/auth.guard';
+import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
     TmPageComponent,
     ModalComponent,
     PmPageComponent,
-    AddCourseComponent
+    AddCourseComponent,
+    ForgotPasswordComponent 
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 
   ],
-  providers: [AuthGuard, UserService, LoginPageComponent, CourseService],
+  providers: [RoleGuard, UserService, LoginPageComponent, CourseService, AuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent, AddCourseComponent]
 })

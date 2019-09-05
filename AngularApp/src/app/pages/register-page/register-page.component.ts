@@ -64,29 +64,4 @@ export class RegisterPageComponent implements OnInit {
      });
     
   }
-
-  goToMyPage() {
-    if (this.user.type == 'USER') {
-      this.router.navigate(['/user']);
-    }
-
-    if (this.user.type == 'TM') {
-      this.router.navigate(['/tm']);
-    }
-
-    if (this.user.type == 'PM') {
-      this.router.navigate(['/pm']);
-    }
-  }
-
-  logOut() {
-    localStorage.removeItem('currentUser');
-    this.loginPage.loggedIn = false;
-    this.loggedIn = false;
-    localStorage.setItem('loggedIn', 'false');
-    this.loginPage.alreadyLoggedIn = false;
-    this.loggedIn = false;
-    this.router.navigate(['/login']);
-  }
-
 }

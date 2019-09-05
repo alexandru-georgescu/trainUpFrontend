@@ -7,32 +7,6 @@
 
 <div class="row screen-full-height">
     <div class="col-md-6 login-logo-container container-center">
-        <div *ngIf="loggedIn">
-            <div class='userDetailsContainer'>
-                <div>
-                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-                        <mat-icon>account_circle</mat-icon>
-                        <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <form (ngSubmit)="goToMyPage()">
-                            <div>
-                                <button mat-menu-item type="submit">
-                                    <span>Go to my page</span>
-                                </button>
-                            </div>
-                        </form>
-                        <form (ngSubmit)="logOut()">
-                            <div>
-                                <button mat-menu-item type="submit">
-                                    <span>Log out</span>
-                                </button>
-                            </div>
-                        </form>
-                    </mat-menu>
-                </div>
-            </div>
-        </div>
         <div>
             <img class="fx-grayscale-logo" alt="trainUP-logo" src="../../../assets/img/156638812088557421.png">
         </div>
@@ -72,12 +46,17 @@
                         <button type="submit" class="button"><span>Login</span></button>
                     </div>
                     <div class="wrong-input">
+                        <span *ngIf="needToactivateAccount">You need to activate your account!</span>
                         <span *ngIf="wrongInput">Wrong email or password. Try again!</span>
                         <span *ngIf="alreadyLoggedIn">You are already logged in!</span>
                     </div>
                     <div class="text-container">
                         <span>You don't have an account?&nbsp;</span>
                         <a [routerLink]="['/register']" class="btn btn-link">Register here</a>
+                    </div>
+                    <div class="text-container">
+                        <span>Forgot your password?&nbsp;</span>
+                        <a [routerLink]="['/forgot-password']" class="btn btn-link">Reset it here</a>
                     </div>
                 </form>
             </div>
