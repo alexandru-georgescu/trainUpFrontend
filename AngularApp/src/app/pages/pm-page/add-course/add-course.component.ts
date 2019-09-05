@@ -17,6 +17,7 @@ export class AddCourseComponent implements OnInit {
   user : User;
   submitted = false;
   alreadyRegistered = false;
+  minDate = new Date();
 
   constructor(
     public dialogRef: MatDialogRef<AddCourseComponent>,
@@ -37,7 +38,7 @@ export class AddCourseComponent implements OnInit {
 
     this.dialogRef.close();
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    let course = new Course(this.controls.name.value, this.controls.capacity.value, 0, this.controls.startDate.value, this.controls.endDate.value, this.user.email);
+    let course = new Course(this.controls.name.value, this.controls.capacity.value, this.controls.capacity.value, this.controls.startDate.value, this.controls.endDate.value, this.user.email);
     this.courseService.addCourse(course).subscribe(data => {
       this.course = data;
       console.log(this.course);
@@ -57,5 +58,4 @@ export class AddCourseComponent implements OnInit {
       endDate: ['', Validators.required],
       });
   }
-
 }

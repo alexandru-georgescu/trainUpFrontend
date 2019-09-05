@@ -7,11 +7,13 @@ export class User {
     firstName: string;
     lastName: string;
     password : string;
+    enable: boolean;
     courses: Course[];
     leader: string;
     wishToEnroll: Course[];
     waitToEnroll: Course[];
     rejectedList: Course[];
+
 
 
     constructor (email: string,

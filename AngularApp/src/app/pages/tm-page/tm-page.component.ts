@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ModalComponent } from 'src/app/pages/tm-page/modal/modal.component';
 import { User } from 'src/app/models/user';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Sort } from '@angular/material/sort';
 import { UserService } from 'src/app/services/user-service.service';
 import { LoginPageComponent } from '../login-page/login-page.component';
 import { Router } from '@angular/router';

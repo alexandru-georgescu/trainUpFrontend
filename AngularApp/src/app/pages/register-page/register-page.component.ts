@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service.service';
 import { Router } from '@angular/router';
 import { LoginPageComponent } from '../login-page/login-page.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register-page',
@@ -12,19 +13,20 @@ import { LoginPageComponent } from '../login-page/login-page.component';
 })
 export class RegisterPageComponent implements OnInit {
 
-  registerForm : FormGroup;
-  user : User;
+  registerForm: FormGroup;
+  user: User;
   submitted = false;
   alreadyRegistered = false;
   loggedIn = false;
 
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService,
-              private router: Router,
-              private loginPage : LoginPageComponent) {
-    
-   }
+    private userService: UserService,
+    private router: Router,
+    private loginPage: LoginPageComponent,
+    private toastr: ToastrService) {
+
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -33,60 +35,43 @@ export class RegisterPageComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
       cPassword: ['', Validators.required]
-      });
-      if (localStorage.getItem('loggedIn') == 'true') {
-        this.user = JSON.parse(localStorage.getItem('currentUser'));
-        this.loginPage.loggedIn = Boolean(localStorage.getItem('loggedIn'));
-        this.loggedIn = Boolean(localStorage.getItem('loggedIn'));
+    });
+    if (localStorage.getItem('loggedIn') == 'true') {
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      this.loginPage.loggedIn = Boolean(localStorage.getItem('loggedIn'));
+      this.loggedIn = Boolean(localStorage.getItem('loggedIn'));
 
-      }
+    }
   }
 
   get controls() {
     return this.registerForm.controls;
-}
+  }
 
   onSubmit() {
     this.submitted = true;
 
-    if (this.registerForm.invalid) { 
-      return; 
+    if (this.registerForm.invalid) {
+      return;
     }
 
     let user = new User(this.controls.email.value, 'USER', this.controls.firstName.value, this.controls.lastName.value, this.controls.password.value, [], 't.m@trainup.com', [], [], []);
     this.userService.register(user).subscribe(data => {
-       this.user = data;
-       if (this.user == null) {
-          this.alreadyRegistered = true;
-          return;
-       }
-       this.router.navigate(['/login']);
-     });
-    
+      this.user = data;
+      if (this.user == null) {
+        this.alreadyRegistered = true;
+        return;
+      }
+      this.toastr.success("You need to activate your account", "Registration done!", {
+        timeOut: 10000
+      });
+      this.router.navigate(['/login']);
+    },
+      error => {
+        this.toastr.error("Failed request", "Fail!", {
+          timeOut: 3000
+        });
+      }
+    )
   }
-
-  goToMyPage() {
-    if (this.user.type == 'USER') {
-      this.router.navigate(['/user']);
-    }
-
-    if (this.user.type == 'TM') {
-      this.router.navigate(['/tm']);
-    }
-
-    if (this.user.type == 'PM') {
-      this.router.navigate(['/pm']);
-    }
-  }
-
-  logOut() {
-    localStorage.removeItem('currentUser');
-    this.loginPage.loggedIn = false;
-    this.loggedIn = false;
-    localStorage.setItem('loggedIn', 'false');
-    this.loginPage.alreadyLoggedIn = false;
-    this.loggedIn = false;
-    this.router.navigate(['/login']);
-  }
-
 }

@@ -18,79 +18,39 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./pm-page.component.css']
 })
 export class PmPageComponent implements OnInit {
-  user: User;
-  users: User[];
+  user : User;
+  users : User[];
   usersList: User[][];
-  courses: Course[];
+  courses : Course[];
   sortedData: User[][];
-  sentUser: User; //userul primit ca raspuns de la backend
+  sentUser: User;
 
+  
   constructor(public dialog: MatDialog,
-    private loginPage: LoginPageComponent,
-    private router: Router,
-    private courseService: CourseService,
-    private userService: UserService,
-    private toastr: ToastrService) { }
+              private loginPage : LoginPageComponent,
+              private router : Router,
+              private courseService : CourseService,
+              private userService : UserService,
+              private toastr : ToastrService) {}
 
   sortData(sort: Sort) {
-    this.usersList.forEach((el, index) => {
+    this.usersList.forEach( (el, index) => {
       const data = el;
-      if (!sort.active || sort.direction === '') {
-        this.sortedData[index] = data;
-        return;
+    if (!sort.active || sort.direction === '') {
+      this.sortedData[index] = data;
+      return;
+    }
+    this.sortedData[index] = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'firstName': return compare(a.firstName, b.firstName, isAsc);
+        case 'lastName': return compare(a.lastName, b.lastName, isAsc);
+        case 'email': return compare(a.email, b.email, isAsc);
+        default: return 0;
       }
-      this.sortedData[index] = data.sort((a, b) => {
-        const isAsc = sort.direction === 'asc';
-        switch (sort.active) {
-          case 'firstName': return compare(a.firstName, b.firstName, isAsc);
-          case 'lastName': return compare(a.lastName, b.lastName, isAsc);
-          case 'email': return compare(a.email, b.email, isAsc);
-          default: return 0;
-        }
-      });
+    });
     })
-
-  }
-
-  ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.courseService.getPmCourses(this.user).subscribe(data => {
-      this.courses = data;
-      this.usersList = new Array(this.courses.length);
-      this.sortedData = new Array(this.courses.length);
-
-      this.courses.forEach((course, index) => {
-        this.usersList[index] = new Array();
-        this.sortedData[index] = new Array();
-        this.userService.getWaitUserCourses(course).subscribe(result => {
-          this.usersList[index] = this.usersList[index].concat(result);
-          console.log(this.usersList[index]);
-          this.sortedData[index] = this.usersList[index].slice();
-        })
-      });
-    });
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddCourseComponent, {
-      width: '560px',
-      height: '350px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
-  onSubmit() {
-    this.logout();
-  }
-
-  logout() {
-    localStorage.removeItem('currentUser');
-    this.loginPage.loggedIn = false;
-    localStorage.setItem('loggedIn', 'false');
-    this.loginPage.alreadyLoggedIn = false;
-    this.router.navigate(['/login']);
+    
   }
 
   yesClick(user: User, course: Course): void {
@@ -162,6 +122,46 @@ export class PmPageComponent implements OnInit {
       () => this.toastr.success("Your request has been sent", "Success!", {
         timeOut: 2000
       }))
+  }
+
+  ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.courseService.getPmCourses(this.user).subscribe(data => {
+      this.courses = data;
+      this.usersList = new Array(this.courses.length);
+      this.sortedData = new Array(this.courses.length);
+
+      this.courses.forEach((course, index) => {
+        this.usersList[index] = new Array();
+        this.sortedData[index] = new Array();
+        this.userService.getWaitUserCourses(course).subscribe(result => {
+          this.usersList[index] = this.usersList[index].concat(result);
+          console.log(this.usersList[index]);
+          this.sortedData[index] = this.usersList[index].slice();
+      })});
+    });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddCourseComponent, {
+      width: '560px',
+      height: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  onSubmit() {
+    this.logout();
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.loginPage.loggedIn = false;
+    localStorage.setItem('loggedIn', 'false');
+    this.loginPage.alreadyLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 
 }

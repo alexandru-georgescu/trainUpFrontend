@@ -28,6 +28,10 @@ button:active {
     color: red !important;
 }
 
+td {
+    text-align: center;
+}
+
 
 
 
