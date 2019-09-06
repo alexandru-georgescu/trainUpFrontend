@@ -19,41 +19,41 @@ import { UserInfoComponent } from './user-info/user-info.component';
   styleUrls: ['./pm-page.component.css']
 })
 export class PmPageComponent implements OnInit {
-  user : User;
-  users : User[];
+  user: User;
+  users: User[];
   usersList: User[][];
-  courses : Course[];
+  courses: Course[];
   sortedData: User[][];
   sentUser: User;
-  selectedUser : User;
+  selectedUser: User;
   full = false;
+  searchText;
 
-  
   constructor(public dialog: MatDialog,
-              private loginPage : LoginPageComponent,
-              private router : Router,
-              private courseService : CourseService,
-              private userService : UserService,
-              private toastr : ToastrService) {}
+    private loginPage: LoginPageComponent,
+    private router: Router,
+    private courseService: CourseService,
+    private userService: UserService,
+    private toastr: ToastrService) { }
 
   sortData(sort: Sort) {
-    this.usersList.forEach( (el, index) => {
+    this.usersList.forEach((el, index) => {
       const data = el;
-    if (!sort.active || sort.direction === '') {
-      this.sortedData[index] = data;
-      return;
-    }
-    this.sortedData[index] = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'firstName': return compare(a.firstName, b.firstName, isAsc);
-        case 'lastName': return compare(a.lastName, b.lastName, isAsc);
-        case 'email': return compare(a.email, b.email, isAsc);
-        default: return 0;
+      if (!sort.active || sort.direction === '') {
+        this.sortedData[index] = data;
+        return;
       }
-    });
+      this.sortedData[index] = data.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'firstName': return compare(a.firstName, b.firstName, isAsc);
+          case 'lastName': return compare(a.lastName, b.lastName, isAsc);
+          case 'email': return compare(a.email, b.email, isAsc);
+          default: return 0;
+        }
+      });
     })
-    
+
   }
 
   yesClick(user: User, course: Course): void {
@@ -153,7 +153,8 @@ export class PmPageComponent implements OnInit {
         this.userService.getWaitUserCourses(course).subscribe(result => {
           this.usersList[index] = this.usersList[index].concat(result);
           this.sortedData[index] = this.usersList[index].slice();
-      })});
+        })
+      });
     });
   }
 
@@ -165,6 +166,30 @@ export class PmPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
+    });
+  }
+
+  courseSort(event: any, mode: String) {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.courseService.getPmCourses(this.user).subscribe(data => {
+      this.courses = data;
+      if (mode === 'mod1')
+        this.courses.sort(compareByName);
+      if (mode === 'mod2')
+        this.courses.sort(compareByCapacity);
+      if (mode === 'mod3')
+        this.courses.sort(compareByStartDate);
+      this.usersList = new Array(this.courses.length);
+      this.sortedData = new Array(this.courses.length);
+
+      this.courses.forEach((course, index) => {
+        this.usersList[index] = new Array();
+        this.sortedData[index] = new Array();
+        this.userService.getWaitUserCourses(course).subscribe(result => {
+          this.usersList[index] = this.usersList[index].concat(result);
+          this.sortedData[index] = this.usersList[index].slice();
+        })
+      });
     });
   }
 
@@ -180,7 +205,7 @@ export class PmPageComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  userInfo(user : User) {
+  userInfo(user: User) {
     localStorage.setItem('selectedUser', JSON.stringify(user));
     const dialogRef = this.dialog.open(UserInfoComponent, {
       width: '560px',
@@ -188,9 +213,41 @@ export class PmPageComponent implements OnInit {
     });
   }
 
+  onStatistic() {
+    const dialogRef = this.dialog.open(AddCourseComponent, {
+      width: '560px',
+      height: '250px',
+    });
+  }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 
+function compareByName(a: Course, b: Course) {
+  if (a.courseName < b.courseName) {
+    return -1;
+  }
+  if (a.courseName > b.courseName) {
+    return 1;
+  }
+}
+
+function compareByCapacity(a: Course, b: Course) {
+  if (a.actualCapacity < b.actualCapacity) {
+    return -1;
+  }
+  if (a.actualCapacity > b.actualCapacity) {
+    return 1;
+  }
+}
+
+function compareByStartDate(a: Course, b: Course) {
+  if (a.startDate < b.startDate) {
+    return -1;
+  }
+  if (a.startDate > b.startDate) {
+    return 1;
+  }
+}
