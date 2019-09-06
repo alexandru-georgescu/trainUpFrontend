@@ -44,6 +44,7 @@
           <th mat-sort-header="lastName">Last Name</th>
           <th mat-sort-header="email">E-mail</th>
           <th>Confirmation</th>
+          <th>Information</th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,7 @@
           <td>{{ user.email }}</td>
           <td><button type="button" class="btn btn-success" (click)="yesClick(user, course)">Accept</button>
               <button type="button" class="btn btn-danger" (click)="noClick(user, course)">Deny</button></td>
+          <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
         </tr>
       </tbody>
     </table>
