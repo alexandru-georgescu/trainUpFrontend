@@ -35,10 +35,11 @@ export class AddCourseComponent implements OnInit {
     if (this.courseForm.invalid) { 
       return; 
     }
-
+    
+    console.log(this.controls.timeInterval.value);
     this.dialogRef.close();
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    let course = new Course(this.controls.name.value, this.controls.capacity.value, this.controls.capacity.value, this.controls.startDate.value, this.controls.endDate.value, this.user.email);
+    let course = new Course(this.controls.name.value, this.controls.capacity.value, this.controls.capacity.value, this.controls.startDate.value, this.controls.endDate.value, this.user.email, this.controls.domain.value, this.controls.timeInterval.value);
     this.courseService.addCourse(course).subscribe(data => {
       this.course = data;
     });
@@ -55,6 +56,8 @@ export class AddCourseComponent implements OnInit {
       capacity: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      domain: ['', Validators.required],
+      timeInterval: ['', Validators.required]
       });
   }
 }
