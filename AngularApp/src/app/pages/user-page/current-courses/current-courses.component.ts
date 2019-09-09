@@ -32,6 +32,7 @@ export class CurrentCoursesComponent implements OnInit {
         case 'courseName': return compare(a.courseName, b.courseName, isAsc);
         case 'capacity': return compare(a.capacity, b.capacity, isAsc);
         case 'actualCapacity': return compare(a.actualCapacity, b.actualCapacity, isAsc);
+        case 'domain': return compare(a.domain, b.domain, isAsc);
         default: return 0;
       }
     });

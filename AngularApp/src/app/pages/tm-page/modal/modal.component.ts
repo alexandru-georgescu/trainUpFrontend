@@ -13,6 +13,7 @@ export class ModalComponent implements OnInit {
   accepted: number;
   rejected: number;
   domain: string;
+  teamPercentage: string;
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -27,6 +28,7 @@ export class ModalComponent implements OnInit {
     this.shareService.accepted.subscribe(data => this.accepted = data);
     this.shareService.rejected.subscribe(data => this.rejected = data);
     this.shareService.domain.subscribe(data => this.domain = data);
+    this.shareService.teamPercentage.subscribe(data => this.teamPercentage = data + '%');
   }
 
 }
