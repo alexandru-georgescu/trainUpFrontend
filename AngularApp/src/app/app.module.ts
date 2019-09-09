@@ -27,7 +27,10 @@ import { CourseService } from './services/course-service.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './guards/auth.guard';
 import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forgot-password.component';
-
+import { UserInfoComponent } from './pages/pm-page/user-info/user-info.component';
+import { MatSelectModule } from '@angular/material/select';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,9 @@ import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forg
     ModalComponent,
     PmPageComponent,
     AddCourseComponent,
-    ForgotPasswordComponent 
+    ForgotPasswordComponent,
+    UserInfoComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -65,12 +70,14 @@ import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forg
     MatSortModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatSelectModule,
+    Ng2SearchPipeModule,
     ToastrModule.forRoot(),
 
 
   ],
-  providers: [RoleGuard, UserService, LoginPageComponent, CourseService, AuthGuard],
+  providers: [RoleGuard, UserService, LoginPageComponent, CourseService, AuthGuard, PmPageComponent],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent, AddCourseComponent]
+  entryComponents: [ModalComponent, AddCourseComponent, UserInfoComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
 </head>
 
 
@@ -14,10 +14,18 @@
         {{ user.lastName }}</span>
     </button>
     <mat-menu #menu="matMenu">
+      <form (ngSubmit)="onStatistic()">
+        <div>
+          <button mat-menu-item type="submit">
+            <span>Statistics</span>
+          </button>
+        </div>
+      </form>
+
       <form (ngSubmit)="onSubmit()">
         <div>
           <button mat-menu-item type="submit">
-            <span style="font-weight: 400; font-size: 14px; font-family: Roboto;">Log out</span>
+            <span>Log out</span>
           </button>
         </div>
       </form>

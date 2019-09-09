@@ -1,5 +1,11 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
   
+  :host {
+    font-family: Roboto,"Helvetica Neue",sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important; 
+  }
+
   button {
     font-size: 15px;
     margin-top: 0 auto;
@@ -24,7 +30,7 @@
     justify-content: space-around;
   }
 
-  .btn-succes {
+  .btn-success {
     width: 60px;
     padding: 0px;
   }
@@ -32,6 +38,11 @@
   .btn-danger {
     width: 60px;
     padding: 0px;
+  }
+
+  .btn-info {
+      width: 60px;
+      padding: 0px;
   }
   
 [topPane]  { background-color: #FFF897; }
@@ -72,18 +83,6 @@ button:focus {
 }
 
 .font-kkt {
-  font-family: Roboto,"Helvetica Neue",sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-}
-
-.toast-title {
-  font-family: Roboto,"Helvetica Neue",sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-}
-
-.toast-message {
   font-family: Roboto,"Helvetica Neue",sans-serif !important;
   font-size: 14px !important;
   font-weight: 500 !important;

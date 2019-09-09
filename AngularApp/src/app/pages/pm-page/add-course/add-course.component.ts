@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { MatDialogRef, ErrorStateMatcher} from '@angular/material';
-import { FormGroup, FormBuilder, Validators, FormGroupDirective, NgForm, FormControl } from '@angular/forms';
+import { MatDialogRef} from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Course } from 'src/app/models/course';
 import { CourseService } from 'src/app/services/course-service.service';
 import { User } from 'src/app/models/user';
@@ -41,7 +41,6 @@ export class AddCourseComponent implements OnInit {
     let course = new Course(this.controls.name.value, this.controls.capacity.value, this.controls.capacity.value, this.controls.startDate.value, this.controls.endDate.value, this.user.email);
     this.courseService.addCourse(course).subscribe(data => {
       this.course = data;
-      console.log(this.course);
     });
 
   }

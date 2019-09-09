@@ -5,13 +5,20 @@
   
   
   <!-- LogOut Button -->
-  <div class='userDetailsContainer'>
+<div class='userDetailsContainer'>
     <div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
         <mat-icon>account_circle</mat-icon>
         <span class="font-kkt">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
       </button>
       <mat-menu #menu="matMenu">
+        <form (ngSubmit)="onStatistic()">
+          <div>
+            <button mat-menu-item type="submit">
+              <span>Statistics</span>
+            </button>
+          </div>
+        </form>
         <form (ngSubmit)="onSubmit()">
           <div>
             <button mat-menu-item type="submit">
@@ -25,8 +32,20 @@
   
   <mat-accordion>
   
-  
-  <mat-expansion-panel *ngFor="let course of courses; let i = index">
+    <div class="search-course">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchText">
+    </div>
+
+    <mat-form-field>
+      <mat-label>Sort By</mat-label>
+      <mat-select [(value)]="selected" (selectionChange)="courseSort($event, selected)">
+        <mat-option value="mod1">Name</mat-option>
+        <mat-option value="mod2">Availability</mat-option>
+        <mat-option value="mod3">Starting Date</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  <mat-expansion-panel *ngFor="let course of courses | filter:searchText; let i = index">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{course.courseName}}
@@ -34,6 +53,7 @@
       <mat-panel-description>
         <span>Check potential participants</span>
         <span>Available : {{course.actualCapacity}}</span>
+        <span>Starting Date: {{course.startDate}}</span>
       </mat-panel-description>
     </mat-expansion-panel-header>
   
@@ -44,6 +64,7 @@
           <th mat-sort-header="lastName">Last Name</th>
           <th mat-sort-header="email">E-mail</th>
           <th>Confirmation</th>
+          <th>Information</th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +74,7 @@
           <td>{{ user.email }}</td>
           <td><button type="button" class="btn btn-success" (click)="yesClick(user, course)">Accept</button>
               <button type="button" class="btn btn-danger" (click)="noClick(user, course)">Deny</button></td>
+          <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
         </tr>
       </tbody>
     </table>

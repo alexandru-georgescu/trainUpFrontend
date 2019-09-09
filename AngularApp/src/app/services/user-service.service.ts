@@ -169,5 +169,48 @@ export class UserService {
     };
     return this.http.post<User>(Consts.backUrl + 'trainup/reset_pass', user, httpOptions);
   }
+
+  public usersFindAll(): Observable<User[]> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.get<User[]>(Consts.backUrl + 'user', httpOptions);
+  }
+  public acceptedParticipants(user : User) : Observable<number> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<number>(Consts.backUrl + 'tm_statistics/accepted', user, httpOptions);
+  }
+
+  public rejectedParticipants(user : User) : Observable<number> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<number>(Consts.backUrl + 'tm_statistics/rejected', user, httpOptions);
+  }
+
+  public predominantDomain(user : User) : Observable<string> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<string>(Consts.backUrl + 'tm_statistics/predominant_domain', user, httpOptions);
+  }
 }
 
