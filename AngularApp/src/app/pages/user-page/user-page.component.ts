@@ -3,6 +3,8 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { LoginPageComponent } from '../login-page/login-page.component';
 import { ShareService } from 'src/app/services/share.service';
+import { MatDialog } from '@angular/material';
+import { CurrentCoursesComponent } from './current-courses/current-courses.component';
 
 
 @Component({
@@ -18,6 +20,7 @@ export class UserPageComponent implements OnInit {
   constructor(private router: Router,
     private loginPage: LoginPageComponent,
     private share: ShareService,
+    private dialog: MatDialog
   ) {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.share.changeMessage(localStorage.getItem('currentUser'));
@@ -36,5 +39,12 @@ export class UserPageComponent implements OnInit {
     localStorage.setItem('loggedIn', 'false');
     this.loginPage.alreadyLoggedIn = false;
     this.router.navigate(['/login']);
+  }
+
+  onStatistic() {
+    const dialogRef = this.dialog.open(CurrentCoursesComponent, {
+      width: '560px',
+      height: '250px',
+    });
   }
 }

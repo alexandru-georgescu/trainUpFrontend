@@ -12,6 +12,7 @@ import { TmPageComponent } from './pages/tm-page/tm-page.component';
 import { PmPageComponent } from './pages/pm-page/pm-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forgot-password.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
                   children: [{path: 'prev' , component: PreviousCoursesComponent},
                             {path: 'curr' , component: CurrentCoursesComponent},
                             {path: 'next' , component: NextCoursesComponent}]},
+  { path: 'admin', canActivate: [RoleGuard], component: AdminPageComponent },
   { path: '**', component : NotFoundPageComponent}
 ];
 

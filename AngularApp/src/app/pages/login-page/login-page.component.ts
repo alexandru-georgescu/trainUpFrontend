@@ -97,6 +97,12 @@ export class LoginPageComponent implements OnInit {
             localStorage.setItem('currentUser', JSON.stringify(this.user));
             this.router.navigate(['/tm']);
           }
+          else if (this.user.type === "ADMIN") {
+            this.loggedIn = true;
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify(this.user));
+            this.router.navigate(['/admin']);
+          }
         }
       }
     });

@@ -1,0 +1,72 @@
+<div class='userDetailsContainer'>
+    <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+            <mat-icon>account_circle</mat-icon>
+            <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <form (ngSubmit)="onSubmit()">
+                <div>
+                    <button mat-menu-item type="submit">
+                        <span>Log out</span>
+                    </button>
+                </div>
+            </form>
+        </mat-menu>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
+
+
+
+<div>
+
+</div>
+
+<div class="all-container">
+    <table matSort (matSortChange)="sortData($event)" class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th mat-sort-header="id">id</th>
+                <th mat-sort-header="email">E-mail</th>
+                <th mat-sort-header="type">Type</th>
+                <th mat-sort-header="firstName">First Name</th>
+                <th mat-sort-header="lastName">Last Name</th>
+                <th mat-sort-header="enable">Enable</th>
+                <th mat-sort-header="leader">Leader</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of sortedData">
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <select>
+                        <option> {{user.type}} </option>
+                        <ng-container *ngFor="let type of types">
+                            <option *ngIf="user.type != type"> {{ type }} </option>
+                        </ng-container>
+                    </select>
+                </td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>
+                    <select>
+                            <option> {{user.enable}} </option>
+                            <ng-container *ngFor="let enable of enables">
+                                <option *ngIf="user.enable != enable"> {{ enable }} </option>
+                            </ng-container>
+                    </select>
+                </td>
+                <td>
+                    <input value="{{user.leader}}">  
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <button type='submit' (click)="resetChanges()"> Reset Changes </button>
+</div>

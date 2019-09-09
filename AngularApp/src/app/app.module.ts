@@ -28,7 +28,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './guards/auth.guard';
 import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forgot-password.component';
 import { UserInfoComponent } from './pages/pm-page/user-info/user-info.component';
-
+import { MatSelectModule } from '@angular/material/select';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { UserInfoComponent } from './pages/pm-page/user-info/user-info.component
     PmPageComponent,
     AddCourseComponent,
     ForgotPasswordComponent,
-    UserInfoComponent 
+    UserInfoComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,8 @@ import { UserInfoComponent } from './pages/pm-page/user-info/user-info.component
     MatSortModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatSelectModule,
+    Ng2SearchPipeModule,
     ToastrModule.forRoot(),
 
 

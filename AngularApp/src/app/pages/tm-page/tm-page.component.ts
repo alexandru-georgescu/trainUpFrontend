@@ -7,6 +7,8 @@ import { LoginPageComponent } from '../login-page/login-page.component';
 import { Router } from '@angular/router';
 import { Course } from 'src/app/models/course';
 import { ToastrService } from 'ngx-toastr';
+import { ModalComponent } from './modal/modal.component';
+import { ShareService } from 'src/app/services/share.service';
 
 @Component({
   selector: 'app-tm-page',
@@ -25,7 +27,8 @@ export class TmPageComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private loginPage: LoginPageComponent,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private shareService : ShareService
   ) { }
 
   sortData(sort: Sort) {
@@ -66,6 +69,22 @@ export class TmPageComponent implements OnInit {
     localStorage.setItem('loggedIn', 'false');
     this.loginPage.alreadyLoggedIn = false;
     this.router.navigate(['/login']);
+  }
+
+  onStatistic() {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '560px',
+      height: '250px',
+    });
+    this.userService.acceptedParticipants(this.user).subscribe(data => {
+      this.shareService.changeAccepted(data);
+    });
+    this.userService.rejectedParticipants(this.user).subscribe(data => {
+      this.shareService.changeRejected(data);
+    });
+    this.userService.predominantDomain(this.user).subscribe(data => {
+      this.shareService.changeDomain(data);
+    })
   }
 
   yesClick(user: User, course: Course): void {

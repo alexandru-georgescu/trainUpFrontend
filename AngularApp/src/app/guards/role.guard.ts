@@ -37,7 +37,9 @@ export class RoleGuard implements CanActivate {
       if (this.user.type == 'TM' && next.url.pop().path == 'tm') {
         return true;
       }
-
+      if (this.user.type == 'ADMIN' && next.url.pop().path == 'admin') {
+        return true;
+      }
       
 
       this.location.back();
