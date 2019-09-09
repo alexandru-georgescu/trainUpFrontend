@@ -5,6 +5,8 @@ import { LoginPageComponent } from '../login-page/login-page.component';
 import { ShareService } from 'src/app/services/share.service';
 import { MatDialog } from '@angular/material';
 import { CurrentCoursesComponent } from './current-courses/current-courses.component';
+import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
+import { UserService } from 'src/app/services/user-service.service';
 
 
 @Component({
@@ -19,11 +21,12 @@ export class UserPageComponent implements OnInit {
 
   constructor(private router: Router,
     private loginPage: LoginPageComponent,
-    private share: ShareService,
+    private shareService: ShareService,
+    private userService: UserService,
     private dialog: MatDialog
   ) {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.share.changeMessage(localStorage.getItem('currentUser'));
+    this.shareService.changeMessage(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
@@ -42,9 +45,15 @@ export class UserPageComponent implements OnInit {
   }
 
   onStatistic() {
-    const dialogRef = this.dialog.open(CurrentCoursesComponent, {
+    const dialogRef = this.dialog.open(UserStatisticsComponent, {
       width: '560px',
       height: '250px',
+    });
+    this.userService.findBestCourse().subscribe(data => {
+      this.shareService.changebestCourse(data);
+    });
+    this.userService.findBestCourseFromPast(this.user).subscribe(data => {
+      this.shareService.changebestPastCourse(data);
     });
   }
 }

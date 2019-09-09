@@ -180,6 +180,7 @@ export class UserService {
     };
     return this.http.get<User[]>(Consts.backUrl + 'user', httpOptions);
   }
+
   public acceptedParticipants(user : User) : Observable<number> {
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
@@ -211,6 +212,50 @@ export class UserService {
       headers: headers_object
     };
     return this.http.post<string>(Consts.backUrl + 'tm_statistics/predominant_domain', user, httpOptions);
+  }
+
+  public teamPercentage(user : User) : Observable<string> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<string>(Consts.backUrl + 'tm_statistics/team_percentage', user, httpOptions);
+  }
+
+  public findBestCourse(): Observable<string> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.get<string>(Consts.backUrl + 'user_statistics/findBestCourse', httpOptions);
+  }
+
+  public findBestCourseFromPast(user : User) : Observable<string> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<string>(Consts.backUrl + 'user_statistics/findBestCourseFromPast', user, httpOptions);
+  }
+
+  public updateUsers(users : User[]) : Observable<any> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<any>(Consts.backUrl + 'user/update_users', users, httpOptions);
   }
 }
 

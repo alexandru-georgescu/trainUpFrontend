@@ -1,49 +1,49 @@
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-  </head>
-  
-  
-  <!-- LogOut Button -->
-<div class='userDetailsContainer'>
-    <div>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-        <mat-icon>account_circle</mat-icon>
-        <span class="font-kkt">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
-      </button>
-      <mat-menu #menu="matMenu">
-        <form (ngSubmit)="onStatistic()">
-          <div>
-            <button mat-menu-item type="submit">
-              <span>Statistics</span>
-            </button>
-          </div>
-        </form>
-        <form (ngSubmit)="onSubmit()">
-          <div>
-            <button mat-menu-item type="submit">
-              <span class="font-kkt">Log out</span>
-            </button>
-          </div>
-        </form>
-      </mat-menu>
-    </div>
-  </div>
-  
-  <mat-accordion>
-  
-    <div class="search-course">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchText">
-    </div>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+</head>
 
-    <mat-form-field>
-      <mat-label>Sort By</mat-label>
-      <mat-select [(value)]="selected" (selectionChange)="courseSort($event, selected)">
-        <mat-option value="mod1">Name</mat-option>
-        <mat-option value="mod2">Availability</mat-option>
-        <mat-option value="mod3">Starting Date</mat-option>
-      </mat-select>
-    </mat-form-field>
+
+<!-- LogOut Button -->
+<div class='userDetailsContainer'>
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+      <mat-icon>account_circle</mat-icon>
+      <span class="font-kkt">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <form (ngSubmit)="onStatistic()">
+        <div>
+          <button mat-menu-item type="submit">
+            <span>Statistics</span>
+          </button>
+        </div>
+      </form>
+      <form (ngSubmit)="onSubmit()">
+        <div>
+          <button mat-menu-item type="submit">
+            <span class="font-kkt">Log out</span>
+          </button>
+        </div>
+      </form>
+    </mat-menu>
+  </div>
+</div>
+
+<mat-accordion>
+
+  <div class="search-course">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchText">
+  </div>
+
+  <mat-form-field>
+    <mat-label>Sort By</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="courseSort($event, selected)">
+      <mat-option value="mod1">Name</mat-option>
+      <mat-option value="mod2">Availability</mat-option>
+      <mat-option value="mod3">Starting Date</mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <mat-expansion-panel *ngFor="let course of courses | filter:searchText; let i = index">
     <mat-expansion-panel-header>
@@ -56,7 +56,7 @@
         <span>Starting Date: {{course.startDate}}</span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-  
+
     <table matSort (matSortChange)="sortData($event)" class="table table-hover">
       <thead class="thead-dark">
         <tr>
@@ -73,15 +73,29 @@
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
           <td><button type="button" class="btn btn-success" (click)="yesClick(user, course)">Accept</button>
-              <button type="button" class="btn btn-danger" (click)="noClick(user, course)">Deny</button></td>
+            <button type="button" class="btn btn-danger" (click)="noClick(user, course)">Deny</button></td>
+          <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
+        </tr>
+        <tr *ngFor="let user of acceptedUsers[i]">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>Accepted</td>
+          <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
+        </tr>
+        <tr *ngFor="let user of refusedUsers[i]">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>Rejected</td>
           <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
         </tr>
       </tbody>
     </table>
-  
+
   </mat-expansion-panel>
-  </mat-accordion> 
-  
-  <div class="add-btn-container">
-    <button mat-raised-button class="btn btn-primary" (click)="openDialog()">Add Course</button>
-  </div>
+</mat-accordion>
+
+<div class="add-btn-container">
+  <button mat-raised-button class="btn btn-primary" (click)="openDialog()">Add Course</button>
+</div>

@@ -84,7 +84,10 @@ export class TmPageComponent implements OnInit {
     });
     this.userService.predominantDomain(this.user).subscribe(data => {
       this.shareService.changeDomain(data);
-    })
+    });
+    this.userService.teamPercentage(this.user).subscribe(data => {
+      this.shareService.changeteamPercentage(data);
+    });
   }
 
   yesClick(user: User, course: Course): void {
