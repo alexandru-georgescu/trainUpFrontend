@@ -16,6 +16,10 @@
     font-family: 'Aleo', serif;
 }
 
+table {
+    border-spacing: 15px;
+}
+
 td {
     text-align: center;
 }

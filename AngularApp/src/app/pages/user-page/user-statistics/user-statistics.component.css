@@ -19,3 +19,7 @@
 td {
     text-align: center;
 }
+
+table {
+    border-spacing: 15px;
+}

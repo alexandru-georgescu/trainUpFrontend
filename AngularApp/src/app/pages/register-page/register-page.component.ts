@@ -63,13 +63,15 @@ export class RegisterPageComponent implements OnInit {
         return;
       }
       this.toastr.success("You need to activate your account", "Registration done!", {
-        timeOut: 10000
+        timeOut: 10000,
+        positionClass: 'toast-bottom-right'
       });
       this.router.navigate(['/login']);
     },
       error => {
         this.toastr.error("Failed request", "Fail!", {
-          timeOut: 3000
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
         });
       }
     )

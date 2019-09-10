@@ -1,26 +1,26 @@
 <div class="modal__overlay">
-    <div class="modal">
-        <div class="modal__content">
-            <h2 class="title">Statistics</h2>
-            <br>
-            <table matSort class="table table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th mat-sort-header="acceptedParticipants">Accepted participants</th>
-                        <th mat-sort-header="rejectedParticipants">Rejected participants</th>
-                        <th mat-sort-header="enrolledParticipants">Predominant domain</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- <td>{{ accepted }}</td>
-                    <td>{{ rejected }}</td>
-                    <td>{{ domain }}</td> -->
-                </tbody>
-            </table>
-            <div class="modal__buttons">
-                <!-- <button mat-button (click)="onNoClick()">Cancel</button> -->
-                <button mat-button [mat-dialog-close]>Ok</button>
+        <div class="modal">
+            <div class="modal__content">
+                <h2 class="title">Statistics</h2>
+                <br>
+                <table matSort class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Accepted participants</th>
+                            <th>Rejected participants</th>
+                            <th>Courses coverage percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>{{ accepted }}</td>
+                        <td>{{ rejected }}</td>
+                        <td>{{ coverage }}</td>
+                    </tbody>
+                </table>
+                <div class="modal__buttons">
+                    <!-- <button mat-button (click)="onNoClick()">Cancel</button> -->
+                    <button mat-button [mat-dialog-close]>Ok</button>
+                </div>
             </div>
         </div>
     </div>
-</div>

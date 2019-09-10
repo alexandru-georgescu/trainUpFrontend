@@ -46,7 +46,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.userService.resetPassword(this.user).subscribe(data => console.log(data));
       this.inexistentUser = false;
       this.toastr.success("An email has been sent to your address", "Done!", {
-        timeOut: 2000
+        timeOut: 2000,
+        positionClass: 'toast-bottom-right'
       });
       setTimeout(() => {
         this.router.navigate(['/login']);

@@ -99,17 +99,20 @@ export class TmPageComponent implements OnInit {
       },
         error => {
           this.toastr.error("Failed request", "Fail!", {
-            timeOut: 3000
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right'
           })
         });
     },
       error => {
         this.toastr.error("Failed request", "Fail!", {
-          timeOut: 3000
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
         })
       },
       () => this.toastr.success("Your request has been sent", "Success!", {
-        timeOut: 2000
+        timeOut: 2000,
+        positionClass: 'toast-bottom-right'
       }));
   }
 
@@ -122,17 +125,20 @@ export class TmPageComponent implements OnInit {
       },
         error => {
           this.toastr.error("Failed request", "Fail!", {
-            timeOut: 3000
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right'
           })
         });
     },
       error => {
         this.toastr.error("Failed request", "Fail!", {
-          timeOut: 3000
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
         })
       },
       () => this.toastr.success("Your request has been sent", "Success!", {
-        timeOut: 2000
+        timeOut: 2000,
+        positionClass: 'toast-bottom-right'
       }));
   }
 }
