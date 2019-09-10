@@ -35,27 +35,50 @@
                 <th mat-sort-header="lastName">Last Name</th>
                 <th mat-sort-header="enable">Enable</th>
                 <th mat-sort-header="leader">Leader</th>
+                <th mat-sort-header="delete_user">Delete user</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of sortedData">
+            <tr *ngFor="let user of sortedData;  let i = index">
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
-                <td>                    
-                    <select>
-                        <option selected={{user.type}} *ngFor="let type of types" > {{ type }} </option>
+                <td>
+                    <select (change)="changeType(i, $event.srcElement.value)">
+                        <option [ngValue]="user.type"> {{user.type}} </option>
+                        <ng-container *ngFor="let type of types">
+                            <option *ngIf="user.type != type" [ngValue]="type"> {{ type }} </option>
+                        </ng-container>
                     </select>
                 </td>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
-                <td> 
-                    <select>
-                        <option>False</option>
-                        <option>True</option>
+                <td>
+                    <select (change)="changeEnable(i, $event.srcElement.value)">
+                        <option [ngValue]="user.enable"> {{user.enable}} </option>
+                        <ng-container *ngFor="let enable of enables">
+                            <option *ngIf="user.enable != enable" [ngValue]="enable"> {{ enable }} </option>
+                        </ng-container>
                     </select>
                 </td>
-                <td> {{ user.leader }} </td>
+                <td>
+                    <select (change)="changeLeader(i, $event.srcElement.value)">
+                        <option [ngValue]="user.leader"> {{user.leader}} </option>
+                        <ng-container *ngFor="let leader of leaders">
+                            <option *ngIf="user.leader != leader" [ngValue]="leader"> {{ leader }} </option>
+                        </ng-container>
+                    </select>
+                </td>
+                <td>
+                    <button type='submit' (click)="deleteUser(user)">Delete user</button>
+                </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<div>
+    <button type='submit' (click)="resetChanges()"> Reset changes </button>
+</div>
+<div>
+    <button type='submit' (click)="saveChanges()"> Save changes </button>
 </div>

@@ -3,20 +3,18 @@
         <div class="modal__content">
             <h2 class="title">Statistics</h2>
             <br>
-            <table>
+            <table matSort class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Accepted participants</th>
-                        <th>Rejected participants</th>
-                        <th>Predominant domain</th>
-                        <th>Team enrollment percentage</th>
+                        <th mat-sort-header="acceptedParticipants">Accepted participants</th>
+                        <th mat-sort-header="rejectedParticipants">Rejected participants</th>
+                        <th mat-sort-header="enrolledParticipants">Predominant domain</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <td>{{ accepted }}</td>
+                    <!-- <td>{{ accepted }}</td>
                     <td>{{ rejected }}</td>
-                    <td>{{ domain }}</td>
-                    <td>{{ teamPercentage }}</td>
+                    <td>{{ domain }}</td> -->
                 </tbody>
             </table>
             <div class="modal__buttons">

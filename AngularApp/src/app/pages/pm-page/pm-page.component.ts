@@ -10,6 +10,7 @@ import { CourseService } from 'src/app/services/course-service.service';
 import { UserService } from 'src/app/services/user-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { PmStatisticsComponent } from './pm-statistics/pm-statistics.component';
 
 
 
@@ -28,6 +29,8 @@ export class PmPageComponent implements OnInit {
   selectedUser: User;
   full = false;
   searchText;
+  refusedUsers: User[][];
+  acceptedUsers: User[][];
 
   constructor(public dialog: MatDialog,
     private loginPage: LoginPageComponent,
@@ -56,7 +59,7 @@ export class PmPageComponent implements OnInit {
 
   }
 
-  yesClick(user: User, course: Course): void {
+  yesClick(user: User, course: Course, printToast: Boolean): void {
 
     if (course.actualCapacity == 0) {
       this.toastr.error("There are no available seats", "Fail!", {
@@ -75,31 +78,74 @@ export class PmPageComponent implements OnInit {
         this.courses.forEach((course, index) => {
           this.usersList[index] = new Array();
           this.sortedData[index] = new Array();
+          this.refusedUsers[index] = new Array();
+          this.courseService.getRejectedUsers(course).subscribe(data => {
+            this.refusedUsers[index] = this.usersList[index].concat(data);
+          })
+          this.acceptedUsers[index] = new Array();
+          this.courseService.getAcceptedUsers(course).subscribe(data => {
+            this.acceptedUsers[index] = this.usersList[index].concat(data);
+          })
           this.userService.getWaitUserCourses(course).subscribe(result => {
             this.usersList[index] = this.usersList[index].concat(result);
-            // console.log(this.usersList[index]);
             this.sortedData[index] = this.usersList[index].slice();
           });
         });
       },
         error => {
+          if (printToast === true) {
+            this.toastr.error("Failed request", "Fail!", {
+              timeOut: 3000,
+              enableHtml: true
+            })
+          }
+        }
+      );
+    },
+      error => {
+        if (printToast === true) {
           this.toastr.error("Failed request", "Fail!", {
             timeOut: 3000,
             enableHtml: true
           })
         }
-      );
-    },
-      error => {
-        this.toastr.error("Failed request", "Fail!", {
-          timeOut: 3000,
-          enableHtml: true
-        })
       },
-      () => this.toastr.success("Your request has been sent", "Success!", {
+      () => {
+        if (printToast === true) {
+          this.toastr.success("Your request has been sent", "Success!", {
+            timeOut: 2000,
+            enableHtml: true
+          })
+        }
+      })
+  }
+
+  allYesClick(course: Course): void {
+
+    if (course.actualCapacity == 0) {
+      this.toastr.error("There are no available seats", "Fail!", {
+        timeOut: 3000
+      });
+      return;
+    }
+
+    this.userService.getWaitUserCourses(course).subscribe(data => {
+      let users = data;
+      if (users.length > course.actualCapacity) {
+        this.toastr.error("Not enough available seats", "Fail!", {
+          timeOut: 3000
+        });
+        return;
+      }
+
+      users.forEach(user => {
+        this.yesClick(user, course, false);
+      });
+
+      this.toastr.success("Your request has been sent", "Success!", {
         timeOut: 2000,
-        enableHtml: true
-      }))
+      })
+    });
   }
 
 
@@ -114,6 +160,14 @@ export class PmPageComponent implements OnInit {
         this.courses.forEach((course, index) => {
           this.usersList[index] = new Array();
           this.sortedData[index] = new Array();
+          this.refusedUsers[index] = new Array();
+          this.courseService.getRejectedUsers(course).subscribe(data => {
+            this.refusedUsers[index] = this.usersList[index].concat(data);
+          })
+          this.acceptedUsers[index] = new Array();
+          this.courseService.getAcceptedUsers(course).subscribe(data => {
+            this.acceptedUsers[index] = this.usersList[index].concat(data);
+          })
           this.userService.getWaitUserCourses(course).subscribe(result => {
             this.usersList[index] = this.usersList[index].concat(result);
             this.sortedData[index] = this.usersList[index].slice();
@@ -146,10 +200,20 @@ export class PmPageComponent implements OnInit {
       this.courses = data;
       this.usersList = new Array(this.courses.length);
       this.sortedData = new Array(this.courses.length);
+      this.refusedUsers = new Array(this.courses.length);
+      this.acceptedUsers = new Array(this.courses.length);
 
       this.courses.forEach((course, index) => {
         this.usersList[index] = new Array();
         this.sortedData[index] = new Array();
+        this.refusedUsers[index] = new Array();
+        this.courseService.getRejectedUsers(course).subscribe(data => {
+          this.refusedUsers[index] = this.usersList[index].concat(data);
+        })
+        this.acceptedUsers[index] = new Array();
+        this.courseService.getAcceptedUsers(course).subscribe(data => {
+          this.acceptedUsers[index] = this.usersList[index].concat(data);
+        })
         this.userService.getWaitUserCourses(course).subscribe(result => {
           this.usersList[index] = this.usersList[index].concat(result);
           this.sortedData[index] = this.usersList[index].slice();
@@ -214,7 +278,7 @@ export class PmPageComponent implements OnInit {
   }
 
   onStatistic() {
-    const dialogRef = this.dialog.open(AddCourseComponent, {
+    const dialogRef = this.dialog.open(PmStatisticsComponent, {
       width: '560px',
       height: '250px',
     });

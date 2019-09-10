@@ -31,6 +31,8 @@ import { UserInfoComponent } from './pages/pm-page/user-info/user-info.component
 import { MatSelectModule } from '@angular/material/select';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { PmStatisticsComponent } from './pages/pm-page/pm-statistics/pm-statistics.component';
+import { UserStatisticsComponent } from './pages/user-page/user-statistics/user-statistics.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     AddCourseComponent,
     ForgotPasswordComponent,
     UserInfoComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    PmStatisticsComponent,
+    UserStatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,6 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
   ],
   providers: [RoleGuard, UserService, LoginPageComponent, CourseService, AuthGuard, PmPageComponent],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent, AddCourseComponent, UserInfoComponent]
+  entryComponents: [ModalComponent, AddCourseComponent, UserInfoComponent, PmStatisticsComponent, UserStatisticsComponent]
 })
 export class AppModule { }
