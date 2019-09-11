@@ -56,4 +56,11 @@ export class ShareService {
   changeteamPercentage(teamPercentage: string) {
     this.teamPercentageSource.next(teamPercentage);
   }
+
+  private courseCoverageSource = new BehaviorSubject(undefined);
+  courseCoverage = this.courseCoverageSource.asObservable();
+
+  changecourseCoverage(courseCoverage: string) {
+    this.courseCoverageSource.next(courseCoverage);
+  }
 }

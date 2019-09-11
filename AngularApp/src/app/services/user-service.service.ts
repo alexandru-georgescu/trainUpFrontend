@@ -257,5 +257,16 @@ export class UserService {
     };
     return this.http.post<any>(Consts.backUrl + 'user/update_users', users, httpOptions);
   }
+
+  public courseCoverage(user : User) : Observable<string> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<string>(Consts.backUrl + 'pm_statistics/course_average', user, httpOptions);
+  }
 }
 
