@@ -30,7 +30,7 @@ export class AdminPageComponent implements OnInit {
     private toastr: ToastrService
 
   ) {
-    this.types = ['TM', 'PM', 'USER'];
+    this.types = ['TM', 'PMTECH', 'PMSOFT', 'PMPROC', 'USER'];
     this.enables = [false, true];
   }
 
@@ -121,9 +121,9 @@ export class AdminPageComponent implements OnInit {
   }
 
   deleteUser(user : User) {
-    if(confirm("User "+ user.email + " will be deleted. Are you sure?")) {
+    //if(confirm("User "+ user.email + " will be deleted. Are you sure?")) {
       console.log("deleted");
-    }
+    //}
   }
 }
 

@@ -26,7 +26,6 @@ export class PmPageComponent implements OnInit {
   usersList: User[][];
   courses: Course[];
   sortedData: User[][];
-  sentUser: User;
   selectedUser: User;
   full = false;
   searchText;
@@ -62,137 +61,110 @@ export class PmPageComponent implements OnInit {
 
   }
 
-  yesClick(user: User, course: Course, printToast: Boolean): void {
-
-    if (course.actualCapacity == 0) {
-      this.toastr.error("There are no available seats", "Fail!", {
-        timeOut: 3000,
-        positionClass: 'toast-bottom-right'
-      });
-      return;
-    }
-
-    this.userService.acceptCourse(user, course).subscribe(data => {
-      this.sentUser = data;
+  acceptRejected(user : User, course : Course) {
+    this.userService.enrollRejected(user, course).subscribe(() => {
       this.courseService.getPmCourses(this.user).subscribe(data => {
         this.courses = data;
         let index = this.courses.findIndex(x => x.id === course.id);
-        this.courseService.getAcceptedUsers(course).subscribe(data => {
-          this.acceptedUsers[index] = data;
-          this.userService.getWaitUserCourses(course).subscribe(data => {
-            this.usersList[index] = data;
-            this.sortedData[index] = this.usersList[index].slice();
-            this.indexExpanded = index;
-          })
-        })
+        this.updateLists(course, index, true);
+      })
+    })
+  }
+
+  rejectAccepted(user : User, course : Course) {
+    this.userService.kickAccepted(user, course).subscribe(() => {
+      this.courseService.getPmCourses(this.user).subscribe(data => {
+        this.courses = data;
+        let index = this.courses.findIndex(x => x.id === course.id);
+        this.updateLists(course, index, true);
+      })
+    })
+  }
+
+  yesClick(user: User, course: Course, printToast: Boolean): void {
+
+    if (course.actualCapacity == 0) {
+      this.doToastr(true, true);
+      return;
+    }
+
+    this.userService.acceptCourse(user, course).subscribe(() => {
+      this.courseService.getPmCourses(this.user).subscribe(data => {
+        this.courses = data;
+        let index = this.courses.findIndex(x => x.id === course.id);
+        this.updateLists(course, index, true);
       },
         error => {
-          if (printToast === true) {
-            this.toastr.error("Failed request", "Fail!", {
-              timeOut: 3000,
-              enableHtml: true,
-              positionClass: 'toast-bottom-right'
-            })
-          }
+          this.doToastr(printToast, true);
         }
       );
     },
       error => {
-        if (printToast === true) {
-          this.toastr.error("Failed request", "Fail!", {
-            timeOut: 3000,
-            enableHtml: true,
-            positionClass: 'toast-bottom-right'
-          })
-        }
+        this.doToastr(printToast, true);
       },
       () => {
-        if (printToast === true) {
-          this.toastr.success("Your request has been sent", "Success!", {
-            timeOut: 2000,
-            enableHtml: true,
-            positionClass: 'toast-bottom-right'
-          })
-        }
+        this.doToastr(printToast, false);
       })
   }
 
   allYesClick(course: Course): void {
 
     if (course.actualCapacity == 0) {
-      this.toastr.error("There are no available seats", "Fail!", {
-        timeOut: 3000,
-        positionClass: 'toast-bottom-right'
-      });
+      this.doToastr(true, true);
       return;
     }
 
     this.userService.getWaitUserCourses(course).subscribe(data => {
       let users = data;
       if (users.length > course.actualCapacity) {
-        this.toastr.error("Not enough available seats", "Fail!", {
-          timeOut: 3000,
-          positionClass: 'toast-bottom-right'
-        });
+        this.doToastr(true, true);
         return;
       }
 
-      users.forEach(user => {
-        this.yesClick(user, course, false);
+      this.userService.acceptAll(users, course).subscribe(() => {
+        this.courseService.getPmCourses(this.user).subscribe(data => {
+          this.courses = data;
+          let index = this.courses.findIndex(x => x.id === course.id);
+          this.updateLists(course, index, true);
+        })
+      },
+      () => {
+        this.doToastr(true, false);
       });
 
-      this.toastr.success("Your request has been sent", "Success!", {
-        timeOut: 2000,
-        positionClass: 'toast-bottom-right'
-      })
     });
+  }
+
+  allNoClick(course : Course) {
+    this.userService.getWaitUserCourses(course).subscribe(data => {
+      let users = data;
+      users.forEach(user => {
+        this.noClick(user, course, false);
+      });
+
+      this.doToastr(true, false);
+    })
   }
 
 
   noClick(user: User, course: Course, printToast: Boolean): void {
 
-    this.userService.denyCourse(user, course).subscribe(data => {
-      this.sentUser = data;
+    this.userService.denyCourse(user, course).subscribe(() => {
       this.courseService.getPmCourses(this.user).subscribe(data => {
         this.courses = data;
         let index = this.courses.findIndex(x => x.id === course.id);
-        this.courseService.getRejectedUsers(course).subscribe(data => {
-          this.refusedUsers[index] = data;
-          this.userService.getWaitUserCourses(course).subscribe(data => {
-            this.usersList[index] = data;
-            this.sortedData[index] = this.usersList[index].slice();
-            this.indexExpanded = index;
-          })
-        })
+        this.updateLists(course, index, true);
       },
         error => {
-          if (printToast === true) {
-            this.toastr.error("Failed request", "Fail!", {
-              timeOut: 3000,
-              enableHtml: true,
-              positionClass: 'toast-bottom-right'
-            })
-          }
+          this.doToastr(printToast, true);
         }
       );
     },
       error => {
-        if (printToast === true) {
-          this.toastr.error("Failed request", "Fail!", {
-            timeOut: 3000,
-            enableHtml: true,
-            positionClass: 'toast-bottom-right'
-          })
-        }
+        this.doToastr(printToast, true);
       },
       () => {
-        if (printToast === true) {
-          this.toastr.success("Your request has been sent", "Success!", {
-            timeOut: 2000,
-            enableHtml: true,
-            positionClass: 'toast-bottom-right'
-          })
-        }
+        this.doToastr(printToast, false);
       })
   }
 
@@ -209,19 +181,26 @@ export class PmPageComponent implements OnInit {
         this.usersList[index] = new Array();
         this.sortedData[index] = new Array();
         this.refusedUsers[index] = new Array();
-        this.courseService.getRejectedUsers(course).subscribe(data => {
-          this.refusedUsers[index] = this.usersList[index].concat(data);
-        })
         this.acceptedUsers[index] = new Array();
-        this.courseService.getAcceptedUsers(course).subscribe(data => {
-          this.acceptedUsers[index] = this.usersList[index].concat(data);
-        })
-        this.userService.getWaitUserCourses(course).subscribe(result => {
-          this.usersList[index] = this.usersList[index].concat(result);
-          this.sortedData[index] = this.usersList[index].slice();
-        })
+        this.updateLists(course, index, false);
       });
     });
+  }
+
+  updateLists(course : Course, index : number, indexEx : Boolean) {
+    this.courseService.getRejectedUsers(course).subscribe(data => {
+      this.refusedUsers[index] = data;
+      this.courseService.getAcceptedUsers(course).subscribe(data => {
+        this.acceptedUsers[index] = data;
+        this.userService.getWaitUserCourses(course).subscribe(result => {
+          this.usersList[index] = result;
+          this.sortedData[index] = this.usersList[index].slice();
+          if (indexEx === true) {
+            this.indexExpanded = index;
+          }
+        })
+      })
+    })
   }
 
   openDialog(): void {
@@ -240,21 +219,25 @@ export class PmPageComponent implements OnInit {
     this.courseService.getPmCourses(this.user).subscribe(data => {
       this.courses = data;
       if (mode === 'mod1')
-        this.courses.sort(compareByName);
+        this.courses.sort(compareByNameAsc);
       if (mode === 'mod2')
-        this.courses.sort(compareByCapacity);
+        this.courses.sort(compareByCapacityAsc);
       if (mode === 'mod3')
-        this.courses.sort(compareByStartDate);
+        this.courses.sort(compareByStartDateAsc);
+      if (mode === 'mod4')
+        this.courses.sort(compareByStartDateDesc);
+      if (mode === 'mod5')
+        this.courses.sort(compareByNameDesc);
+      if (mode === 'mod6')
+        this.courses.sort(compareByCapacityDesc);
       this.usersList = new Array(this.courses.length);
       this.sortedData = new Array(this.courses.length);
 
       this.courses.forEach((course, index) => {
         this.usersList[index] = new Array();
         this.sortedData[index] = new Array();
-        this.userService.getWaitUserCourses(course).subscribe(result => {
-          this.usersList[index] = this.usersList[index].concat(result);
-          this.sortedData[index] = this.usersList[index].slice();
-        })
+        this.updateLists(course, index, false);
+        this.indexExpanded = -1;
       });
     });
   }
@@ -294,13 +277,32 @@ export class PmPageComponent implements OnInit {
       this.shareService.changecourseCoverage(data);
     })
   }
+
+  doToastr(printToast : Boolean, error : Boolean) {
+    if (printToast === false)
+      return;
+    else if (error === true) {
+      this.toastr.error("Failed request", "Fail!", {
+        timeOut: 3000,
+        enableHtml: true,
+        positionClass: 'toast-bottom-right'
+      });
+    }
+    else {
+      this.toastr.success("Your request has been sent", "Success!", {
+        timeOut: 2000,
+        enableHtml: true,
+        positionClass: 'toast-bottom-right'
+      });
+    }
+  }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 
-function compareByName(a: Course, b: Course) {
+function compareByNameAsc(a: Course, b: Course) {
   if (a.courseName < b.courseName) {
     return -1;
   }
@@ -309,7 +311,16 @@ function compareByName(a: Course, b: Course) {
   }
 }
 
-function compareByCapacity(a: Course, b: Course) {
+function compareByNameDesc(a: Course, b: Course) {
+  if (a.courseName < b.courseName) {
+    return 1;
+  }
+  if (a.courseName > b.courseName) {
+    return -1;
+  }
+}
+
+function compareByCapacityAsc(a: Course, b: Course) {
   if (a.actualCapacity < b.actualCapacity) {
     return -1;
   }
@@ -318,11 +329,29 @@ function compareByCapacity(a: Course, b: Course) {
   }
 }
 
-function compareByStartDate(a: Course, b: Course) {
+function compareByCapacityDesc(a: Course, b: Course) {
+  if (a.actualCapacity < b.actualCapacity) {
+    return 1;
+  }
+  if (a.actualCapacity > b.actualCapacity) {
+    return -1;
+  }
+}
+
+function compareByStartDateAsc(a: Course, b: Course) {
   if (a.startDate < b.startDate) {
     return -1;
   }
   if (a.startDate > b.startDate) {
     return 1;
+  }
+}
+
+function compareByStartDateDesc(a: Course, b: Course) {
+  if (a.startDate < b.startDate) {
+    return 1;
+  }
+  if (a.startDate > b.startDate) {
+    return -1;
   }
 }

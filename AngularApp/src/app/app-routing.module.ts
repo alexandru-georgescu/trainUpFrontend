@@ -13,6 +13,7 @@ import { PmPageComponent } from './pages/pm-page/pm-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ForgotPasswordComponent } from './pages/login-page/forgot-password/forgot-password.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { CalendarComponent } from './pages/user-page/calendar/calendar.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'forgot-password', canActivate: [AuthGuard], component: ForgotPasswordComponent },
   { path: 'tm', canActivate: [RoleGuard], component: TmPageComponent },
   { path: 'pm', canActivate: [RoleGuard], component: PmPageComponent },
+  { path: 'calendar', component: CalendarComponent },
   { path: 'user', canActivate: [RoleGuard], component: UserPageComponent, 
                   children: [{path: 'prev' , component: PreviousCoursesComponent},
                             {path: 'curr' , component: CurrentCoursesComponent},

@@ -79,7 +79,7 @@ export class LoginPageComponent implements OnInit {
             localStorage.setItem('loggedIn', 'true');
 
           }
-          else if (this.user.type === "PM") {
+          else if (this.user.type === "PMTECH" || this.user.type === "PMSOFT" || this.user.type === "PMPROC") {
             this.loggedIn = true;
             localStorage.setItem('loggedIn', 'true');
             localStorage.setItem('currentUser', JSON.stringify(this.user));

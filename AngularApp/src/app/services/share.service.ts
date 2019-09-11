@@ -63,4 +63,25 @@ export class ShareService {
   changecourseCoverage(courseCoverage: string) {
     this.courseCoverageSource.next(courseCoverage);
   }
+
+  private attendedDaysSource = new BehaviorSubject(undefined);
+  attendedDays = this.attendedDaysSource.asObservable();
+
+  changeAttendedDays(attendedDays: number) {
+    this.attendedDaysSource.next(attendedDays);
+  }
+
+  private upcomingDaysSource = new BehaviorSubject(undefined);
+  upcomingDays = this.upcomingDaysSource.asObservable();
+
+  changeUpcomingDays(upcomingDays: number) {
+    this.upcomingDaysSource.next(upcomingDays);
+  }
+
+  private courseStatisticSource = new BehaviorSubject(undefined);
+  courseStatistic = this.courseStatisticSource.asObservable();
+
+  changeCourseStatistic(courseStatistic: number[]) {
+    this.courseStatisticSource.next(courseStatistic);
+  }
 }

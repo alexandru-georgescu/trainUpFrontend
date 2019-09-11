@@ -69,7 +69,7 @@
                     </select>
                 </td>
                 <td>
-                    <button type='submit' (click)="deleteUser(user)">Delete user</button>
+                    <button appPreventDoubleClick (throttledClick)="deleteUser(user)" [throttleTime]="1000">Delete user</button>
                 </td>
             </tr>
         </tbody>

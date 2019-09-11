@@ -1,4 +1,4 @@
-<div class="modal__overlay">
+<!-- <div class="modal__overlay">
     <div class="modal">
         <div class="modal__content">
             <h2 class="title">Statistics</h2>
@@ -19,6 +19,25 @@
                     <td>{{ teamPercentage }}</td>
                 </tbody>
             </table>
+            <div class="modal__buttons">
+                <button mat-button (click)="onNoClick()">Cancel</button>
+                <button mat-button [mat-dialog-close]>Ok</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="modal__overlay">
+    <div class="modal">
+        <div class="modal__content">
+            <h2 class="title">Statistics</h2>
+            <br>
+            <div class="chart-container">
+                <fusioncharts width="600" height="300" type="Column2d" [dataSource]="dataSource1">
+                </fusioncharts>
+                <br>
+                <fusioncharts width="600" height="300" type="Column2d" [dataSource]="dataSource2">
+                </fusioncharts>
+            </div>
             <div class="modal__buttons">
                 <!-- <button mat-button (click)="onNoClick()">Cancel</button> -->
                 <button mat-button [mat-dialog-close]>Ok</button>
