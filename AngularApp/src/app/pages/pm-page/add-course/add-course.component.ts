@@ -36,10 +36,14 @@ export class AddCourseComponent implements OnInit {
       return; 
     }
     
-    console.log(this.controls.timeInterval.value);
     this.dialogRef.close();
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    let course = new Course(this.controls.name.value, this.controls.capacity.value, this.controls.capacity.value, this.controls.startDate.value, this.controls.endDate.value, this.user.email, this.controls.domain.value, this.controls.timeInterval.value);
+    let startDate = new Date(this.controls.startDate.value);
+    let endDate = new Date(this.controls.endDate.value);
+
+    startDate = new Date(startDate.getTime() + Math.abs(startDate.getTimezoneOffset()*60000));
+    endDate = new Date(endDate.getTime() + Math.abs(endDate.getTimezoneOffset()*60000));
+    let course = new Course(this.controls.name.value, this.controls.capacity.value, this.controls.capacity.value, startDate, endDate, this.user.email, this.controls.domain.value, this.controls.timeInterval.value);
     this.courseService.addCourse(course).subscribe(data => {
       this.course = data;
     });

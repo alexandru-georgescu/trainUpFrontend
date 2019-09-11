@@ -92,11 +92,13 @@ export class AdminPageComponent implements OnInit {
     this.userService.updateUsers(this.users).subscribe(a => {this.ngOnInit()},
     error => {
       this.toastr.error("Failed request", "Fail!", {
-        timeOut: 3000
+        timeOut: 3000,
+        positionClass: 'toast-bottom-right'
       })
     },
     () => this.toastr.success("Data has been saved", "Success!", {
-      timeOut: 2000
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right'
     }));
   }
     
