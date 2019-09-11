@@ -15,7 +15,7 @@
       <form (ngSubmit)="onStatistic()">
         <div>
           <button mat-menu-item type="submit">
-            <span>Statistics</span>
+            <span class="font-kkt">Statistics</span>
           </button>
         </div>
       </form>
@@ -39,9 +39,12 @@
   <mat-form-field>
     <mat-label>Sort By</mat-label>
     <mat-select [(value)]="selected" (selectionChange)="courseSort($event, selected)">
-      <mat-option value="mod1">Name</mat-option>
-      <mat-option value="mod2">Availability</mat-option>
-      <mat-option value="mod3">Starting Date</mat-option>
+      <mat-option value="mod1">Name(asc)</mat-option>
+      <mat-option value="mod5">Name(desc)</mat-option>
+      <mat-option value="mod2">Availability(asc)</mat-option>
+      <mat-option value="mod6">Availability(desc)</mat-option>
+      <mat-option value="mod3">Starting Date(asc)</mat-option>
+      <mat-option value="mod4">Starting Date(desc)</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -56,6 +59,7 @@
         <span>Available : {{course.actualCapacity}}</span>
         <span>Starting Date: {{course.startDate}}</span>
         <button type="button" class="btn btn-success" (click)="allYesClick(course)">Accept All</button>
+        <button type="button" class="btn btn-danger" (click)="allNoClick(course)">Reject All</button>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -82,14 +86,14 @@
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
-          <td>Accepted</td>
+          <td>Accepted <button type="button" class="btn btn-danger" (click)="rejectAccepted(user, course)">Kick</button></td>
           <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
         </tr>
         <tr *ngFor="let user of refusedUsers[i]">
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
-          <td>Rejected</td>
+          <td>Rejected <button type="button" class="btn btn-success" (click)="acceptRejected(user, course)">Enroll</button></td>
           <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
         </tr>
       </tbody>

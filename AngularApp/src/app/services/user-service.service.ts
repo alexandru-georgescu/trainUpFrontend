@@ -268,5 +268,41 @@ export class UserService {
     };
     return this.http.post<string>(Consts.backUrl + 'pm_statistics/course_average', user, httpOptions);
   }
+
+  public enrollRejected(user : User, course : Course) : Observable<User> {
+    let data = JSON.stringify({user : user, course : course});
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<User>(Consts.backUrl + 'user/moveToAccepted', data, httpOptions);
+  }
+
+  public kickAccepted(user : User, course : Course) : Observable<User> {
+    let data = JSON.stringify({user : user, course : course});
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<User>(Consts.backUrl + 'user/moveToRejected', data, httpOptions);
+  }
+
+  public acceptAll(users : User[], course : Course) : Observable<User[]> {
+    let data = JSON.stringify({users : users, course : course});
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<User[]>(Consts.backUrl + 'user/acceptAll', data, httpOptions);
+  }
 }
 
