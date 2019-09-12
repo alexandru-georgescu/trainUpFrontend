@@ -19,7 +19,7 @@
                 <div class="title title-border">
                     <h4>Log in to your account</h4>
                 </div>
-                <form id="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <form id="login" [formGroup]="loginForm">
                     <div class="form-group flex">
                         <!-- <label> Email </label> -->
                         <i class="fa fa-user icon" aria-hidden="true"></i>
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="login-button">
-                        <button type="submit" class="button"><span>Login</span></button>
+                        <button appPreventDoubleClick (throttledClick)="beforeLogIn()" [throttleTime]="1000" class="button"><span>Login</span></button>
                     </div>
                     <div class="wrong-input">
                         <span *ngIf="needToactivateAccount">You need to activate your account!</span>

@@ -66,3 +66,9 @@ td {
 .project-tab .nav-link:hover {
     border: none;
 }
+
+.font-kkt {
+    font-family: Roboto,"Helvetica Neue",sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }

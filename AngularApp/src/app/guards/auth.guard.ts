@@ -8,12 +8,12 @@ import { User } from '../models/user';
 })
 export class AuthGuard implements CanActivate {
 
-  user : User;
-  loggedIn : boolean;
+  user: User;
+  loggedIn: boolean;
 
-  constructor (private router : Router) { }
+  constructor(private router: Router) { }
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean {
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (localStorage.getItem('loggedIn') == 'true') {
       this.loggedIn = true;
     } else {
@@ -21,12 +21,16 @@ export class AuthGuard implements CanActivate {
     }
 
     if (this.loggedIn === false) {
-     return true;
+      return true;
     }
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.router.navigate([this.user.type.toLowerCase()]);
+    if (this.user.type === 'PMTECH' || this.user.type === 'PMSOFT' || this.user.type === 'PMPROC') {
+      this.router.navigate(['pm']);
+    } else {
+      this.router.navigate([this.user.type.toLowerCase()]);
+    }
     return false;
 
   }
-  
+
 }

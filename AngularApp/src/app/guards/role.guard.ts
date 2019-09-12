@@ -30,7 +30,7 @@ export class RoleGuard implements CanActivate {
         return true;
       }
 
-      if (this.user.type == 'PM' && next.url.pop().path == 'pm') {
+      if ((this.user.type == 'PMTECH'|| this.user.type == 'PMSOFT' || this.user.type == 'PMPROC') && next.url.pop().path == 'pm') {
         return true;
       }
 

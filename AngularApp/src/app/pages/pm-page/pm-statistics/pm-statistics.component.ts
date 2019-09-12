@@ -26,8 +26,5 @@ export class PmStatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.shareService.accepted.subscribe(data => this.accepted = data);
-    this.shareService.rejected.subscribe(data => this.rejected = data);
-    this.shareService.courseCoverage.subscribe(data => this.coverage = data + '%');
   }
 }

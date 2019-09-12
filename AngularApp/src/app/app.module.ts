@@ -33,6 +33,15 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { PmStatisticsComponent } from './pages/pm-page/pm-statistics/pm-statistics.component';
 import { UserStatisticsComponent } from './pages/user-page/user-statistics/user-statistics.component';
+import { CalendarComponent } from './pages/user-page/calendar/calendar.component';
+import { PreventDoubleClickDirective } from './directives/prevent-double-click.directive';
+import { FusionChartsModule } from 'angular-fusioncharts';
+import * as FusionCharts from 'fusioncharts';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
+
+FusionChartsModule.fcRoot(FusionCharts, Charts, TimeSeries);
+
 
 @NgModule({
   declarations: [
@@ -52,7 +61,9 @@ import { UserStatisticsComponent } from './pages/user-page/user-statistics/user-
     UserInfoComponent,
     AdminPageComponent,
     PmStatisticsComponent,
-    UserStatisticsComponent
+    UserStatisticsComponent,
+    CalendarComponent,
+    PreventDoubleClickDirective,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +88,7 @@ import { UserStatisticsComponent } from './pages/user-page/user-statistics/user-
     MatSelectModule,
     Ng2SearchPipeModule,
     ToastrModule.forRoot(),
+    FusionChartsModule
 
 
   ],

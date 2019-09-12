@@ -88,37 +88,28 @@ export class NextCoursesComponent implements OnInit {
 
   filterUnavailableCourses(course: Course, currentCourses: Course[]) {
     if (currentCourses.length == 0) return;
-    let courseInterval = this.timeIntervalParser(course.timeInterval);
+
+    let courseStart = (new Date(course.startDate)).getTime();
+    let courseEnd = (new Date(course.endDate)).getTime();
+
+
     currentCourses.forEach(currCourse => {
-      let currCourseInterval = this.timeIntervalParser(currCourse.timeInterval);
+      let currCourseStart = (new Date(currCourse.startDate)).getTime();
+      let currCourseEnd = (new Date(currCourse.endDate)).getTime();
+
       if (
-        (courseInterval.startHHMM <= currCourseInterval.startHHMM && courseInterval.endHHMM >= currCourseInterval.endHHMM) ||
-        (courseInterval.startHHMM <= currCourseInterval.startHHMM && courseInterval.endHHMM <= currCourseInterval.endHHMM && courseInterval.endHHMM >= currCourseInterval.startHHMM) ||
-        (courseInterval.startHHMM >= currCourseInterval.startHHMM && courseInterval.startHHMM <= currCourseInterval.endHHMM && courseInterval.endHHMM <= currCourseInterval.endHHMM && courseInterval.endHHMM >= currCourseInterval.startHHMM) ||
-        (courseInterval.startHHMM >= currCourseInterval.startHHMM && courseInterval.startHHMM <= currCourseInterval.endHHMM && courseInterval.endHHMM >= currCourseInterval.endHHMM)) {
+        (courseStart <= currCourseStart && courseEnd >= currCourseEnd) ||
+        (courseStart <= currCourseStart && courseEnd <= currCourseEnd && courseEnd >= currCourseStart) ||
+        (courseStart >= currCourseStart && courseStart <= currCourseEnd && courseEnd <= currCourseEnd && courseEnd >= currCourseStart) ||
+        (courseStart >= currCourseStart && courseStart <= currCourseEnd && courseEnd >= currCourseEnd)) {
         this.unavailableCourses.push(course);
         return;
       }
     });
     return;
   }
-
-  timeIntervalParser(timeIntervalString: String): TimeIntervalType {
-    let parsedTimeInterval: TimeIntervalType;
-    parsedTimeInterval = {
-      startHHMM: parseInt(timeIntervalString.substr(0, 2), 10) * 60 + parseInt(timeIntervalString.substr(3, 2), 10),
-      endHHMM: parseInt(timeIntervalString.substr(6, 2), 10) * 60 +  parseInt(timeIntervalString.substr(9, 2), 10)
-    }
-    return parsedTimeInterval;
-  }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
-
-type TimeIntervalType = {
-  startHHMM: Number;
-  endHHMM: Number;
-  
-};

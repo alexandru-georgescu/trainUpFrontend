@@ -7,7 +7,6 @@ export class Course {
     endDate: Date;
     projectManager: string;
     domain: string;
-    type: string;
     timeInterval: string;
 
     constructor(courseName: string,
