@@ -50,7 +50,7 @@ export class LoginPageComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  onSubmit() {
+  beforeLogIn() {
     this.submitted = true;
     if (this.controls.email.value != '' && this.controls.password.value != '') {
       this.login();

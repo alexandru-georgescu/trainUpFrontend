@@ -54,8 +54,7 @@ export class UserStatisticsComponent implements OnInit {
     public dialogRef: MatDialogRef<UserStatisticsComponent>,
     private shareService: ShareService
   ) {
-    
-      this.courseStatistic = JSON.parse(localStorage.getItem('courseStatistic'));
+    this.courseStatistic = JSON.parse(localStorage.getItem('courseStatistic'));
       this.dataSource = {
         chart: {
           caption: "Team's enrollment coverage",

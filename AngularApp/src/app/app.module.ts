@@ -88,7 +88,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, TimeSeries);
     MatSelectModule,
     Ng2SearchPipeModule,
     ToastrModule.forRoot(),
-    FusionChartsModule,
+    FusionChartsModule
 
 
   ],

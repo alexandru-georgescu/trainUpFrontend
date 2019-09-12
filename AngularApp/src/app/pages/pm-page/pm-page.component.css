@@ -87,3 +87,7 @@ button:focus {
   font-size: 14px !important;
   font-weight: 500 !important;
 }
+
+.accepted > tr:last-child {
+  border-bottom: 5px solid;
+}

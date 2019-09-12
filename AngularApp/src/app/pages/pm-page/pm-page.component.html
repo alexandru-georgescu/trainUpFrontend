@@ -13,12 +13,12 @@
     </button>
     <mat-menu #menu="matMenu">
       <div>
-        <button mat-menu-item (click)="onStatistic()">
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
           <span class="font-kkt">Statistics</span>
         </button>
       </div>
       <div>
-        <button mat-menu-item (click)="logout()">
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
           <span class="font-kkt">Log out</span>
         </button>
       </div>
@@ -54,8 +54,8 @@
         <span>Check potential participants</span>
         <span>Available : {{course.actualCapacity}}</span>
         <span>Starting Date: {{course.startDate}}</span>
-        <button type="button" class="btn btn-success" (click)="allYesClick(course)">Accept All</button>
-        <button type="button" class="btn btn-danger" (click)="allNoClick(course)">Reject All</button>
+        <button type="button" class="btn btn-success" appPreventDoubleClick (throttledClick)="allYesClick(course)" [throttleTime]="1000">Accept All</button>
+        <button type="button" class="btn btn-danger" appPreventDoubleClick (throttledClick)="allNoClick(course)" [throttleTime]="1000">Reject All</button>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -69,30 +69,36 @@
           <th>Information</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="accepted">
         <tr *ngFor="let user of sortedData[i]">
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
-          <td><button type="button" class="btn btn-success" (click)="yesClick(user, course)">Accept</button>
-            <button type="button" class="btn btn-danger" (click)="noClick(user, course)">Deny</button></td>
-          <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
+          <td>
+            <button type="button" class="btn btn-success" appPreventDoubleClick (throttledClick)="yesClick(user, course)" [throttleTime]="1000">Accept</button>
+            <button type="button" class="btn btn-danger" appPreventDoubleClick (throttledClick)="noClick(user, course)" [throttleTime]="1000">Deny</button></td>
+          <td>
+            <button type="button" class="btn btn-info" appPreventDoubleClick (throttledClick)="userInfo(user)" [throttleTime]="1000">Info</button></td>
         </tr>
+      </tbody>
+      <tbody class="accepted">
         <tr *ngFor="let user of acceptedUsers[i]">
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
-          <td>Accepted <button type="button" class="btn btn-danger" (click)="rejectAccepted(user, course)">Kick</button>
+          <td>Accepted <button type="button" class="btn btn-danger" appPreventDoubleClick (throttledClick)="rejectAccepted(user, course)" [throttleTime]="1000">Kick</button>
           </td>
-          <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
+          <td><button type="button" class="btn btn-info" appPreventDoubleClick (throttledClick)="userInfo(user)" [throttleTime]="1000">Info</button></td>
         </tr>
+      </tbody>
+      <tbody>
         <tr *ngFor="let user of refusedUsers[i]">
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
-          <td>Rejected <button type="button" class="btn btn-success"
-              (click)="acceptRejected(user, course)">Enroll</button></td>
-          <td><button type="button" class="btn btn-info" (click)="userInfo(user)">Info</button></td>
+          <td>Rejected <button type="button" class="btn btn-success" appPreventDoubleClick
+              (throttledClick)="acceptRejected(user, course)" [throttleTime]="1000">Enroll</button></td>
+          <td><button type="button" class="btn btn-info" appPreventDoubleClick (throttledClick)="userInfo(user)" [throttleTime]="1000">Info</button></td>
         </tr>
       </tbody>
     </table>
@@ -101,5 +107,5 @@
 </mat-accordion>
 
 <div class="add-btn-container">
-  <button mat-raised-button class="btn btn-primary" (click)="openDialog()">Add Course</button>
+  <button mat-raised-button class="btn btn-primary" appPreventDoubleClick (throttledClick)="openDialog()" [throttleTime]="1000">Add Course</button>
 </div>

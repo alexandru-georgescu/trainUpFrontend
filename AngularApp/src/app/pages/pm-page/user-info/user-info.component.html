@@ -20,7 +20,7 @@
                         <span>{{user.courses.length}}</span>
                     </div>
                     <div class="modal__buttons">
-                        <button class="cancel-btn" mat-button (click)="onNoClick()">Close</button>
+                        <button class="cancel-btn" mat-button appPreventDoubleClick (throttledClick)="onNoClick()" [throttleTime]="1000">Close</button>
                     </div>
                 </div>
             </div>

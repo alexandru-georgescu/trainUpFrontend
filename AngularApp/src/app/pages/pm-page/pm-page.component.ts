@@ -242,10 +242,6 @@ export class PmPageComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.logout();
-  }
-
   logout() {
     localStorage.removeItem('currentUser');
     this.loginPage.loggedIn = false;

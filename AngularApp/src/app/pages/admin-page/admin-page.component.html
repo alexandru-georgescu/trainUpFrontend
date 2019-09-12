@@ -5,13 +5,11 @@
             <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
         </button>
         <mat-menu #menu="matMenu">
-            <form (ngSubmit)="onSubmit()">
-                <div>
-                    <button mat-menu-item type="submit">
-                        <span>Log out</span>
-                    </button>
-                </div>
-            </form>
+            <div>
+                <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
+                    <span>Log out</span>
+                </button>
+            </div>
         </mat-menu>
     </div>
 </div>
@@ -69,7 +67,8 @@
                     </select>
                 </td>
                 <td>
-                    <button appPreventDoubleClick (throttledClick)="deleteUser(user)" [throttleTime]="1000">Delete user</button>
+                    <button appPreventDoubleClick (throttledClick)="deleteUser(user)" [throttleTime]="1000">Delete
+                        user</button>
                 </td>
             </tr>
         </tbody>
@@ -77,8 +76,8 @@
 </div>
 
 <div>
-    <button type='submit' (click)="resetChanges()"> Reset changes </button>
+    <button appPreventDoubleClick (throttledClick)="resetChanges()" [throttleTime]="1000"> Reset changes </button>
 </div>
 <div>
-    <button type='submit' (click)="saveChanges()"> Save changes </button>
+    <button appPreventDoubleClick (throttledClick)="saveChanges()" [throttleTime]="1000"> Save changes </button>
 </div>

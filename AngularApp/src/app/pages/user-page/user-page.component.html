@@ -1,27 +1,24 @@
+<!-- LogOut Button -->
 <div class='userDetailsContainer'>
-  <div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-      <mat-icon>account_circle</mat-icon>
-      <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
-    </button>
-    <mat-menu #menu="matMenu">
-      <form (ngSubmit)="onStatistic()">
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+        <mat-icon>account_circle</mat-icon>
+        <span class="font-kkt">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+      </button>
+      <mat-menu #menu="matMenu">
         <div>
-          <button mat-menu-item type="submit">
-            <span>Statistics</span>
+          <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
+            <span class="font-kkt">Statistics</span>
           </button>
         </div>
-      </form>
-      <form (ngSubmit)="onSubmit()">
         <div>
-          <button mat-menu-item type="submit">
-            <span>Log out</span>
+          <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
+            <span class="font-kkt">Log out</span>
           </button>
         </div>
-      </form>
-    </mat-menu>
+      </mat-menu>
+    </div>
   </div>
-</div>
 
 <section id="tabs" class="project-tab">
   <div class="container">

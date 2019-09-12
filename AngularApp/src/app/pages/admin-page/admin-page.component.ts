@@ -68,11 +68,6 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-
-  onSubmit() {
-    this.logout();
-  }
-
   logout() {
     localStorage.removeItem('currentUser');
     this.loginPage.loggedIn = false;

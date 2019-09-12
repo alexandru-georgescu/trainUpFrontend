@@ -57,8 +57,8 @@
                         </mat-form-field>
                     </div>
                     <div class="modal__buttons">
-                        <button class="cancel-btn" mat-button (click)="onNoClick()">Cancel</button>
-                        <button class="add-btn" mat-button (click)="onClick()">Add</button>
+                        <button class="cancel-btn" mat-button appPreventDoubleClick (throttledClick)="onNoClick()" [throttleTime]="1000">Cancel</button>
+                        <button class="add-btn" mat-button appPreventDoubleClick (throttledClick)="onClick()" [throttleTime]="1000">Add</button>
                     </div>
                 </form>
             </div>

@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -12,6 +11,8 @@ export interface CalendarDate {
 @Component({
   selector: 'yoshimi-calendar',
   templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.css']
+
 })
 export class CalendarComponent implements OnInit, OnChanges {
 

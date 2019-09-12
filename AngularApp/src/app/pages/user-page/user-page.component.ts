@@ -32,10 +32,6 @@ export class UserPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
-    this.logout();
-  }
-
   logout() {
     localStorage.removeItem('currentUser');
     this.loginPage.loggedIn = false;
