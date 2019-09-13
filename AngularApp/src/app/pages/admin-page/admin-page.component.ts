@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service.service';
 import { Sort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
+import { Course } from 'src/app/models/course';
+import { CourseService } from 'src/app/services/course-service.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -12,21 +14,25 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
-  // TODO:
-  //functie care sterge un user
-  // r u sure pt delete user and save changes 
+
 
   user: User;
   users: User[];
-  sortedData: User[];
-  default: User[];
+  sortedDataUser: User[];
+  defaultUsers: User[];
   types: String[];
   enables: boolean[];
   leaders: string[]
 
+
+  courses: Course[];
+  sortedDataCourse: Course[];
+  defaultCourses: Course[];
+
   constructor(private loginPage: LoginPageComponent,
     private router: Router,
     private userService: UserService,
+    private courseService: CourseService,
     private toastr: ToastrService
 
   ) {
@@ -39,21 +45,29 @@ export class AdminPageComponent implements OnInit {
     this.userService.usersFindAll().subscribe(users => {
       this.leaders = users.filter(u => u.type != 'USER').map(u => u.email);
       this.users = users.slice(1, users.length);
-      this.sortedData = this.users;
-      if (this.default === undefined) {
-        this.default = JSON.parse(JSON.stringify(this.users));
+      this.sortedDataUser = this.users;
+      if (this.defaultUsers === undefined) {
+        this.defaultUsers = JSON.parse(JSON.stringify(this.users));
+      }
+    });
+
+    this.courseService.getAllCourses().subscribe(courses => {
+      this.courses = courses;
+      this.sortedDataCourse = this.courses;
+      if (this.defaultCourses === undefined) {
+        this.defaultCourses = JSON.parse(JSON.stringify(this.courses));
       }
     });
 
   }
 
-  sortData(sort: Sort) {
+  sortDataUser(sort: Sort) {
     const data = this.users;
     if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
+      this.sortedDataUser = data;
       return;
     }
-    this.sortedData = data.sort((a, b) => {
+    this.sortedDataUser = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'id': return compare(a.id, b.id, isAsc);
@@ -68,6 +82,29 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
+  sortDataCourse(sort: Sort) {
+    const data = this.courses;
+    if (!sort.active || sort.direction === '') {
+      this.sortedDataCourse = data;
+      return;
+    }
+    this.sortedDataCourse = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id': return compare(a.id, b.id, isAsc);
+        case 'courseName': return compare(a.courseName, b.courseName, isAsc);
+        case 'capacity': return compare(a.capacity, b.capacity, isAsc);
+        case 'actualCapacity': return compare(a.actualCapacity, b.actualCapacity, isAsc);
+        case 'projectManager': return compare(a.projectManager, b.projectManager, isAsc);
+        case 'startDate': return compare(a.startDate.toString(), b.startDate.toString(), isAsc);
+        case 'endDate': return compare(a.startDate.toString(), b.startDate.toString(), isAsc);
+        case 'domain': return compare(a.domain, b.domain, isAsc);
+        case 'timeInterval': return compare(a.timeInterval, b.timeInterval, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.loginPage.loggedIn = false;
@@ -76,14 +113,14 @@ export class AdminPageComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  resetChanges() {
-    this.users = this.default;
+  resetChangesUser() {
+    this.users = this.defaultUsers;
     this.ngOnInit();
   }
 
-  saveChanges() {
+  saveChangesUser() {
     if (confirm("This changes can't be undone. Are you sure?")){
-    this.default = JSON.parse(JSON.stringify(this.users));
+    this.defaultUsers = JSON.parse(JSON.stringify(this.users));
     this.userService.updateUsers(this.users).subscribe(a => {this.ngOnInit()},
     error => {
       this.toastr.error("Failed request", "Fail!", {
@@ -99,26 +136,75 @@ export class AdminPageComponent implements OnInit {
     
   }
 
+  resetChangesCourse() {
+    this.courses = this.defaultCourses;
+    this.ngOnInit();
+  }
+
+  saveChangesCourse() {
+    if (confirm("This changes can't be undone. Are you sure?")){
+    this.defaultCourses = JSON.parse(JSON.stringify(this.courses));
+    this.courseService.updateCourses(this.courses).subscribe(a => {this.ngOnInit()},
+    error => {
+      this.toastr.error("Failed request", "Fail!", {
+        timeOut: 3000,
+        positionClass: 'toast-bottom-right'
+      })
+    },
+    () => this.toastr.success("Data has been saved", "Success!", {
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right'
+    }));
+  }
+    
+  }
+
   changeType(index: number, newType: string) {
-    this.sortedData[index].type = newType;
-    this.users = this.sortedData;
+    this.sortedDataUser[index].type = newType;
+    this.users = this.sortedDataUser;
   }
 
   changeEnable(index: number, newEnable: string) {
     let newBoolEnable = newEnable.toLowerCase() == 'true' ? true : false; 
-    this.sortedData[index].enable = newBoolEnable;
-    this.users = this.sortedData;
+    this.sortedDataUser[index].enable = newBoolEnable;
+    this.users = this.sortedDataUser;
   }
 
   changeLeader(index: number, newLeader: string) {
-    this.sortedData[index].leader = newLeader;
-    this.users = this.sortedData;
+    this.sortedDataUser[index].leader = newLeader;
+    this.users = this.sortedDataUser;
   }
 
   deleteUser(user : User) {
-    //if(confirm("User "+ user.email + " will be deleted. Are you sure?")) {
-      console.log("deleted");
-    //}
+    if(confirm("User "+ user.email + " will be deleted. Are you sure?")) {
+      this.userService.removeUserById(user.id.toString()).subscribe(a => {this.ngOnInit()},
+      error => {
+        this.toastr.error("Failed request", "Fail!", {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        })
+      },
+      () => this.toastr.success("User has been deleted", "Success!", {
+        timeOut: 2000,
+        positionClass: 'toast-bottom-right'
+      }));
+    }
+  }
+
+  deleteCourse(course : Course) {
+    if(confirm("Course "+ course.courseName + " will be deleted. Are you sure?")) {
+      this.courseService.removeCourseById(course.id.toString()).subscribe(a => {this.ngOnInit()},
+      error => {
+        this.toastr.error("Failed request", "Fail!", {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        })
+      },
+      () => this.toastr.success("Course has been deleted", "Success!", {
+        timeOut: 2000,
+        positionClass: 'toast-bottom-right'
+      }));
+    }
   }
 }
 

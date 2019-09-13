@@ -19,6 +19,7 @@
 
   mat-expansion-panel-header {
     max-width: 1500px;
+    line-height: 1.6;
   }
   mat-expansion-panel {
     max-width: 1500px;
@@ -33,11 +34,14 @@
   .btn-success {
     width: 60px;
     padding: 0px;
+    font-size: 12px;
   }
 
   .btn-danger {
     width: 60px;
     padding: 0px;
+    font-size: 12px;
+    margin-right: 0px;
   }
 
   .btn-info {
@@ -45,10 +49,6 @@
       padding: 0px;
   }
   
-[topPane]  { background-color: #FFF897; }
-[bottomPane] { background-color: #6CE6CB; }
-
-
 /* LogOutButton */
 .userDetailsContainer {
   display: flex;
@@ -88,6 +88,45 @@ button:focus {
   font-weight: 500 !important;
 }
 
-.accepted > tr:last-child {
+/* .accepted > tr:last-child {
   border-bottom: 5px solid;
+} */
+
+.left-addon input  { 
+  padding-left:  35px;
+ }
+
+.inner-addon {
+  position: relative;
+}
+
+.inner-addon i {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+#acceptAll {
+  width: 80px;
+  height: 30px;
+}
+
+#rejectAll {
+  width: 80px;
+  height: 30px;
+}
+
+#align-info {
+  vertical-align: middle;
+  text-align: center;
+}
+
+#xbtn {
+  width: 30px;
+  padding: 0px;
+  height: 25px;
+}
+
+.align {
+  text-align: center;
 }

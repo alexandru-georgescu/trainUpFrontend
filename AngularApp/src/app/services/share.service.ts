@@ -29,41 +29,6 @@ export class ShareService {
     this.rejectedSource.next(rejected);
   }
 
-  private domainSource = new BehaviorSubject(undefined);
-  domain = this.domainSource.asObservable();
-
-  changeDomain(domain: string) {
-    this.domainSource.next(domain);
-  }
-
-  private bestCourseSource = new BehaviorSubject(undefined);
-  bestCourse = this.bestCourseSource.asObservable();
-
-  changebestCourse(bestCourse: string) {
-    this.bestCourseSource.next(bestCourse);
-  }
-
-  private bestPastCourseSource = new BehaviorSubject(undefined);
-  bestPastCourse = this.bestPastCourseSource.asObservable();
-
-  changebestPastCourse(bestPastCourse: string) {
-    this.bestPastCourseSource.next(bestPastCourse);
-  }
-
-  private teamPercentageSource = new BehaviorSubject(undefined);
-  teamPercentage = this.teamPercentageSource.asObservable();
-
-  changeteamPercentage(teamPercentage: string) {
-    this.teamPercentageSource.next(teamPercentage);
-  }
-
-  private courseCoverageSource = new BehaviorSubject(undefined);
-  courseCoverage = this.courseCoverageSource.asObservable();
-
-  changecourseCoverage(courseCoverage: string) {
-    this.courseCoverageSource.next(courseCoverage);
-  }
-
   private attendedDaysSource = new BehaviorSubject(undefined);
   attendedDays = this.attendedDaysSource.asObservable();
 
@@ -83,5 +48,19 @@ export class ShareService {
 
   changeCourseStatistic(courseStatistic: number[]) {
     this.courseStatisticSource.next(courseStatistic);
+  }
+  
+  private typeStatisticSource = new BehaviorSubject(undefined);
+  typeStatistic = this.typeStatisticSource.asObservable();
+
+  changeTypeStatistic(typeStatistic: number[]) {
+    this.typeStatisticSource.next(typeStatistic);
+  }
+
+  private yearStatisticSource = new BehaviorSubject(undefined);
+  yearStatistic = this.yearStatisticSource.asObservable();
+
+  changeYearStatistic(yearStatistic: number[]) {
+    this.yearStatisticSource.next(yearStatistic);
   }
 }

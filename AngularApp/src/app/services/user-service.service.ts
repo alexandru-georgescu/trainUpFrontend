@@ -203,50 +203,6 @@ export class UserService {
     return this.http.post<number>(Consts.backUrl + 'tm_statistics/rejected', user, httpOptions);
   }
 
-  public predominantDomain(user: User): Observable<string> {
-    let headers_object = new HttpHeaders();
-    headers_object = headers_object.append('Content-Type', 'application/json');
-    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
-
-    const httpOptions = {
-      headers: headers_object
-    };
-    return this.http.post<string>(Consts.backUrl + 'tm_statistics/predominant_domain', user, httpOptions);
-  }
-
-  public teamPercentage(user: User): Observable<string> {
-    let headers_object = new HttpHeaders();
-    headers_object = headers_object.append('Content-Type', 'application/json');
-    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
-
-    const httpOptions = {
-      headers: headers_object
-    };
-    return this.http.post<string>(Consts.backUrl + 'tm_statistics/team_percentage', user, httpOptions);
-  }
-
-  public findBestCourse(): Observable<string> {
-    let headers_object = new HttpHeaders();
-    headers_object = headers_object.append('Content-Type', 'application/json');
-    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
-
-    const httpOptions = {
-      headers: headers_object
-    };
-    return this.http.get<string>(Consts.backUrl + 'user_statistics/findBestCourse', httpOptions);
-  }
-
-  public findBestCourseFromPast(user: User): Observable<string> {
-    let headers_object = new HttpHeaders();
-    headers_object = headers_object.append('Content-Type', 'application/json');
-    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
-
-    const httpOptions = {
-      headers: headers_object
-    };
-    return this.http.post<string>(Consts.backUrl + 'user_statistics/findBestCourseFromPast', user, httpOptions);
-  }
-
   public updateUsers(users: User[]): Observable<any> {
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
@@ -256,17 +212,6 @@ export class UserService {
       headers: headers_object
     };
     return this.http.post<any>(Consts.backUrl + 'user/update_users', users, httpOptions);
-  }
-
-  public courseCoverage(user: User): Observable<string> {
-    let headers_object = new HttpHeaders();
-    headers_object = headers_object.append('Content-Type', 'application/json');
-    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
-
-    const httpOptions = {
-      headers: headers_object
-    };
-    return this.http.post<string>(Consts.backUrl + 'pm_statistics/course_average', user, httpOptions);
   }
 
   public enrollRejected(user: User, course: Course): Observable<User> {
@@ -336,6 +281,39 @@ export class UserService {
       headers: headers_object
     };
     return this.http.post<number[]>(Consts.backUrl + 'user_statistics/course_statistic', user, httpOptions);
+  }
+
+  public removeUserById(data: String): Observable<any> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.get<any>(Consts.backUrl + 'user/remove?id=' + data, httpOptions);
+  }
+
+  public typeStatistic(user: User): Observable<number[]> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<number[]>(Consts.backUrl + 'user_statistics/type_statistic', user, httpOptions);
+  }
+
+  public yearStatistic(user: User): Observable<number[]> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<number[]>(Consts.backUrl + 'tm_statistics/year_statistics', user, httpOptions);
   }
 }
 

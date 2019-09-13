@@ -1,47 +1,19 @@
-<!-- <div class="modal__overlay">
-    <div class="modal">
-        <div class="modal__content">
-            <h2 class="title">Statistics</h2>
-            <br>
-            <table>
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Accepted participants</th>
-                        <th>Rejected participants</th>
-                        <th>Predominant domain</th>
-                        <th>Team enrollment percentage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <td>{{ accepted }}</td>
-                    <td>{{ rejected }}</td>
-                    <td>{{ domain }}</td>
-                    <td>{{ teamPercentage }}</td>
-                </tbody>
-            </table>
-            <div class="modal__buttons">
-                <button mat-button appPreventDoubleClick (throttledClick)="onNoClick()" [throttleTime]="1000">Cancel</button>
-                <button mat-button [mat-dialog-close]>Ok</button>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="modal__overlay">
-    <div class="modal">
-        <div class="modal__content">
-            <h2 class="title">Statistics</h2>
-            <br>
-            <div class="chart-container">
-                <fusioncharts width="600" height="300" type="Column2d" [dataSource]="dataSource1">
-                </fusioncharts>
+        <div class="modal">
+            <div class="modal__content">
+                <h2 class="title">Statistics</h2>
                 <br>
-                <fusioncharts width="600" height="300" type="Column2d" [dataSource]="dataSource2">
-                </fusioncharts>
-            </div>
-            <div class="modal__buttons">
-                <!-- <button mat-button appPreventDoubleClick (throttledClick)="onNoClick()" [throttleTime]="1000">Cancel</button> -->
-                <button mat-button [mat-dialog-close]>Ok</button>
+                <div class="chart-container">
+                    <fusioncharts width="600" height="300" type="Column2d" [dataSource]="dataSource1" *ngIf="typeStatistic">
+                    </fusioncharts>
+                    <br>
+                    <fusioncharts width="600" height="300" type="Column2d" [dataSource]="dataSource2" *ngIf="yearStatistic">
+                    </fusioncharts>
+                </div>
+                <div class="modal__buttons">
+                    <!-- <button mat-button appPreventDoubleClick (throttledClick)="onNoClick()" [throttleTime]="1000">Cancel</button> -->
+                    <button mat-button [mat-dialog-close]>Ok</button>
+                </div>
             </div>
         </div>
     </div>
-</div>

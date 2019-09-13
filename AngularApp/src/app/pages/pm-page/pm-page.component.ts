@@ -29,8 +29,10 @@ export class PmPageComponent implements OnInit {
   selectedUser: User;
   full = false;
   searchText;
+  searchUser;
   refusedUsers: User[][];
   acceptedUsers: User[][];
+  markedCourses: Boolean[];
   indexExpanded = -1;
 
   constructor(public dialog: MatDialog,
@@ -176,6 +178,7 @@ export class PmPageComponent implements OnInit {
       this.sortedData = new Array(this.courses.length);
       this.refusedUsers = new Array(this.courses.length);
       this.acceptedUsers = new Array(this.courses.length);
+      this.markedCourses= new Array(this.courses.length);
 
       this.courses.forEach((course, index) => {
         this.usersList[index] = new Array();
@@ -194,6 +197,11 @@ export class PmPageComponent implements OnInit {
         this.acceptedUsers[index] = data;
         this.userService.getWaitUserCourses(course).subscribe(result => {
           this.usersList[index] = result;
+          if (this.usersList[index].length === 0)
+            this.markedCourses[index] = false;
+          else 
+            this.markedCourses[index] = true;
+
           this.sortedData[index] = this.usersList[index].slice();
           if (indexEx === true) {
             this.indexExpanded = index;
@@ -263,15 +271,6 @@ export class PmPageComponent implements OnInit {
       width: '560px',
       height: '290px',
     });
-    this.userService.acceptedParticipants(this.user).subscribe(data => {
-      this.shareService.changeAccepted(data);
-    });
-    this.userService.rejectedParticipants(this.user).subscribe(data => {
-      this.shareService.changeRejected(data);
-    });
-    this.userService.courseCoverage(this.user).subscribe(data => {
-      this.shareService.changecourseCoverage(data);
-    })
   }
 
   doToastr(printToast : Boolean, error : Boolean) {
