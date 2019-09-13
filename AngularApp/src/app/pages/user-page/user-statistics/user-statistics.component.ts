@@ -12,13 +12,41 @@ import { Course } from 'src/app/models/course';
 export class UserStatisticsComponent implements OnInit {
 
   user: User;
-  bestCourse: Course;
-  bestPastCourse: Course;
+  attendedDays: number;
+  upcomingDays: number;
+  courseStatistic: number[];
+  dataSource: Object;
 
   constructor(
     public dialogRef: MatDialogRef<UserStatisticsComponent>,
     private shareService: ShareService
-  ) { }
+  ) {
+    this.dataSource = {
+      chart: {
+        caption: "Team's enrollment coverage",
+        subCaption: "per type of course",
+        xAxisName: "Type of course",
+        yAxisName: "Participants",
+        // numberSuffix: "K",
+        theme: "candy"
+      },
+      // Chart Data
+      data: [
+        {
+          label: 'Tech',
+          value: 'Data Set 1'
+        },
+        {
+          label: 'Soft',
+          value: 'Data Set 2'
+        },
+        {
+          label: 'Process',
+          value: 'Data Set 3'
+        },
+      ]
+    }; // end of this.dataSource
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -26,8 +54,43 @@ export class UserStatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.shareService.bestCourse.subscribe(data => this.bestCourse = data);
-    this.shareService.bestPastCourse.subscribe(data => this.bestPastCourse = data);
-  }
+    this.shareService.attendedDays.subscribe(data => {
+      this.attendedDays = data;
+    });
+    this.shareService.upcomingDays.subscribe(data => {
+      this.upcomingDays = data;
+    });
+    this.shareService.courseStatistic.subscribe(data => {
+      this.courseStatistic = data;
+      const data0 = this.courseStatistic ? this.courseStatistic[0] : '';
+      const data1 = this.courseStatistic ? this.courseStatistic[1] : '';
+      const data2 = this.courseStatistic ? this.courseStatistic[2] : '';
 
+      this.dataSource = {
+        chart: {
+          caption: "Team's enrollment coverage",
+          subCaption: "per type of course",
+          xAxisName: "Type of course",
+          yAxisName: "Participants",
+          // numberSuffix: "K",
+          theme: "candy"
+        },
+        // Chart Data
+        data: [
+          {
+            label: 'Tech',
+            value: data0
+          },
+          {
+            label: 'Soft',
+            value: data1
+          },
+          {
+            label: 'Process',
+            value: data2
+          },
+        ]
+      }; // end of this.dataSource
+    });
+  }
 }

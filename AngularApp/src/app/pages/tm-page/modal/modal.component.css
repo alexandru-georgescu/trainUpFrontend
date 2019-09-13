@@ -8,12 +8,19 @@
 }
 
 .modal__buttons {
-    margin-top: 50px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .mat-button {
     background-color: gainsboro;
     font-family: 'Aleo', serif;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-around;
 }
 
 td {

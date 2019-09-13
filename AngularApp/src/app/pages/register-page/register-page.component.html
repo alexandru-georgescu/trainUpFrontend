@@ -14,7 +14,7 @@
                 <div class="title title-border">
                     <h4>Register a new account</h4>
                 </div>
-                <form id="register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <form id="register" [formGroup]="registerForm">
                     <div class="form-group flex">
                         <div class="col">
                             <i class="fa fa-user icon" aria-hidden="true"></i>
@@ -78,7 +78,7 @@
                     </div>
                     <div *ngIf="alreadyRegistered" class="wrong-input">This e-mail is already registered!</div>
                     <div class="register-button">
-                        <button type="submit" class="button"><span>Register</span></button>
+                        <button type="submit" appPreventDoubleClick (throttledClick)="register()" [throttleTime]="1000" class="button"><span>Register</span></button>
                     </div>
                     <div class="text-container">
                         <span>Already have an account?&nbsp;</span>

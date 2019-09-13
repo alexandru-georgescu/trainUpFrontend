@@ -29,38 +29,38 @@ export class ShareService {
     this.rejectedSource.next(rejected);
   }
 
-  private domainSource = new BehaviorSubject(undefined);
-  domain = this.domainSource.asObservable();
+  private attendedDaysSource = new BehaviorSubject(undefined);
+  attendedDays = this.attendedDaysSource.asObservable();
 
-  changeDomain(domain: string) {
-    this.domainSource.next(domain);
+  changeAttendedDays(attendedDays: number) {
+    this.attendedDaysSource.next(attendedDays);
   }
 
-  private bestCourseSource = new BehaviorSubject(undefined);
-  bestCourse = this.bestCourseSource.asObservable();
+  private upcomingDaysSource = new BehaviorSubject(undefined);
+  upcomingDays = this.upcomingDaysSource.asObservable();
 
-  changebestCourse(bestCourse: string) {
-    this.bestCourseSource.next(bestCourse);
+  changeUpcomingDays(upcomingDays: number) {
+    this.upcomingDaysSource.next(upcomingDays);
   }
 
-  private bestPastCourseSource = new BehaviorSubject(undefined);
-  bestPastCourse = this.bestPastCourseSource.asObservable();
+  private courseStatisticSource = new BehaviorSubject(undefined);
+  courseStatistic = this.courseStatisticSource.asObservable();
 
-  changebestPastCourse(bestPastCourse: string) {
-    this.bestPastCourseSource.next(bestPastCourse);
+  changeCourseStatistic(courseStatistic: number[]) {
+    this.courseStatisticSource.next(courseStatistic);
+  }
+  
+  private typeStatisticSource = new BehaviorSubject(undefined);
+  typeStatistic = this.typeStatisticSource.asObservable();
+
+  changeTypeStatistic(typeStatistic: number[]) {
+    this.typeStatisticSource.next(typeStatistic);
   }
 
-  private teamPercentageSource = new BehaviorSubject(undefined);
-  teamPercentage = this.teamPercentageSource.asObservable();
+  private yearStatisticSource = new BehaviorSubject(undefined);
+  yearStatistic = this.yearStatisticSource.asObservable();
 
-  changeteamPercentage(teamPercentage: string) {
-    this.teamPercentageSource.next(teamPercentage);
-  }
-
-  private courseCoverageSource = new BehaviorSubject(undefined);
-  courseCoverage = this.courseCoverageSource.asObservable();
-
-  changecourseCoverage(courseCoverage: string) {
-    this.courseCoverageSource.next(courseCoverage);
+  changeYearStatistic(yearStatistic: number[]) {
+    this.yearStatisticSource.next(yearStatistic);
   }
 }

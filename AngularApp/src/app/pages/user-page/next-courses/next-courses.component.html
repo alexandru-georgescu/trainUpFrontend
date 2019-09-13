@@ -24,7 +24,7 @@
             <td>{{ course.endDate }}</td>
             <td>{{ course.timeInterval }}</td>
             <td>{{ course.projectManager }}</td>
-            <td> <button (click)="rowClick(course)"><mat-icon>loyalty</mat-icon> Wish to enroll </button> </td>
+            <td> <button appPreventDoubleClick (throttledClick)="rowClick(course)" [throttleTime]="1000"><mat-icon>loyalty</mat-icon> Wish to enroll </button> </td>
         </tr>
         <tr *ngFor="let course of unavailableCourses">
                 <td>{{ course.courseName }}</td>

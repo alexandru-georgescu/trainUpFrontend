@@ -32,10 +32,6 @@ export class UserPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
-    this.logout();
-  }
-
   logout() {
     localStorage.removeItem('currentUser');
     this.loginPage.loggedIn = false;
@@ -46,14 +42,17 @@ export class UserPageComponent implements OnInit {
 
   onStatistic() {
     const dialogRef = this.dialog.open(UserStatisticsComponent, {
-      width: '560px',
-      height: '250px',
+      width: '700',
+      height: '700',
     });
-    this.userService.findBestCourse().subscribe(data => {
-      this.shareService.changebestCourse(data);
+    this.userService.attendedDays(this.user).subscribe(data => {
+      this.shareService.changeAttendedDays(data);
     });
-    this.userService.findBestCourseFromPast(this.user).subscribe(data => {
-      this.shareService.changebestPastCourse(data);
+    this.userService.upcomingDays(this.user).subscribe(data => {
+      this.shareService.changeUpcomingDays(data);
     });
+    this.userService.courseStatistic(this.user).subscribe(data => {
+      this.shareService.changeCourseStatistic(data);
+    })
   }
 }

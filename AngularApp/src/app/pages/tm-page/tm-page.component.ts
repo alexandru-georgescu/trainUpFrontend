@@ -59,10 +59,6 @@ export class TmPageComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.logout();
-  }
-
   logout() {
     localStorage.removeItem('currentUser');
     this.loginPage.loggedIn = false;
@@ -73,21 +69,16 @@ export class TmPageComponent implements OnInit {
 
   onStatistic() {
     const dialogRef = this.dialog.open(ModalComponent, {
-      width: '560px',
-      height: '250px',
+      width: '100vw',
+      height: '500'
     });
-    this.userService.acceptedParticipants(this.user).subscribe(data => {
-      this.shareService.changeAccepted(data);
+    this.userService.yearStatistic(this.user).subscribe(data => {
+      this.shareService.changeYearStatistic(data);
     });
-    this.userService.rejectedParticipants(this.user).subscribe(data => {
-      this.shareService.changeRejected(data);
+    this.userService.typeStatistic(this.user).subscribe(data => {
+      this.shareService.changeTypeStatistic(data);
     });
-    this.userService.predominantDomain(this.user).subscribe(data => {
-      this.shareService.changeDomain(data);
-    });
-    this.userService.teamPercentage(this.user).subscribe(data => {
-      this.shareService.changeteamPercentage(data);
-    });
+  
   }
 
   yesClick(user: User, course: Course): void {
