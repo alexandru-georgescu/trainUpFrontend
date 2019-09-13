@@ -207,6 +207,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   deleteCourse(course : Course) {
+    console.log(course);
     if(confirm("Course "+ course.courseName + " will be deleted. Are you sure?")) {
       this.courseService.removeCourseById(course.id.toString()).subscribe(a => {this.ngOnInit()},
       error => {

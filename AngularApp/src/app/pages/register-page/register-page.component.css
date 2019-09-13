@@ -119,5 +119,4 @@ input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default), 
 textarea.materialize-textarea {
     width: 80%;
-    margin: 0 0 10px 0;
 }
