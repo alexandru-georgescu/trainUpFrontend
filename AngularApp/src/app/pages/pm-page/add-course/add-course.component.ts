@@ -43,7 +43,7 @@ export class AddCourseComponent implements OnInit {
 
     startDate = new Date(startDate.getTime() + Math.abs(startDate.getTimezoneOffset()*60000));
     endDate = new Date(endDate.getTime() + Math.abs(endDate.getTimezoneOffset()*60000));
-    let course = new Course(this.controls.name.value, this.controls.capacity.value, this.controls.capacity.value, startDate, endDate, this.user.email, this.controls.domain.value, this.controls.timeInterval.value);
+    let course = new Course(this.controls.name.value, this.controls.capacity.value, this.controls.capacity.value, startDate, endDate, this.user.email, this.controls.domain.value, this.controls.timeInterval.value, this.user.type);
     this.courseService.addCourse(course).subscribe(data => {
       this.course = data;
     });

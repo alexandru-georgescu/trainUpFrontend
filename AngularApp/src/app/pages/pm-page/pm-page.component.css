@@ -1,5 +1,9 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
   
+  body {
+    background-color: #70e1e1;
+  }
+
   :host {
     font-family: Roboto,"Helvetica Neue",sans-serif !important;
     font-size: 14px !important;
@@ -129,4 +133,8 @@ button:focus {
 
 .align {
   text-align: center;
+}
+
+#table-head {
+  background-color: #70e1e1;
 }

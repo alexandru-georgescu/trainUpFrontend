@@ -64,11 +64,17 @@ export class PmPageComponent implements OnInit {
   }
 
   acceptRejected(user : User, course : Course) {
+    if (course.actualCapacity == 0) {
+      this.doToastr(true, true);
+      return;
+    }
+
     this.userService.enrollRejected(user, course).subscribe(() => {
       this.courseService.getPmCourses(this.user).subscribe(data => {
         this.courses = data;
         let index = this.courses.findIndex(x => x.id === course.id);
         this.updateLists(course, index, true);
+        this.doToastr(true, false);
       })
     })
   }
@@ -79,6 +85,7 @@ export class PmPageComponent implements OnInit {
         this.courses = data;
         let index = this.courses.findIndex(x => x.id === course.id);
         this.updateLists(course, index, true);
+        this.doToastr(true, false);
       })
     })
   }
@@ -268,8 +275,14 @@ export class PmPageComponent implements OnInit {
 
   onStatistic() {
     const dialogRef = this.dialog.open(PmStatisticsComponent, {
-      width: '560px',
-      height: '290px',
+      width: '100vw',
+      height: '500'
+    });
+    this.userService.maxEnrollmentDomains(this.user).subscribe(data => {
+      this.shareService.changeMaxDomains(data);
+      this.userService.courseBelow50(this.user).subscribe(res => {
+        this.shareService.changeBelow50(res);
+      });
     });
   }
 

@@ -63,4 +63,18 @@ export class ShareService {
   changeYearStatistic(yearStatistic: number[]) {
     this.yearStatisticSource.next(yearStatistic);
   }
+
+  private maxDomainsSource = new BehaviorSubject(undefined);
+  maxDomains = this.maxDomainsSource.asObservable();
+
+  changeMaxDomains(maxDomains: string[]) {
+    this.maxDomainsSource.next(maxDomains);
+  }
+
+  private below50Source = new BehaviorSubject(undefined);
+  below50 = this.below50Source.asObservable();
+
+  changeBelow50(below50: string[]) {
+    this.below50Source.next(below50);
+  }
 }

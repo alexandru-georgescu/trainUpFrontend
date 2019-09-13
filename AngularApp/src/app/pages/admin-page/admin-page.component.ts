@@ -28,6 +28,8 @@ export class AdminPageComponent implements OnInit {
   courses: Course[];
   sortedDataCourse: Course[];
   defaultCourses: Course[];
+  projectManagers : string[];
+  domains : string[];
 
   constructor(private loginPage: LoginPageComponent,
     private router: Router,
@@ -38,12 +40,15 @@ export class AdminPageComponent implements OnInit {
   ) {
     this.types = ['TM', 'PMTECH', 'PMSOFT', 'PMPROC', 'USER'];
     this.enables = [false, true];
+    this.domains = ['RCA', 'GTB', 'NFR', 'PWCC'];
   }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.userService.usersFindAll().subscribe(users => {
       this.leaders = users.filter(u => u.type != 'USER').map(u => u.email);
+      this.projectManagers = users.filter(u => u.type === 'PMSOFT' || u.type == 'PMTECH' || u.type == 'PMPROC').map(u => u.email);
+
       this.users = users.slice(1, users.length);
       this.sortedDataUser = this.users;
       if (this.defaultUsers === undefined) {
@@ -172,6 +177,16 @@ export class AdminPageComponent implements OnInit {
 
   changeLeader(index: number, newLeader: string) {
     this.sortedDataUser[index].leader = newLeader;
+    this.users = this.sortedDataUser;
+  }
+
+  changeProjectManager(index: number, newProjectManager: string) {
+    this.sortedDataCourse[index].projectManager = newProjectManager;
+    this.users = this.sortedDataUser;
+  }
+
+  changeDomain(index: number, newDomain: string) {
+    this.sortedDataCourse[index].domain = newDomain;
     this.users = this.sortedDataUser;
   }
 

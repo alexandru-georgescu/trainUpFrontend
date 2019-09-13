@@ -72,13 +72,12 @@ export class TmPageComponent implements OnInit {
       width: '100vw',
       height: '500'
     });
-    this.userService.yearStatistic(this.user).subscribe(data => {
-      this.shareService.changeYearStatistic(data);
-    });
     this.userService.typeStatistic(this.user).subscribe(data => {
       this.shareService.changeTypeStatistic(data);
+      this.userService.yearStatistic(this.user).subscribe(res => {
+        this.shareService.changeYearStatistic(res);
+      });
     });
-  
   }
 
   yesClick(user: User, course: Course): void {
