@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service.service';
 import { Router } from '@angular/router';
+import { ErrorStateMatcher } from '@angular/material';
 
 @Component({
   selector: 'app-login-page',
@@ -20,7 +21,6 @@ export class LoginPageComponent implements OnInit {
   alreadyLoggedIn = false;
   loggedIn = false;
   needToactivateAccount = false;
-
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
@@ -52,6 +52,8 @@ export class LoginPageComponent implements OnInit {
 
   beforeLogIn() {
     this.submitted = true;
+    this.controls.email.markAsTouched();
+    this.controls.password.markAsTouched();
     if (this.controls.email.value != '' && this.controls.password.value != '') {
       this.login();
     }

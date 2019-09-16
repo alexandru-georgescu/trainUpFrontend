@@ -79,7 +79,7 @@ export class CourseService {
     return this.http.get<any>(Consts.backUrl + 'course/remove?id=' + data, httpOptions);
   }
 
-  public updateCourses(data: Course[]): Observable<any> {
+  public updateCourses(courses: Course[]): Observable<any> {
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
     headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
@@ -87,6 +87,6 @@ export class CourseService {
     const httpOptions = {
       headers: headers_object
     };
-    return this.http.get<any>(Consts.backUrl + 'course/remove?id=' + data, httpOptions);
+    return this.http.post<any>(Consts.backUrl + 'course/update_courses', courses, httpOptions);
   }
 }

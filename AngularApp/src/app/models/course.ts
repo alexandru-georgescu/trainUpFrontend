@@ -8,6 +8,7 @@ export class Course {
     projectManager: string;
     domain: string;
     timeInterval: string;
+    type: string;
 
     constructor(courseName: string,
         capacity: number,
@@ -16,7 +17,8 @@ export class Course {
         endDate: Date,
         projectManager: string,
         domain: string,
-        timeInterval: string) {
+        timeInterval: string,
+        type: string) {
         this.courseName = courseName;
         this.capacity = capacity;
         this.actualCapacity = actualCapacity;
@@ -25,6 +27,7 @@ export class Course {
         this.projectManager = projectManager;
         this.domain = domain;
         this.timeInterval = timeInterval;
+        this.type = type;
     }
 }
 

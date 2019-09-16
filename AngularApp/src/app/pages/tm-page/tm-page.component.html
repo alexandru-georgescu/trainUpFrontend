@@ -1,31 +1,29 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
 </head>
 
 
 <!-- LogOut Button -->
 <div class='userDetailsContainer'>
-    <div>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-        <mat-icon>account_circle</mat-icon>
-        <span class="font-kkt">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
-      </button>
-      <mat-menu #menu="matMenu">
-        <div>
-          <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
-            <span class="font-kkt">Statistics</span>
-          </button>
-        </div>
-        <div>
-          <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
-            <span class="font-kkt">Log out</span>
-          </button>
-        </div>
-      </mat-menu>
-    </div>
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+      <i class="material-icons">account_circle</i>
+      <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <div>
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
+          <span>Statistics</span>
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
+          <span>Log out</span>
+        </button>
+      </div>
+    </mat-menu>
   </div>
+</div>
 
 
 <div class="all-container">
@@ -53,8 +51,10 @@
           <td>{{ course.courseName }}</td>
           <td>{{ course.domain }}</td>
           <td>
-            <button type="button" class="btn btn-success" appPreventDoubleClick (throttledClick)="yesClick(user, course)" [throttleTime]="1000">Yes</button>
-            <button type="button" class="btn btn-danger" appPreventDoubleClick (throttledClick)="noClick(user, course)" [throttleTime]="1000">No</button>
+            <button type="button" class="btn btn-success" appPreventDoubleClick
+              (throttledClick)="yesClick(user, course)" [throttleTime]="1000">&#10004;</button>
+            <button type="button" class="btn btn-danger" appPreventDoubleClick (throttledClick)="noClick(user, course)"
+              [throttleTime]="1000">&times;</button>
           </td>
         </tr>
       </ng-container>

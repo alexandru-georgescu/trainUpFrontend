@@ -28,6 +28,8 @@ export class AdminPageComponent implements OnInit {
   courses: Course[];
   sortedDataCourse: Course[];
   defaultCourses: Course[];
+  projectManagers : string[];
+  domains : string[];
 
   constructor(private loginPage: LoginPageComponent,
     private router: Router,
@@ -38,12 +40,15 @@ export class AdminPageComponent implements OnInit {
   ) {
     this.types = ['TM', 'PMTECH', 'PMSOFT', 'PMPROC', 'USER'];
     this.enables = [false, true];
+    this.domains = ['RCA', 'GTB', 'NFR', 'PWCC'];
   }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.userService.usersFindAll().subscribe(users => {
       this.leaders = users.filter(u => u.type != 'USER').map(u => u.email);
+      this.projectManagers = users.filter(u => u.type === 'PMSOFT' || u.type == 'PMTECH' || u.type == 'PMPROC').map(u => u.email);
+
       this.users = users.slice(1, users.length);
       this.sortedDataUser = this.users;
       if (this.defaultUsers === undefined) {
@@ -96,6 +101,8 @@ export class AdminPageComponent implements OnInit {
         case 'capacity': return compare(a.capacity, b.capacity, isAsc);
         case 'actualCapacity': return compare(a.actualCapacity, b.actualCapacity, isAsc);
         case 'projectManager': return compare(a.projectManager, b.projectManager, isAsc);
+        case 'startDate': return compare(a.startDate.toString(), b.startDate.toString(), isAsc);
+        case 'endDate': return compare(a.startDate.toString(), b.startDate.toString(), isAsc);
         case 'domain': return compare(a.domain, b.domain, isAsc);
         case 'timeInterval': return compare(a.timeInterval, b.timeInterval, isAsc);
         default: return 0;
@@ -173,6 +180,16 @@ export class AdminPageComponent implements OnInit {
     this.users = this.sortedDataUser;
   }
 
+  changeProjectManager(index: number, newProjectManager: string) {
+    this.sortedDataCourse[index].projectManager = newProjectManager;
+    this.users = this.sortedDataUser;
+  }
+
+  changeDomain(index: number, newDomain: string) {
+    this.sortedDataCourse[index].domain = newDomain;
+    this.users = this.sortedDataUser;
+  }
+
   deleteUser(user : User) {
     if(confirm("User "+ user.email + " will be deleted. Are you sure?")) {
       this.userService.removeUserById(user.id.toString()).subscribe(a => {this.ngOnInit()},
@@ -190,6 +207,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   deleteCourse(course : Course) {
+    console.log(course);
     if(confirm("Course "+ course.courseName + " will be deleted. Are you sure?")) {
       this.courseService.removeCourseById(course.id.toString()).subscribe(a => {this.ngOnInit()},
       error => {
