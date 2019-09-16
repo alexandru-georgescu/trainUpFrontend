@@ -27,7 +27,8 @@
             <td>{{ course.timeInterval }}</td>
             <td>{{ course.projectManager }}</td>
             <td>
-                <button appPreventDoubleClick (throttledClick)="rowClick(course)" [throttleTime]="1000">
+                <button appPreventDoubleClick (throttledClick)="rowClick(course)" [throttleTime]="1000"
+                    title="Enroll to this course">
                     <i class="material-icons">add_circle</i>
                 </button>
             </td>

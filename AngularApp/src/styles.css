@@ -58,6 +58,17 @@ div.error-message i{
     background-color: #bed9fa !important;
 }
 
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: black !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #6699d3 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-input-element {
+    color: black !important;
+}
 
 :not(i) {
     font-family: 'Aleo', serif;

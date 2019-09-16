@@ -16,6 +16,10 @@
     font-weight: 700;
 }
 
+::ng-deep .mat-tab-header {
+    border-bottom: none !important;
+}
+
 .all-container {
     text-align: center;
     margin: 0 auto;

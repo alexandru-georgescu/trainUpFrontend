@@ -275,8 +275,8 @@ export class PmPageComponent implements OnInit {
 
   onStatistic() {
     const dialogRef = this.dialog.open(PmStatisticsComponent, {
-      width: '100vw',
-      height: '500'
+      width: '700',
+      height: '700'
     });
     this.userService.maxEnrollmentDomains(this.user).subscribe(data => {
       this.shareService.changeMaxDomains(data);

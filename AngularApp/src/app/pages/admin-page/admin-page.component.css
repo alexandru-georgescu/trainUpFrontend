@@ -34,5 +34,32 @@ button:focus {
 }
 
 td {
+    vertical-align: middle !important;
     text-align: center;
+    padding:0% !important;
+}
+
+.delete_button {
+    text-decoration: none !important;
+    background: none !important;
+    outline : 0 !important;
+    border: none !important;
+}
+  
+  .mat-stroked-button.mat-primary {
+    color: black !important;
+    font-size: 15px;
+  }
+  
+  .mat-stroked-button:not([disabled]) {
+    border-color: rgba(0,0,0,.5) !important;
+  }
+
+button:active {
+  transform: translateY(2px)!important;
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: center;
 }

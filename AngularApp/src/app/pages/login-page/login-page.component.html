@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="login-button">
-                        <button mat-stroked-button color="primary" appPreventDoubleClick (throttledClick)="beforeLogIn()" [throttleTime]="1000">Login</button>
+                        <button mat-stroked-button appPreventDoubleClick (throttledClick)="beforeLogIn()" [throttleTime]="1000">Login</button>
                     </div>
                     <div class="wrong-input">
                         <span *ngIf="needToactivateAccount">You need to activate your account!</span>

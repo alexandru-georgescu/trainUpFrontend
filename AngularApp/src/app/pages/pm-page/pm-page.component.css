@@ -16,6 +16,10 @@
     max-width: 1500px;
     line-height: 1.6;
   }
+
+  .mat-expansion-panel-header-title {
+    width: 10% !important;
+  }
   mat-expansion-panel {
     max-width: 1500px;
     margin: 0 auto;
@@ -113,16 +117,6 @@ button:focus {
   text-align: center;
 }
 
-
-::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-  color: black;
-}
-::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: #6699d3;
-}
-::ng-deep .mat-form-field.mat-focused .mat-input-element {
-  color: black;
-}
 
 .inner-addon, .left-addon {
   margin-left: 10px !important;

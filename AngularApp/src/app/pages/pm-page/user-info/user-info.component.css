@@ -25,5 +25,7 @@
 }
 
 .cancel-btn {
-    background-color:#ff6347;
+    background-color:#dc3545;
+    margin-left: 50px;
+    color: white;
 }
