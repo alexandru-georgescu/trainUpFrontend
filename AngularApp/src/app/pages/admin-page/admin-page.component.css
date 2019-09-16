@@ -1,10 +1,6 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 
-th {
-    font-family: 'Roboto' !important;
-}
-
 .all-container {
     text-align: center;
     margin: 0 auto;

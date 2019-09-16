@@ -26,7 +26,7 @@
                             <mat-form-field>
                                 <input matInput type="text" placeholder="E-mail" formControlName="email"
                                     autocomplete="email" id="email" />
-                                <mat-error *ngIf="submitted && controls.email.errors?.required"> E-mail
+                                <mat-error *ngIf="controls.email.errors?.required"> E-mail
                                     is required! </mat-error>
                             </mat-form-field>
                         </div>
@@ -39,15 +39,14 @@
                             <mat-form-field [color]='accent'>
                                 <input matInput type="password" placeholder="Password" formControlName="password"
                                     autocomplete="current-password" id="password" />
-                                <mat-error *ngIf="submitted && controls.password.errors?.required">
+                                <mat-error *ngIf="controls.password.errors?.required">
                                     Password is required! </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
 
                     <div class="login-button">
-                        <button appPreventDoubleClick (throttledClick)="beforeLogIn()" [throttleTime]="1000"
-                            class="button"><span>Login</span></button>
+                        <button mat-stroked-button color="primary" appPreventDoubleClick (throttledClick)="beforeLogIn()" [throttleTime]="1000">Login</button>
                     </div>
                     <div class="wrong-input">
                         <span *ngIf="needToactivateAccount">You need to activate your account!</span>

@@ -1,6 +1,4 @@
-* {
-    font-family: 'Aleo', serif;
-}
+
 .inputs__container {
     display: flex;
     justify-content: space-around;
@@ -28,5 +26,4 @@
 
 .cancel-btn {
     background-color:#ff6347;
-    font-family: 'Aleo', serif;
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { ShareService } from 'src/app/services/share.service';
 import { UserService } from 'src/app/services/user-service.service';
 import { Course } from 'src/app/models/course';
-import { Sort } from '@angular/material';
+import { Sort, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-previous-courses',
@@ -12,15 +12,15 @@ import { Sort } from '@angular/material';
 })
 export class PreviousCoursesComponent implements OnInit {
 
-  user : User;
-  courses : Course[];
+  user: User;
+  courses: Course[];
   sortedData: Course[];
 
 
-  constructor(private share : ShareService,
-      private userService : UserService) {
+  constructor(private share: ShareService,
+    private userService: UserService) {
   }
-  
+
   sortData(sort: Sort) {
     const data = this.courses.slice();
     if (!sort.active || sort.direction === '') {
@@ -41,9 +41,9 @@ export class PreviousCoursesComponent implements OnInit {
   ngOnInit() {
 
     this.share.currentMessage.subscribe(data => this.user = JSON.parse(data));
-    this.userService.getPreviousCourses(this.user).subscribe(data => { this.courses = data , this.sortedData = this.courses.slice();});
-    
-    
+    this.userService.getPreviousCourses(this.user).subscribe(data => {
+      this.courses = data, this.sortedData = this.courses.slice();
+    });
   }
 
 }

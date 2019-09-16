@@ -1,6 +1,13 @@
-* {
-    font-family: 'Aleo', serif;
-}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: black;
+  }
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #6699d3;
+  }
+  ::ng-deep .mat-form-field.mat-focused .mat-input-element {
+    color: black;
+  }
+
 .inputs__container {
     display: flex;
     justify-content: space-around;
@@ -26,12 +33,12 @@
 }
 
 .cancel-btn {
-    background-color:#ff6347;
-    font-family: 'Aleo', serif;
+    background-color:#dc3545;
     margin-left: 50px;
+    color: white;
 }
 .add-btn {
-    background-color: #98fb98;
-    font-family: 'Aleo', serif;
+    background-color: #28a745;
     margin-left: 250px;
+    color: white;
 }

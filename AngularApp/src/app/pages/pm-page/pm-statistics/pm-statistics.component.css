@@ -1,7 +1,3 @@
-* {
-    font-family: 'Aleo', serif;
-    font-size: 15px;
-}
 
 .title {
     font-size: 30px;
@@ -13,7 +9,6 @@
 
 .mat-button {
     background-color: gainsboro;
-    font-family: 'Aleo', serif;
 }
 
 table {

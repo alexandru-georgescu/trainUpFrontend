@@ -1,20 +1,16 @@
-* {
-    font-family: 'Aleo', serif;
-    font-size: 15px;
-}
 
 .title {
     font-size: 30px;
 }
 
-.modal__buttons {
-    margin-top: 50px;
-}
-
-.mat-button {
-    background-color: gainsboro;
-    font-family: 'Aleo', serif;
-}
+.mat-stroked-button.mat-primary {
+    color: black !important;
+    font-size: 15px;
+  }
+  
+  .mat-stroked-button:not([disabled]) {
+    border-color: rgba(0,0,0,.5) !important;
+  }
 
 td {
     text-align: center;

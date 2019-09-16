@@ -40,6 +40,7 @@ import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
 
+
 FusionChartsModule.fcRoot(FusionCharts, Charts, TimeSeries);
 
 

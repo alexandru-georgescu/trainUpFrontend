@@ -1,43 +1,40 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+
 <!-- LogOut Button -->
 <div class='userDetailsContainer'>
-    <div>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-        <mat-icon>account_circle</mat-icon>
-        <span class="font-kkt">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
-      </button>
-      <mat-menu #menu="matMenu">
-        <div>
-          <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
-            <span class="font-kkt">Statistics</span>
-          </button>
-        </div>
-        <div>
-          <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
-            <span class="font-kkt">Log out</span>
-          </button>
-        </div>
-      </mat-menu>
-    </div>
-  </div>
-
-<section id="tabs" class="project-tab">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <nav>
-          <div class="nav nav-tabs nav-fill justify-content-center" role="tablist">
-            <a class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="prev" routerLink='prev'
-              skipLocationChange routerLinkActive='active'>Previous Courses</a>
-            <a class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="curr" routerLink='curr'
-              skipLocationChange routerLinkActive='active'>Current Courses</a>
-            <a class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="next" routerLink='next'
-              skipLocationChange routerLinkActive='active'>Future Courses</a>
-          </div>
-        </nav>
-        <div class="card-content white">
-          <router-outlet></router-outlet>
-        </div>
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+      <i class="material-icons">account_circle</i>
+      <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <div>
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
+          <span>Statistics</span>
+        </button>
       </div>
-    </div>
+      <div>
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
+          <span>Log out</span>
+        </button>
+      </div>
+    </mat-menu>
   </div>
-</section>
+</div>
+
+<mat-tab-group mat-align-tabs="center" [selectedIndex]="1">
+  <mat-tab label="Previous Courses">
+    <app-previous-courses></app-previous-courses>
+
+  </mat-tab>
+  <mat-tab label="Current Courses">
+    <app-current-courses></app-current-courses>
+
+  </mat-tab>
+  <mat-tab label="Future Courses">
+    <app-next-courses></app-next-courses>
+  </mat-tab>
+</mat-tab-group>

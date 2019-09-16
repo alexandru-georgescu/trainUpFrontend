@@ -11,7 +11,7 @@
         <div class="container-center screen-full-height">
             <div class="content">
                 <div class="title title-border">
-                    <h4>Register a new account</h4>
+                    <h2>Register a new account</h2>
                 </div>
                 <form id="register" [formGroup]="registerForm">
                     <div class="form-group flex">
@@ -61,9 +61,7 @@
                                 <input matInput type="password" placeholder="Password" formControlName="password"
                                     autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
                                 <mat-error *ngIf="controls.password.errors?.required">Password is required!</mat-error>
-                                <mat-error *ngIf="controls.password.errors?.pattern">Password must contain at least one
-                                    uppercase letter, one lowercase letter, one number and 8 or more characters!
-                                </mat-error>
+                                <mat-error *ngIf="controls.password.errors?.pattern">Password must contain at least one uppercase and lowercase letter, one number and minimum 8 characters! </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -83,8 +81,7 @@
                     </div>
                     <div *ngIf="alreadyRegistered" class="wrong-input">This e-mail is already registered!</div>
                     <div class="register-button">
-                        <button type="submit" appPreventDoubleClick (throttledClick)="register()" [throttleTime]="1000"
-                            class="button"><span>Register</span></button>
+                        <button mat-stroked-button color="primary" appPreventDoubleClick (throttledClick)="register()" [throttleTime]="1000">Register</button>
                     </div>
                     <div class="text-container">
                         <span>Already have an account?&nbsp;</span>
