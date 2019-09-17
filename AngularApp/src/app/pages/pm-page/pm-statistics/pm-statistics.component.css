@@ -1,10 +1,10 @@
-
 .title {
     font-size: 30px;
 }
 
 .modal__buttons {
-    margin-top: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 .mat-button {
@@ -12,9 +12,14 @@
 }
 
 table {
+    margin: 0 auto;
     border-spacing: 15px;
 }
 
 td {
     text-align: center;
+}
+
+th {
+    font-weight: bold;
 }

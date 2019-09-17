@@ -9,10 +9,10 @@
             <th mat-sort-header="domain">Domain</th>
             <th mat-sort-header="capacity">Capacity</th>
             <th mat-sort-header="actualCapacity">Available</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Time Interval</th>
-            <th>Project Manager</th>
+            <th mat-sort-header="startDate">Start Date</th>
+            <th mat-sort-header="endDate">End Date</th>
+            <th mat-sort-header="timeInterval">Time Interval</th>
+            <th mat-sort-header="projectManager">Project Manager</th>
             <th>Wish to enroll</th>
         </tr>
     </thead>
@@ -27,7 +27,8 @@
             <td>{{ course.timeInterval }}</td>
             <td>{{ course.projectManager }}</td>
             <td>
-                <button appPreventDoubleClick (throttledClick)="rowClick(course)" [throttleTime]="1000">
+                <button appPreventDoubleClick (throttledClick)="rowClick(course)" [throttleTime]="1000"
+                    title="Enroll to this course">
                     <i class="material-icons">add_circle</i>
                 </button>
             </td>

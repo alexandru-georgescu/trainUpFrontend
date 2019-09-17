@@ -43,7 +43,7 @@ export class UserPageComponent implements OnInit {
   onStatistic() {
     const dialogRef = this.dialog.open(UserStatisticsComponent, {
       width: '700',
-      height: '700',
+      height: '700'
     });
     this.userService.attendedDays(this.user).subscribe(data => {
       this.shareService.changeAttendedDays(data);

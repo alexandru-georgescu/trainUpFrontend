@@ -61,6 +61,7 @@ export class PmStatisticsComponent implements OnInit {
       const data0 = this.maxDomains ? this.maxDomains[0] : '';
       const data1 = this.maxDomains ? this.maxDomains[1] : '';
       const data2 = this.maxDomains ? this.maxDomains[2] : '';
+      const data3 = this.maxDomains ? this.maxDomains[3] : '';
 
       this.dataSource1 = {
         chart: {
@@ -87,7 +88,7 @@ export class PmStatisticsComponent implements OnInit {
           },
           {
             label: "PWCC",
-            value: "Data Set 4"
+            value: data3
           },
         ]
       }; // end of this.dataSource1

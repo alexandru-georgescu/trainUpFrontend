@@ -2,26 +2,30 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-
-<!-- LogOut Button -->
-<div class='userDetailsContainer'>
-  <div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-      <i class="material-icons">account_circle</i>
-      <span>Logged in as: {{user.firstName}} {{ user.lastName }}</span>
-    </button>
-    <mat-menu #menu="matMenu">
-      <div>
-        <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
-          <span>Statistics</span>
-        </button>
-      </div>
-      <div>
-        <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
-          <span>Log out</span>
-        </button>
-      </div>
-    </mat-menu>
+<div class="upperContainer">
+  <div class="logoContainer">
+    trainUP
+  </div>
+  <!-- LogOut Button -->
+  <div class='userDetailsContainer'>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+        <i class="material-icons">account_circle</i>
+        <span> {{user.firstName}} {{ user.lastName }}</span>
+      </button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+        <div>
+          <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
+            <span>Statistics</span>
+          </button>
+        </div>
+        <div>
+          <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
+            <span>Log out</span>
+          </button>
+        </div>
+      </mat-menu>
+    </div>
   </div>
 </div>
 

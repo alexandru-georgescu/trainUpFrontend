@@ -22,7 +22,11 @@ export class AdminPageComponent implements OnInit {
   defaultUsers: User[];
   types: String[];
   enables: boolean[];
-  leaders: string[]
+  leaders: string[];
+  selectedUserType : String[];
+  selectedUserEnable : boolean[];
+  selectedUserLeader : String[];
+
 
 
   courses: Course[];
@@ -30,6 +34,8 @@ export class AdminPageComponent implements OnInit {
   defaultCourses: Course[];
   projectManagers : string[];
   domains : string[];
+  selectedCoursePm : string[];
+  selectedCourseDomain : string[];
 
   constructor(private loginPage: LoginPageComponent,
     private router: Router,
@@ -51,6 +57,7 @@ export class AdminPageComponent implements OnInit {
 
       this.users = users.slice(1, users.length);
       this.sortedDataUser = this.users;
+      this.updateUserData();
       if (this.defaultUsers === undefined) {
         this.defaultUsers = JSON.parse(JSON.stringify(this.users));
       }
@@ -59,6 +66,7 @@ export class AdminPageComponent implements OnInit {
     this.courseService.getAllCourses().subscribe(courses => {
       this.courses = courses;
       this.sortedDataCourse = this.courses;
+      this.updateCourseData();
       if (this.defaultCourses === undefined) {
         this.defaultCourses = JSON.parse(JSON.stringify(this.courses));
       }
@@ -85,6 +93,13 @@ export class AdminPageComponent implements OnInit {
         default: return 0;
       }
     });
+    this.updateUserData();
+  }
+
+  updateUserData() {
+    this.selectedUserType = this.sortedDataUser.map(u => u.type);
+    this.selectedUserEnable = this.sortedDataUser.map(u => u.enable);
+    this.selectedUserLeader = this.sortedDataUser.map(u => u.leader);
   }
 
   sortDataCourse(sort: Sort) {
@@ -108,6 +123,12 @@ export class AdminPageComponent implements OnInit {
         default: return 0;
       }
     });
+    this.updateCourseData();
+  }
+
+  updateCourseData() {
+    this.selectedCoursePm = this.sortedDataCourse.map(c => c.projectManager);
+    this.selectedCourseDomain = this.sortedDataCourse.map(c => c.domain);
   }
 
   logout() {
@@ -169,9 +190,8 @@ export class AdminPageComponent implements OnInit {
     this.users = this.sortedDataUser;
   }
 
-  changeEnable(index: number, newEnable: string) {
-    let newBoolEnable = newEnable.toLowerCase() == 'true' ? true : false; 
-    this.sortedDataUser[index].enable = newBoolEnable;
+  changeEnable(index: number, newEnable: boolean) {
+    this.sortedDataUser[index].enable = newEnable;
     this.users = this.sortedDataUser;
   }
 
@@ -207,7 +227,6 @@ export class AdminPageComponent implements OnInit {
   }
 
   deleteCourse(course : Course) {
-    console.log(course);
     if(confirm("Course "+ course.courseName + " will be deleted. Are you sure?")) {
       this.courseService.removeCourseById(course.id.toString()).subscribe(a => {this.ngOnInit()},
       error => {
