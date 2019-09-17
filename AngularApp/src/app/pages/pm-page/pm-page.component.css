@@ -197,3 +197,17 @@ mat-form-field {
   margin-top: 3px !important;
   display: inline-block;
 }
+
+
+.mat-expansion-panel-header[aria-disabled=true] .mat-expansion-panel-header-title, .mat-expansion-panel-header[aria-disabled=true] .mat-expansion-panel-header-description {
+   margin-right: 24px !important;
+}
+
+
+table {
+  margin: 0 auto;
+}
+
+thead {
+  margin: 0 auto;
+ }

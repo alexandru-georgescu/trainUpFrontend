@@ -33,7 +33,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { PmStatisticsComponent } from './pages/pm-page/pm-statistics/pm-statistics.component';
 import { UserStatisticsComponent } from './pages/user-page/user-statistics/user-statistics.component';
-import { CalendarComponent } from './pages/user-page/calendar/calendar.component';
 import { PreventDoubleClickDirective } from './directives/prevent-double-click.directive';
 import { FusionChartsModule } from 'angular-fusioncharts';
 import * as FusionCharts from 'fusioncharts';
@@ -66,7 +65,6 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, TimeSeries);
     AdminPageComponent,
     PmStatisticsComponent,
     UserStatisticsComponent,
-    CalendarComponent,
     PreventDoubleClickDirective,
     SearchFilterPipe,
     AdminUserComponent,
