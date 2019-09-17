@@ -31,8 +31,14 @@ export class PreviousCoursesComponent implements OnInit {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'courseName': return compare(a.courseName, b.courseName, isAsc);
+        case 'domain': return compare(a.domain, b.domain, isAsc);
         case 'capacity': return compare(a.capacity, b.capacity, isAsc);
         case 'actualCapacity': return compare(a.actualCapacity, b.actualCapacity, isAsc);
+        case 'startDate': return compare(a.startDate.toString(), b.startDate.toString(), isAsc);
+        case 'endDate': return compare(a.endDate.toString(), b.endDate.toString(), isAsc);
+        case 'endDate': return compare(a.endDate.toString(), b.endDate.toString(), isAsc);
+        case 'timeInterval': return compare(a.timeInterval, b.timeInterval, isAsc);
+        case 'projectManager': return compare(a.projectManager, b.projectManager, isAsc);
         default: return 0;
       }
     });

@@ -2,29 +2,24 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-
-<!-- LogOut Button -->
-<div class='userDetailsContainer'>
-  <div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-      <i class="material-icons">account_circle</i>
-      <span> {{user.firstName}} {{ user.lastName }}</span>
-    </button>
-    <mat-menu #menu="matMenu">
-      <div>
-        <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
-          <span>Statistics</span>
-        </button>
-      </div>
-      <div>
-        <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
-          <span>Log out</span>
-        </button>
-      </div>
-    </mat-menu>
+<div class="upperContainer">
+  <div class="logoContainer">
+    trainUP
+  </div>
+  <!-- LogOut Button -->
+  <div class='userDetailsContainer'>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+        <i class="material-icons">account_circle</i> {{user.firstName}} {{ user.lastName }}
+      </button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()"
+          [throttleTime]="1000">Statistics</button>
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">Log out</button>
+      </mat-menu>
+    </div>
   </div>
 </div>
-
 <mat-accordion>
 
   <mat-form-field>
@@ -95,7 +90,7 @@
         </tr>
       </tbody>
       <tbody class="accepted">
-        <tr class="table-success" *ngFor="let user of acceptedUsers[i] | searchFilter: 'email' : searchUser">
+        <tr class="table-accepted" *ngFor="let user of acceptedUsers[i] | searchFilter: 'email' : searchUser">
           <td id="align-info">{{ user.firstName }}</td>
           <td id="align-info">{{ user.lastName }}</td>
           <td id="align-info">{{ user.email }}</td>
@@ -109,8 +104,7 @@
         </tr>
       </tbody>
       <tbody>
-        <tr class="table-danger" *ngFor="let user of refusedUsers[i] | searchFilter: 'email' : searchUser">
-          <td id="align-info">{{ user.firstName }}</td>
+        <tr class="table-refused" *ngFor="let user of refusedUsers[i] | searchFilter: 'email' : searchUser">
           <td id="align-info">{{ user.lastName }}</td>
           <td id="align-info">{{ user.email }}</td>
           <td id="align-info">
@@ -129,6 +123,6 @@
 </mat-accordion>
 
 <div class="add-btn-container">
-  <button mat-stroked-button appPreventDoubleClick (throttledClick)="openDialog()"
-    [throttleTime]="1000"><i class="material-icons">add_circle</i>Add Course</button>
+  <button mat-stroked-button appPreventDoubleClick (throttledClick)="openDialog()" [throttleTime]="1000"><i
+      class="material-icons">add_circle</i>Add Course</button>
 </div>

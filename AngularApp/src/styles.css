@@ -50,25 +50,7 @@ div.error-message i{
 
 
 
-.table-hover tr:hover {
-    background-color: #bed9fa !important;
-}
 
-.mat-menu-item:hover:not([disabled]) {
-    background-color: #bed9fa !important;
-}
-
-::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-    color: black !important;
-}
-
-::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
-    background-color: #6699d3 !important;
-}
-
-::ng-deep .mat-form-field.mat-focused .mat-input-element {
-    color: black !important;
-}
 
 :not(i) {
     font-family: 'Aleo', serif;
@@ -84,3 +66,30 @@ h2 {
     font-size: 18px !important;
     font-weight: 800 !important;
   }
+
+  .table-hover tr:hover {
+    background-color: #bed9fa !important;
+}
+
+.mat-menu-item:hover:not([disabled]) {
+    background-color: #bed9fa !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: black !important;
+  }
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #6699d3 !important;
+  }
+
+  ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) .mat-select-arrow {
+    color: #6699d3 !important;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused .mat-input-element {
+    color: black !important;
+  }
+
+  .table-hover tr:hover:not(.table-accepted):not(.table-refused) {
+    background-color: #bed9fa !important;
+}

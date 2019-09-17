@@ -17,6 +17,24 @@
     line-height: 1.6;
   }
 
+
+  .upperContainer {
+    /* background-color:#b8e8f7; */
+    background-color: lightblue;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: flex-start;
+  color: black;
+  font-size: 24px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
   .mat-expansion-panel-header-title {
     width: 10% !important;
   }
@@ -54,8 +72,14 @@
 .userDetailsContainer {
   display: flex;
   justify-content: flex-end;
-  margin-right: 15px;
+  margin-top: 5px;
 }
+
+::ng-deep .cdk-overlay-connected-position-bounding-box {
+  right: 0px !important;
+  width: 100% !important;
+}
+
 
 .mat-icon-button {
   width:0%;
@@ -142,4 +166,12 @@ mat-form-field {
   justify-content: center;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.table-refused {
+  background-color: rgb(245, 230, 230) !important;
+}
+
+.table-accepted {
+  background-color: rgb(229, 243, 229) !important;
 }

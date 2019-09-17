@@ -11,11 +11,22 @@ table {
 
 .upperContainer {
     /* background-color:#b8e8f7; */
-    background-color:white;
+    background-color: lightblue;
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
 }
+
+.logoContainer {
+  display: flex;
+  justify-content: flex-start;
+  color: black;
+  font-size: 24px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+
 
 /* LogOutButton */
 .userDetailsContainer {
@@ -25,8 +36,9 @@ table {
     margin-top: 5px;
 }
 
-::ng-deep .mat-menu-panel {
-    margin-left: 50px !important;
+::ng-deep .cdk-overlay-connected-position-bounding-box {
+  right: 0px !important;
+  width: 100% !important;
 }
 
 .mat-icon-button {

@@ -13,8 +13,8 @@
         <i class="material-icons">account_circle</i>
         <span> {{user.firstName}} {{ user.lastName }}</span>
       </button>
-      <mat-menu #menu="matMenu">
-        <div>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+          <div>
           <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
             <span>Statistics</span>
           </button>

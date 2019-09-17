@@ -8,8 +8,8 @@
             <i class="material-icons">account_circle</i>
             <span>{{user.firstName}} {{ user.lastName }}</span>
         </button>
-        <mat-menu #menu="matMenu">
-            <div>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+                <div>
                 <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
                     <span>Log out</span>
                 </button>
@@ -33,7 +33,7 @@
                 <th mat-sort-header="lastName">Last Name</th>
                 <th mat-sort-header="enable">Enable</th>
                 <th mat-sort-header="leader">Leader</th>
-                <th mat-sort-header="delete_user">Delete user</th>
+                <th>Delete user</th>
             </tr>
         </thead>
         <tbody>
@@ -101,7 +101,7 @@
                 <th mat-sort-header="projectManager">Project Manager</th>
                 <th mat-sort-header="domain">Domain</th>
                 <th mat-sort-header="timeInterval">Time Interval</th>
-                <th mat-sort-header="delete_course">Delete course</th>
+                <th>Delete course</th>
 
             </tr>
         </thead>

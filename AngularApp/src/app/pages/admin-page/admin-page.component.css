@@ -17,6 +17,12 @@ table {
     margin-right: 15px;
 }
 
+::ng-deep .cdk-overlay-connected-position-bounding-box {
+    /* position: relative !important; */
+    right: 0px !important;
+    width: 100% !important;
+  }
+
 .mat-icon-button {
     width:0%;
 }
@@ -55,6 +61,10 @@ td {
     border-color: rgba(0,0,0,.5) !important;
   }
 
+  mat-form-field {
+    width: 90%;
+  }
+
 button:active {
   transform: translateY(2px)!important;
 }
@@ -63,3 +73,18 @@ button:active {
     display: flex;
     justify-content: center;
 }
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: black !important;
+  }
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #6699d3 !important;
+  }
+
+  ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) .mat-select-arrow {
+      color: #6699d3 !important;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused .mat-input-element {
+    color: black !important;
+  }
