@@ -59,9 +59,12 @@ export class NextCoursesComponent implements OnInit {
         this.sortedData = this.courses.slice();
         this.userService.getCurrentCourses(this.user).subscribe(currentCourses => {
           this.unavailableCourses = new Array();
+          console.log(futureCourses);
           futureCourses.forEach(course => {
             this.filterUnavailableCourses(course, currentCourses)
           });
+          console.log(this.unavailableCourses);
+
           this.unavailableCourses.forEach(course => {
             const index: number = this.courses.indexOf(course);
             if (index !== -1) {
@@ -97,8 +100,7 @@ export class NextCoursesComponent implements OnInit {
     let courseStart = (new Date(course.startDate)).getTime();
     let courseEnd = (new Date(course.endDate)).getTime();
 
-
-    currentCourses.forEach(currCourse => {
+    for (let currCourse of currentCourses) {
       let currCourseStart = (new Date(currCourse.startDate)).getTime();
       let currCourseEnd = (new Date(currCourse.endDate)).getTime();
 
@@ -108,9 +110,10 @@ export class NextCoursesComponent implements OnInit {
         (courseStart >= currCourseStart && courseStart <= currCourseEnd && courseEnd <= currCourseEnd && courseEnd >= currCourseStart) ||
         (courseStart >= currCourseStart && courseStart <= currCourseEnd && courseEnd >= currCourseEnd)) {
         this.unavailableCourses.push(course);
-        return;
+        console.log(course);
+        break;
       }
-    });
+    };
     return;
   }
 }

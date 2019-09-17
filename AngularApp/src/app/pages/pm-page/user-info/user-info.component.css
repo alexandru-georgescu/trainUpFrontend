@@ -1,31 +1,23 @@
-
-.inputs__container {
-    display: flex;
-    justify-content: space-around;
-    align-content: center;
-    margin-top: 50px;
-}
-
-.space-needed1 {
-    margin-left: 100px;
-}
-
-.space-needed2 {
-    margin-left: 125px;
-}
-
 .modal__buttons {
     display: flex;
-    margin-top: 25px;
     justify-content: center;
+    margin-top: 10px;
 }
 
-.title {
-    margin-bottom: 15px;
+.mat-button {
+    background-color: gainsboro;
 }
 
-.cancel-btn {
-    background-color:#dc3545;
-    margin-left: 50px;
-    color: white;
+table {
+    margin: 0 auto;
+    border-spacing: 15px;
+    margin-top: 10px;
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    font-weight: bold;
 }

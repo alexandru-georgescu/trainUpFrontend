@@ -40,6 +40,8 @@ import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
 import { SearchFilterPipe } from 'src/searchfilterpipe';
+import { AdminUserComponent } from './pages/admin-page/admin-user/admin-user.component';
+import { AdminCourseComponent } from './pages/admin-page/admin-course/admin-course.component';
 
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, TimeSeries);
@@ -66,7 +68,9 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, TimeSeries);
     UserStatisticsComponent,
     CalendarComponent,
     PreventDoubleClickDirective,
-    SearchFilterPipe
+    SearchFilterPipe,
+    AdminUserComponent,
+    AdminCourseComponent
   ],
   imports: [
     BrowserModule,

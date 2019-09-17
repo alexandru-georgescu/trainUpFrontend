@@ -10,48 +10,6 @@ table {
     display: inline;
 }
 
-.upperContainer {
-  /* background-color:#b8e8f7; */
-  background-color: lightblue;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-.logoContainer {
-  display: flex;
-  justify-content: flex-start;
-  color: black;
-  font-size: 24px;
-  margin-left: 15px;
-  margin-top: 10px;
-}
-
-/* LogOutButton */
-.userDetailsContainer {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 15px;
-}
-
-::ng-deep .cdk-overlay-connected-position-bounding-box {
-    /* position: relative !important; */
-    right: 0px !important;
-    width: 100% !important;
-  }
-
-.mat-icon-button {
-    width:0%;
-}
-
-.mat-menu-item {
-    background-color: none !important;
-}
-
-button.mat-menu-item{
-    background-color: white;
-}
-
 button:focus {
     outline:0;
 }
@@ -91,6 +49,13 @@ button:active {
     justify-content: center;
 }
 
+.edit-buttons button {
+  display: flex;
+  justify-content: center;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
     color: black !important;
   }
@@ -105,7 +70,3 @@ button:active {
   ::ng-deep .mat-form-field.mat-focused .mat-input-element {
     color: black !important;
   }
-
-  ::ng-deep .mat-tab-header {
-    border-bottom: none !important;
-}

@@ -6,8 +6,10 @@
                 <form [formGroup]="courseForm">
                     <div class="first__container">
                         <mat-form-field>
-                            <input matInput placeholder="Course Name (max. 50 characters)" formControlName="name" maxLength="50">
-                            <mat-error *ngIf="submitted && controls.name.errors" class="invalid-feedback">Enter the course name</mat-error>
+                            <input matInput placeholder="Course Name (max. 30 characters)" formControlName="name"
+                                maxLength="30">
+                            <mat-error *ngIf="submitted && controls.name.errors" class="invalid-feedback">Enter the
+                                course name</mat-error>
                         </mat-form-field>
                         <mat-form-field class="space-needed2">
                             <input matInput placeholder="Capacity" formControlName="capacity" pattern="^[0-9]*$">

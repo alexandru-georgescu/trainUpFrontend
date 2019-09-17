@@ -33,6 +33,7 @@ export class PmPageComponent implements OnInit {
   refusedUsers: User[][];
   acceptedUsers: User[][];
   markedCourses: Boolean[];
+  emptyCourses: Boolean[];
   indexExpanded = -1;
 
   constructor(public dialog: MatDialog,
@@ -186,6 +187,7 @@ export class PmPageComponent implements OnInit {
       this.refusedUsers = new Array(this.courses.length);
       this.acceptedUsers = new Array(this.courses.length);
       this.markedCourses= new Array(this.courses.length);
+      this.emptyCourses = new Array(this.courses.length);
 
       this.courses.forEach((course, index) => {
         this.usersList[index] = new Array();
@@ -208,7 +210,10 @@ export class PmPageComponent implements OnInit {
             this.markedCourses[index] = false;
           else 
             this.markedCourses[index] = true;
-
+          if (this.usersList[index].length === 0 && this.refusedUsers[index].length === 0 && this.acceptedUsers[index].length === 0)
+            this.emptyCourses[index] = true;
+          else
+            this.emptyCourses[index] = false;
           this.sortedData[index] = this.usersList[index].slice();
           if (indexEx === true) {
             this.indexExpanded = index;
@@ -269,7 +274,7 @@ export class PmPageComponent implements OnInit {
     localStorage.setItem('selectedUser', JSON.stringify(user));
     const dialogRef = this.dialog.open(UserInfoComponent, {
       width: '560px',
-      height: '350px',
+      height: '250px',
     });
   }
 

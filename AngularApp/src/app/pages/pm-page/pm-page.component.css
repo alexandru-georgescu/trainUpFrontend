@@ -58,14 +58,12 @@
     width: 60px;
     padding: 0px;
     font-size: 12px;
-    margin-right: 0px;
   }
 
   .btn-info {
-      width: 60px;
-      padding: 0px;
-      background-color: #6699d3;
-
+    width: 60px;
+    padding: 0px;
+    background-color: #6699d3;
   }
   
 /* LogOutButton */
@@ -112,7 +110,7 @@ button:focus {
 
 .inner-addon i {
   position: absolute;
-  padding: 10px;
+  padding: 6.5px;
   pointer-events: none;
 }
 
@@ -141,12 +139,6 @@ button:focus {
   text-align: center;
 }
 
-
-.inner-addon, .left-addon {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
-}
-
 mat-form-field {
  margin-left: 10px !important;
 }
@@ -164,8 +156,10 @@ mat-form-field {
   display: flex;
   text-align: center;
   justify-content: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  height: 35px;
+  margin-left: 30px;
+  margin-top: 10px;
+  width: 180px;
 }
 
 .table-refused {
@@ -174,4 +168,32 @@ mat-form-field {
 
 .table-accepted {
   background-color: rgb(229, 243, 229) !important;
+}
+
+.sort-search {
+  display: flex;
+  margin-left: 120px !important;
+}
+
+#sort {
+  margin-left: 30px;
+  margin-top: 10px;
+  width: 66%;
+}
+
+::ng-deep #add-btn {
+  width: 180px;
+  padding: 0;
+  margin: 0 auto;
+  border: 1px solid #ced4da !important;
+  border-radius: .25rem !important;
+}
+
+#note-add-icon {
+  margin-right: 5px; 
+}
+
+::ng-deep #add-course-text {
+  margin-top: 3px !important;
+  display: inline-block;
 }

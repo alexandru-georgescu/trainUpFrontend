@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~ngx-toastr/toastr.css';
 
 
@@ -67,12 +66,12 @@ h2 {
     font-weight: 800 !important;
   }
 
-  .table-hover tr:hover {
-    background-color: #bed9fa !important;
+  .table-hover tr:hover:not(.table-accepted):not(.table-refused) {
+    background-color: #d7e8fd !important;
 }
 
 .mat-menu-item:hover:not([disabled]) {
-    background-color: #bed9fa !important;
+    background-color: #d7e8fd !important;
 }
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
@@ -90,6 +89,3 @@ h2 {
     color: black !important;
   }
 
-  .table-hover tr:hover:not(.table-accepted):not(.table-refused) {
-    background-color: #bed9fa !important;
-}
