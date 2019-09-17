@@ -1,25 +1,25 @@
-* {
-    font-family: 'Aleo', serif;
-    font-size: 15px;
-}
-
 .title {
     font-size: 30px;
 }
 
 .modal__buttons {
-    margin-top: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 .mat-button {
     background-color: gainsboro;
-    font-family: 'Aleo', serif;
 }
 
 table {
+    margin: 0 auto;
     border-spacing: 15px;
 }
 
 td {
     text-align: center;
+}
+
+th {
+    font-weight: bold;
 }

@@ -1,31 +1,33 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
 </head>
 
-
-<!-- LogOut Button -->
-<div class='userDetailsContainer'>
+<div class="upperContainer">
+  <div class="logoContainer">
+    trainUP
+  </div>
+  <!-- LogOut Button -->
+  <div class='userDetailsContainer'>
     <div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-        <mat-icon>account_circle</mat-icon>
-        <span class="font-kkt">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
+        <i class="material-icons">account_circle</i>
+        <span> {{user.firstName}} {{ user.lastName }}</span>
       </button>
-      <mat-menu #menu="matMenu">
-        <div>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+          <div>
           <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
-            <span class="font-kkt">Statistics</span>
+            <span>Statistics</span>
           </button>
         </div>
         <div>
           <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
-            <span class="font-kkt">Log out</span>
+            <span>Log out</span>
           </button>
         </div>
       </mat-menu>
     </div>
   </div>
+</div>
 
 
 <div class="all-container">
@@ -35,9 +37,10 @@
         <th mat-sort-header="firstName">First Name</th>
         <th mat-sort-header="lastName">Last Name</th>
         <th mat-sort-header="email">E-mail</th>
-        <th mat-sort-header="ongoing_courses">Ongoing courses</th>
+        <th mat-sort-header="ongoing_courses">Attended courses</th>
         <th mat-sort-header="rejected_courses">Rejected courses</th>
         <th mat-sort-header="course">Wish to enroll course</th>
+        <th>Course type</th>
         <th>Course domain</th>
         <th>Enroll</th>
       </tr>
@@ -51,10 +54,13 @@
           <td>{{ user.courses.length }}</td>
           <td>{{ user.rejectedList.length }}</td>
           <td>{{ course.courseName }}</td>
+          <td>{{ course.type }}</td>
           <td>{{ course.domain }}</td>
           <td>
-            <button type="button" class="btn btn-success" appPreventDoubleClick (throttledClick)="yesClick(user, course)" [throttleTime]="1000">Yes</button>
-            <button type="button" class="btn btn-danger" appPreventDoubleClick (throttledClick)="noClick(user, course)" [throttleTime]="1000">No</button>
+            <button type="button" class="btn btn-success" appPreventDoubleClick
+              (throttledClick)="yesClick(user, course)" [throttleTime]="1000" title="Accept user">&#10004;</button>
+            <button type="button" class="btn btn-danger" appPreventDoubleClick (throttledClick)="noClick(user, course)"
+              [throttleTime]="1000" title="Decline user">&times;</button>
           </td>
         </tr>
       </ng-container>

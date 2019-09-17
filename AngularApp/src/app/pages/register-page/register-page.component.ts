@@ -50,6 +50,11 @@ export class RegisterPageComponent implements OnInit {
 
   register() {
     this.submitted = true;
+    this.controls.email.markAsTouched();
+    this.controls.firstName.markAsTouched();
+    this.controls.lastName.markAsTouched();
+    this.controls.password.markAsTouched();
+    this.controls.cPassword.markAsTouched();
 
     if (this.registerForm.invalid) {
       return;

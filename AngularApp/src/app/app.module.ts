@@ -39,6 +39,8 @@ import { FusionChartsModule } from 'angular-fusioncharts';
 import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
+import { SearchFilterPipe } from 'src/searchfilterpipe';
+
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, TimeSeries);
 
@@ -64,6 +66,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, TimeSeries);
     UserStatisticsComponent,
     CalendarComponent,
     PreventDoubleClickDirective,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,

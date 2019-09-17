@@ -43,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.inexistentUser = true;
         return;
       }
-      this.userService.resetPassword(this.user).subscribe(data => console.log(data));
+      this.userService.resetPassword(this.user).subscribe();
       this.inexistentUser = false;
       this.toastr.success("An email has been sent to your address", "Done!", {
         timeOut: 2000,

@@ -1,10 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-
-th {
-    font-family: 'Roboto' !important;
-}
-
 .all-container {
     text-align: center;
     margin: 0 auto;
@@ -14,11 +9,36 @@ table {
     display: inline;
 }
 
+.upperContainer {
+    /* background-color:#b8e8f7; */
+    background-color: lightblue;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: flex-start;
+  color: black;
+  font-size: 24px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+
+
 /* LogOutButton */
 .userDetailsContainer {
     display: flex;
     justify-content: flex-end;
     margin-right: 15px;
+    margin-top: 5px;
+}
+
+::ng-deep .cdk-overlay-connected-position-bounding-box {
+  right: 0px !important;
+  width: 100% !important;
 }
 
 .mat-icon-button {
@@ -41,8 +61,29 @@ td {
     text-align: center;
 }
 
-.font-kkt {
-    font-family: Roboto,"Helvetica Neue",sans-serif !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-  }
+.btn-success {
+    width: 50px;
+    padding: 0px;
+    font-size: 13px;
+}
+
+.btn-danger {
+    width: 50px;
+    padding: 0px;
+    font-size: 13px;
+}
+
+img {
+    width: 150px;
+    height: 50px;
+    margin-top: 0;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: flex-start;
+    color: black;
+    font-size: 24px;
+    margin-left: 15px;
+    margin-top: 10px;
+}

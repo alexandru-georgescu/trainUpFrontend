@@ -1,28 +1,25 @@
 <div class="modal__overlay">
-        <div class="modal">
-            <div class="modal__content">
-                <h2 class="title">Statistics</h2>
-                <br>
-                <fusioncharts width="700" height="400" type="Column2d" [dataSource]="dataSource" *ngIf="courseStatistic">
-                </fusioncharts>
-                <table matSort class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Days of attended courses: </th>
-                            <th>Days of upcoming courses: </th>
-                            <!-- <th>Enrollments/type</th> -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td>{{ attendedDays }}</td>
-                        <td>{{ upcomingDays }}</td>
-                        <!-- <td>{{ courseStatistic }}</td> -->
-                    </tbody>
-                </table>
-                <div class="modal__buttons">
-                    <!-- <button mat-button appPreventDoubleClick (throttledClick)="onNoClick()" [throttleTime]="1000">Cancel</button> -->
-                    <button mat-button [mat-dialog-close]>Ok</button>
-                </div>
+    <div class="modal">
+        <div class="modal__content">
+            <h2 class="title">Statistics</h2>
+            <br>
+            <fusioncharts width="700" height="400" type="Column2d" [dataSource]="dataSource" *ngIf="courseStatistic">
+            </fusioncharts>
+            <table matSort class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Days of attended courses: </th>
+                        <th>Days of upcoming courses: </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td>{{ attendedDays }}</td>
+                    <td>{{ upcomingDays }}</td>
+                </tbody>
+            </table>
+            <div class="modal__buttons">
+                <button mat-stroked-button [mat-dialog-close]>Ok</button>
             </div>
         </div>
     </div>
+</div>

@@ -22,12 +22,20 @@ export class AdminPageComponent implements OnInit {
   defaultUsers: User[];
   types: String[];
   enables: boolean[];
-  leaders: string[]
+  leaders: string[];
+  selectedUserType : String[];
+  selectedUserEnable : boolean[];
+  selectedUserLeader : String[];
+
 
 
   courses: Course[];
   sortedDataCourse: Course[];
   defaultCourses: Course[];
+  projectManagers : string[];
+  domains : string[];
+  selectedCoursePm : string[];
+  selectedCourseDomain : string[];
 
   constructor(private loginPage: LoginPageComponent,
     private router: Router,
@@ -38,14 +46,18 @@ export class AdminPageComponent implements OnInit {
   ) {
     this.types = ['TM', 'PMTECH', 'PMSOFT', 'PMPROC', 'USER'];
     this.enables = [false, true];
+    this.domains = ['RCA', 'GTB', 'NFR', 'PWCC'];
   }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.userService.usersFindAll().subscribe(users => {
       this.leaders = users.filter(u => u.type != 'USER').map(u => u.email);
+      this.projectManagers = users.filter(u => u.type === 'PMSOFT' || u.type == 'PMTECH' || u.type == 'PMPROC').map(u => u.email);
+
       this.users = users.slice(1, users.length);
       this.sortedDataUser = this.users;
+      this.updateUserData();
       if (this.defaultUsers === undefined) {
         this.defaultUsers = JSON.parse(JSON.stringify(this.users));
       }
@@ -54,6 +66,7 @@ export class AdminPageComponent implements OnInit {
     this.courseService.getAllCourses().subscribe(courses => {
       this.courses = courses;
       this.sortedDataCourse = this.courses;
+      this.updateCourseData();
       if (this.defaultCourses === undefined) {
         this.defaultCourses = JSON.parse(JSON.stringify(this.courses));
       }
@@ -80,6 +93,13 @@ export class AdminPageComponent implements OnInit {
         default: return 0;
       }
     });
+    this.updateUserData();
+  }
+
+  updateUserData() {
+    this.selectedUserType = this.sortedDataUser.map(u => u.type);
+    this.selectedUserEnable = this.sortedDataUser.map(u => u.enable);
+    this.selectedUserLeader = this.sortedDataUser.map(u => u.leader);
   }
 
   sortDataCourse(sort: Sort) {
@@ -96,11 +116,19 @@ export class AdminPageComponent implements OnInit {
         case 'capacity': return compare(a.capacity, b.capacity, isAsc);
         case 'actualCapacity': return compare(a.actualCapacity, b.actualCapacity, isAsc);
         case 'projectManager': return compare(a.projectManager, b.projectManager, isAsc);
+        case 'startDate': return compare(a.startDate.toString(), b.startDate.toString(), isAsc);
+        case 'endDate': return compare(a.startDate.toString(), b.startDate.toString(), isAsc);
         case 'domain': return compare(a.domain, b.domain, isAsc);
         case 'timeInterval': return compare(a.timeInterval, b.timeInterval, isAsc);
         default: return 0;
       }
     });
+    this.updateCourseData();
+  }
+
+  updateCourseData() {
+    this.selectedCoursePm = this.sortedDataCourse.map(c => c.projectManager);
+    this.selectedCourseDomain = this.sortedDataCourse.map(c => c.domain);
   }
 
   logout() {
@@ -162,14 +190,23 @@ export class AdminPageComponent implements OnInit {
     this.users = this.sortedDataUser;
   }
 
-  changeEnable(index: number, newEnable: string) {
-    let newBoolEnable = newEnable.toLowerCase() == 'true' ? true : false; 
-    this.sortedDataUser[index].enable = newBoolEnable;
+  changeEnable(index: number, newEnable: boolean) {
+    this.sortedDataUser[index].enable = newEnable;
     this.users = this.sortedDataUser;
   }
 
   changeLeader(index: number, newLeader: string) {
     this.sortedDataUser[index].leader = newLeader;
+    this.users = this.sortedDataUser;
+  }
+
+  changeProjectManager(index: number, newProjectManager: string) {
+    this.sortedDataCourse[index].projectManager = newProjectManager;
+    this.users = this.sortedDataUser;
+  }
+
+  changeDomain(index: number, newDomain: string) {
+    this.sortedDataCourse[index].domain = newDomain;
     this.users = this.sortedDataUser;
   }
 

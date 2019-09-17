@@ -2,30 +2,18 @@
 
 mat-icon {
     vertical-align: bottom !important;
+    font-family: 'Material Icons' !important;
 }
 
 button, .mat-sort-header-button {
     text-decoration: none !important;
     background: none !important;
-    border-radius: 50px !important;
     outline : 0 !important;
-    border-color: lightgrey!important;
-    border-width: 1.2px !important;
     border: none !important;
 }
 
-button:hover {
-    background-color: lightblue!important;
-}
-
 button:active {
-  background-color: lightcyan !important;
-  box-shadow: 0 1px #666!important;
-  transform: translateY(4px)!important;
-}
-
-.mat-sort-header-arrow {
-    color: red !important;
+  transform: translateY(2px)!important;
 }
 
 td {
@@ -35,6 +23,7 @@ td {
 th {
     text-align: center;
 }
+
 
 
 

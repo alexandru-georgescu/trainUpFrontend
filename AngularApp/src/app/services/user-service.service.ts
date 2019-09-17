@@ -250,7 +250,7 @@ export class UserService {
     return this.http.post<User[]>(Consts.backUrl + 'user/acceptAll', data, httpOptions);
   }
 
-  public attendedDays(user : User) : Observable<number> {
+  public attendedDays(user: User): Observable<number> {
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
     headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
@@ -261,7 +261,7 @@ export class UserService {
     return this.http.post<number>(Consts.backUrl + 'user_statistics/days', user, httpOptions);
   }
 
-  public upcomingDays(user : User) : Observable<number> {
+  public upcomingDays(user: User): Observable<number> {
     let headers_object = new HttpHeaders();
     headers_object = headers_object.append('Content-Type', 'application/json');
     headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
@@ -313,7 +313,29 @@ export class UserService {
     const httpOptions = {
       headers: headers_object
     };
-    return this.http.post<number[]>(Consts.backUrl + 'tm_statistics/year_statistics', user, httpOptions);
+    return this.http.post<number[]>(Consts.backUrl + 'tm_statistics/year_statistic', user, httpOptions);
+  }
+
+  public maxEnrollmentDomains(user: User): Observable<string[]> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<string[]>(Consts.backUrl + 'pm_statistics/max_enrollment_domains', user, httpOptions);
+  }
+
+  public courseBelow50(user: User): Observable<string[]> {
+    let headers_object = new HttpHeaders();
+    headers_object = headers_object.append('Content-Type', 'application/json');
+    headers_object = headers_object.append('Authorization', 'Basic ' + btoa('admin:AlexGAdmin'));
+
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.post<string[]>(Consts.backUrl + 'pm_statistics/course_below_50', user, httpOptions);
   }
 }
 

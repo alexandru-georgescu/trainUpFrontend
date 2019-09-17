@@ -1,6 +1,3 @@
-* {
-    font-family: 'Aleo', serif;
-}
 .inputs__container {
     display: flex;
     justify-content: space-around;
@@ -26,12 +23,27 @@
 }
 
 .cancel-btn {
-    background-color:#ff6347;
-    font-family: 'Aleo', serif;
+    background-color:#dc3545;
     margin-left: 50px;
+    color: white;
 }
 .add-btn {
-    background-color: #98fb98;
-    font-family: 'Aleo', serif;
+    background-color: #28a745;
     margin-left: 250px;
+    color: white;
 }
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: black !important;
+  }
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #6699d3 !important;
+  }
+
+  ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) .mat-select-arrow {
+      color: #6699d3 !important;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused .mat-input-element {
+    color: black !important;
+  }

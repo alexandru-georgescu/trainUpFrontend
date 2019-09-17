@@ -1,4 +1,6 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
 <table matSort (matSortChange)="sortData($event)" class="table table-hover">
     <thead class="thead-dark">
@@ -7,10 +9,10 @@
             <th mat-sort-header="domain">Domain</th>
             <th mat-sort-header="capacity">Capacity</th>
             <th mat-sort-header="actualCapacity">Available</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Time Interval</th>
-            <th>Project Manager</th>
+            <th mat-sort-header="startDate">Start Date</th>
+            <th mat-sort-header="endDate">End Date</th>
+            <th mat-sort-header="timeInterval">Time Interval</th>
+            <th mat-sort-header="projectManager">Project Manager</th>
             <th>Wish to enroll</th>
         </tr>
     </thead>
@@ -24,18 +26,23 @@
             <td>{{ course.endDate }}</td>
             <td>{{ course.timeInterval }}</td>
             <td>{{ course.projectManager }}</td>
-            <td> <button appPreventDoubleClick (throttledClick)="rowClick(course)" [throttleTime]="1000"><mat-icon>loyalty</mat-icon> Wish to enroll </button> </td>
+            <td>
+                <button appPreventDoubleClick (throttledClick)="rowClick(course)" [throttleTime]="1000"
+                    title="Enroll to this course">
+                    <i class="material-icons">add_circle</i>
+                </button>
+            </td>
         </tr>
         <tr *ngFor="let course of unavailableCourses">
-                <td>{{ course.courseName }}</td>
-                <td>{{ course.domain }}</td>
-                <td>{{ course.capacity }}</td>
-                <td>{{ course.actualCapacity }}</td>
-                <td>{{ course.startDate }}</td>
-                <td>{{ course.endDate }}</td>
-                <td>{{ course.timeInterval }}</td>
-                <td>{{ course.projectManager }}</td>
-                <td> You can't enroll to this course </td>
-            </tr>
+            <td>{{ course.courseName }}</td>
+            <td>{{ course.domain }}</td>
+            <td>{{ course.capacity }}</td>
+            <td>{{ course.actualCapacity }}</td>
+            <td>{{ course.startDate }}</td>
+            <td>{{ course.endDate }}</td>
+            <td>{{ course.timeInterval }}</td>
+            <td>{{ course.projectManager }}</td>
+            <td> You can't enroll to this course </td>
+        </tr>
     </tbody>
 </table>

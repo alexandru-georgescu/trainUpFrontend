@@ -1,37 +1,26 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
 </head>
 
-
-<!-- LogOut Button -->
-<div class='userDetailsContainer'>
-  <div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
-      <mat-icon>account_circle</mat-icon>
-      <span class="font-kkt">Logged in as: {{user.firstName}} {{ user.lastName }}</span>
-    </button>
-    <mat-menu #menu="matMenu">
-      <div>
-        <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()" [throttleTime]="1000">
-          <span class="font-kkt">Statistics</span>
-        </button>
-      </div>
-      <div>
-        <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">
-          <span class="font-kkt">Log out</span>
-        </button>
-      </div>
-    </mat-menu>
+<div class="upperContainer">
+  <div class="logoContainer">
+    trainUP
+  </div>
+  <!-- LogOut Button -->
+  <div class='userDetailsContainer'>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account">
+        <i class="material-icons">account_circle</i> {{user.firstName}} {{ user.lastName }}
+      </button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="onStatistic()"
+          [throttleTime]="1000">Statistics</button>
+        <button mat-menu-item appPreventDoubleClick (throttledClick)="logout()" [throttleTime]="1000">Log out</button>
+      </mat-menu>
+    </div>
   </div>
 </div>
-
 <mat-accordion>
-
-  <div class="inner-addon left-addon">
-      <i class="material-icons">search</i>
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchText">
-  </div>
 
   <mat-form-field>
     <mat-label>Sort By</mat-label>
@@ -45,8 +34,13 @@
     </mat-select>
   </mat-form-field>
 
+  <div class="inner-addon left-addon">
+    <i class="material-icons">search</i>
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchText">
+  </div>
+
   <mat-expansion-panel [expanded]="indexExpanded == i"
-    *ngFor="let course of courses | filter:searchText; let i = index">
+    *ngFor="let course of courses | searchFilter: 'courseName' : searchText; let i = index">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span *ngIf="markedCourses[i]"><i class="material-icons">fiber_new</i></span><span>{{course.courseName}}</span>
@@ -55,14 +49,17 @@
         <span>Check potential participants</span>
         <span>Available : {{course.actualCapacity}}</span>
         <span>Starting Date: {{course.startDate}}</span>
-        <button type="button" class="btn btn-success" id="acceptAll" appPreventDoubleClick (throttledClick)="allYesClick(course)" [throttleTime]="1000">Accept All</button>
-        <button type="button" class="btn btn-danger" id="rejectAll" appPreventDoubleClick (throttledClick)="allNoClick(course)" [throttleTime]="1000">Reject All</button>
+        <button type="button" class="btn btn-success" id="acceptAll" appPreventDoubleClick
+          (throttledClick)="allYesClick(course)" [throttleTime]="1000">Accept All</button>
+        <button type="button" class="btn btn-danger" id="rejectAll" appPreventDoubleClick
+          (throttledClick)="allNoClick(course)" [throttleTime]="1000">Reject All</button>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <div class="inner-addon left-addon">
       <i class="material-icons">search</i>
-      <input class="form-control mr-sm-2" type="search" placeholder="Search by e-mail" aria-label="Search" [(ngModel)]="searchUser">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search by e-mail" aria-label="Search"
+        [(ngModel)]="searchUser">
     </div>
 
     <table matSort (matSortChange)="sortData($event)" class="table table-hover">
@@ -76,41 +73,48 @@
         </tr>
       </thead>
       <tbody class="accepted">
-        <tr *ngFor="let user of sortedData[i] | filter:searchUser">
+        <tr *ngFor="let user of sortedData[i] | searchFilter: 'email' : searchUser">
           <td id="align-info">{{ user.firstName }}</td>
           <td id="align-info">{{ user.lastName }}</td>
           <td id="align-info">{{ user.email }}</td>
           <td id="align-info">
-            <button type="button" class="btn btn-success" id="xbtn" appPreventDoubleClick (throttledClick)="yesClick(user, course)" [throttleTime]="1000">&#10004;</button>
-            <button type="button" class="btn btn-danger" id="xbtn" appPreventDoubleClick (throttledClick)="noClick(user, course)" [throttleTime]="1000">&times;</button>
+            <button type="button" class="btn btn-success" id="xbtn" appPreventDoubleClick
+              (throttledClick)="yesClick(user, course)" [throttleTime]="1000" title="Accept user">&#10004;</button>
+            <button type="button" class="btn btn-danger" id="xbtn" appPreventDoubleClick
+              (throttledClick)="noClick(user, course)" [throttleTime]="1000" title="Reject user">&times;</button>
           </td>
           <td id="align-info">
-            <button type="button" class="btn btn-info" appPreventDoubleClick (throttledClick)="userInfo(user)" [throttleTime]="1000">Info</button>
+            <button type="button" class="btn btn-info" appPreventDoubleClick (throttledClick)="userInfo(user)"
+              [throttleTime]="1000">Info</button>
           </td>
         </tr>
       </tbody>
       <tbody class="accepted">
-        <tr class="table-success" *ngFor="let user of acceptedUsers[i] | filter:searchUser">
+        <tr class="table-accepted" *ngFor="let user of acceptedUsers[i] | searchFilter: 'email' : searchUser">
           <td id="align-info">{{ user.firstName }}</td>
           <td id="align-info">{{ user.lastName }}</td>
           <td id="align-info">{{ user.email }}</td>
           <td id="align-info">
             <button type="button" class="btn btn-success" id="xbtn" [disabled]="true">&#10004;</button>
-            <button type="button" class="btn btn-danger" aria-label="Close" id="xbtn" appPreventDoubleClick (throttledClick)="rejectAccepted(user, course)" [throttleTime]="1000">&times;</button>
+            <button type="button" class="btn btn-danger" aria-label="Close" id="xbtn" appPreventDoubleClick
+              (throttledClick)="rejectAccepted(user, course)" [throttleTime]="1000" title="Remove user">&times;</button>
           </td>
-          <td id="align-info"><button type="button" class="btn btn-info" appPreventDoubleClick (throttledClick)="userInfo(user)" [throttleTime]="1000">Info</button></td>
+          <td id="align-info"><button type="button" class="btn btn-info" appPreventDoubleClick
+              (throttledClick)="userInfo(user)" [throttleTime]="1000">Info</button></td>
         </tr>
       </tbody>
       <tbody>
-        <tr class="table-danger" *ngFor="let user of refusedUsers[i] | filter:searchUser">
-          <td id="align-info">{{ user.firstName }}</td>
+        <tr class="table-refused" *ngFor="let user of refusedUsers[i] | searchFilter: 'email' : searchUser">
           <td id="align-info">{{ user.lastName }}</td>
           <td id="align-info">{{ user.email }}</td>
           <td id="align-info">
-            <button type="button" class="btn btn-success" id="xbtn" appPreventDoubleClick (throttledClick)="acceptRejected(user, course)" [throttleTime]="1000">&#10004;</button>
+            <button type="button" class="btn btn-success" id="xbtn" appPreventDoubleClick
+              (throttledClick)="acceptRejected(user, course)" [throttleTime]="1000"
+              title="Accept user">&#10004;</button>
             <button type="button" class="btn btn-danger" id="xbtn" [disabled]="true">&times;</button>
           </td>
-          <td id="align-info"><button type="button" class="btn btn-info" appPreventDoubleClick (throttledClick)="userInfo(user)" [throttleTime]="1000">Info</button></td>
+          <td id="align-info"><button type="button" class="btn btn-info" appPreventDoubleClick
+              (throttledClick)="userInfo(user)" [throttleTime]="1000">Info</button></td>
         </tr>
       </tbody>
     </table>
@@ -119,5 +123,6 @@
 </mat-accordion>
 
 <div class="add-btn-container">
-  <button mat-raised-button class="btn btn-primary" appPreventDoubleClick (throttledClick)="openDialog()" [throttleTime]="1000">Add Course</button>
+  <button mat-stroked-button appPreventDoubleClick (throttledClick)="openDialog()" [throttleTime]="1000"><i
+      class="material-icons">add_circle</i>Add Course</button>
 </div>
