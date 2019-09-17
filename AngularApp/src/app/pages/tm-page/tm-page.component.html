@@ -57,9 +57,9 @@
           <td>{{ course.type }}</td>
           <td>{{ course.domain }}</td>
           <td>
-            <button type="button" class="btn btn-success" appPreventDoubleClick
+            <button type="button" class="btn btn-success" id="xbtn" appPreventDoubleClick
               (throttledClick)="yesClick(user, course)" [throttleTime]="1000" title="Accept user">&#10004;</button>
-            <button type="button" class="btn btn-danger" appPreventDoubleClick (throttledClick)="noClick(user, course)"
+            <button type="button" class="btn btn-danger" id="xbtn" appPreventDoubleClick (throttledClick)="noClick(user, course)"
               [throttleTime]="1000" title="Decline user">&times;</button>
           </td>
         </tr>
