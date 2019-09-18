@@ -23,10 +23,10 @@ export class UserStatisticsComponent implements OnInit {
   ) {
     this.dataSource = {
       chart: {
-        caption: "Team's enrollment coverage",
+        caption: "My enrollment coverage",
         subCaption: "per type of course",
         xAxisName: "Type of course",
-        yAxisName: "Participants",
+        yAxisName: "Courses",
         // numberSuffix: "K",
         theme: "candy"
       },
@@ -68,10 +68,10 @@ export class UserStatisticsComponent implements OnInit {
 
       this.dataSource = {
         chart: {
-          caption: "Team's enrollment coverage",
+          caption: "My enrollment coverage",
           subCaption: "per type of course",
           xAxisName: "Type of course",
-          yAxisName: "Participants",
+          yAxisName: "Courses",
           // numberSuffix: "K",
           theme: "candy"
         },
