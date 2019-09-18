@@ -2,11 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LoginPageComponent } from '../login-page/login-page.component';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user-service.service';
-import { Sort } from '@angular/material/sort';
-import { ToastrService } from 'ngx-toastr';
-import { Course } from 'src/app/models/course';
-import { CourseService } from 'src/app/services/course-service.service';
 
 @Component({
   selector: 'app-admin-page',

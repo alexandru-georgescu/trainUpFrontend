@@ -274,7 +274,7 @@ export class PmPageComponent implements OnInit {
     localStorage.setItem('selectedUser', JSON.stringify(user));
     const dialogRef = this.dialog.open(UserInfoComponent, {
       width: '560px',
-      height: '250px',
+      height: '280px',
     });
   }
 
