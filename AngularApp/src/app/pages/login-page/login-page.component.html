@@ -46,9 +46,11 @@
                     </div>
 
                     <div class="login-button">
-                        <button mat-stroked-button appPreventDoubleClick (throttledClick)="beforeLogIn()" [throttleTime]="1000">Login</button>
+                        <button mat-stroked-button appPreventDoubleClick (throttledClick)="beforeLogIn()"
+                            [throttleTime]="1000">Login</button>
                     </div>
                     <div class="wrong-input">
+                        <span *ngIf="needToSetTeamLeader">You do not have a Team Leader assigned!</span>
                         <span *ngIf="needToactivateAccount">You need to activate your account!</span>
                         <span *ngIf="wrongInput">Wrong email or password. Try again!</span>
                         <span *ngIf="alreadyLoggedIn">You are already logged in!</span>

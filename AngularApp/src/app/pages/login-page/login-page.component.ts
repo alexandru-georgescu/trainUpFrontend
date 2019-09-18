@@ -21,6 +21,7 @@ export class LoginPageComponent implements OnInit {
   alreadyLoggedIn = false;
   loggedIn = false;
   needToactivateAccount = false;
+  needToSetTeamLeader = false;
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
@@ -35,6 +36,7 @@ export class LoginPageComponent implements OnInit {
     this.alreadyLoggedIn = false;
     this.loggedIn = false;
     this.needToactivateAccount = false;
+    this.needToSetTeamLeader = false;
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -60,7 +62,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    let user = new User(this.controls.email.value, null, null, null, this.controls.password.value, [], 't.m@trainup.com', [], [], []);
+    let user = new User(this.controls.email.value, null, null, null, this.controls.password.value, [], null, [], [], []);
     this.userService.login(user).subscribe(data => {
       this.user = data;
       if (this.user == null || this.user == undefined) {
@@ -70,43 +72,53 @@ export class LoginPageComponent implements OnInit {
         this.wrongInput = true;
         this.alreadyLoggedIn = false;
         this.needToactivateAccount = false;
-      } else {
-        this.needToactivateAccount = !this.user.enable;
-        this.wrongInput = false;
-        if (this.needToactivateAccount === false) {
-          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          if (this.currentUser != null && this.currentUser.email == this.user.email && this.currentUser.password == this.user.password) {
-            this.alreadyLoggedIn = true;
-            this.loggedIn = true;
-            localStorage.setItem('loggedIn', 'true');
+        this.needToSetTeamLeader = false;
 
-          }
-          else if (this.user.type === "PMTECH" || this.user.type === "PMSOFT" || this.user.type === "PMPROC") {
-            this.loggedIn = true;
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('currentUser', JSON.stringify(this.user));
-            this.router.navigate(['/pm']);
-          }
-          else if (this.user.type === "USER") {
-            this.loggedIn = true;
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('currentUser', JSON.stringify(this.user));
-            this.router.navigate(['/user/curr']);
-          }
-          else if (this.user.type === "TM") {
-            this.loggedIn = true;
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('currentUser', JSON.stringify(this.user));
-            this.router.navigate(['/tm']);
-          }
-          else if (this.user.type === "ADMIN") {
-            this.loggedIn = true;
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('currentUser', JSON.stringify(this.user));
-            this.router.navigate(['/admin']);
+      } else {
+        if (this.user.leader == null) {
+          this.needToSetTeamLeader = true;
+          this.needToactivateAccount = !this.user.enable;
+          this.wrongInput = false;
+        } else {
+          this.needToSetTeamLeader = false;
+          this.needToactivateAccount = !this.user.enable;
+          this.wrongInput = false;
+          if (this.needToactivateAccount === false) {
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (this.currentUser != null && this.currentUser.email == this.user.email && this.currentUser.password == this.user.password) {
+              this.alreadyLoggedIn = true;
+              this.loggedIn = true;
+              localStorage.setItem('loggedIn', 'true');
+
+            }
+            else if (this.user.type === "PMTECH" || this.user.type === "PMSOFT" || this.user.type === "PMPROC") {
+              this.loggedIn = true;
+              localStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('currentUser', JSON.stringify(this.user));
+              this.router.navigate(['/pm']);
+            }
+            else if (this.user.type === "USER") {
+              this.loggedIn = true;
+              localStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('currentUser', JSON.stringify(this.user));
+              this.router.navigate(['/user/curr']);
+            }
+            else if (this.user.type === "TM") {
+              this.loggedIn = true;
+              localStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('currentUser', JSON.stringify(this.user));
+              this.router.navigate(['/tm']);
+            }
+            else if (this.user.type === "ADMIN") {
+              this.loggedIn = true;
+              localStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('currentUser', JSON.stringify(this.user));
+              this.router.navigate(['/admin']);
+            }
           }
         }
       }
-    });
+    }
+    );
   }
 }

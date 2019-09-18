@@ -51,23 +51,24 @@
     *ngFor="let course of courses | searchFilter: 'courseName' : searchText; let i = index">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span *ngIf="markedCourses[i]"><i id="new" class="material-icons">fiber_new</i></span><span>{{course.courseName}}</span>
+        <span *ngIf="markedCourses[i]"><i id="new"
+            class="material-icons">fiber_new</i></span><span>{{course.courseName}}</span>
       </mat-panel-title>
       <mat-panel-description>
         <table>
           <thead>
-          <th>Check potential participants</th>
-        </thead>
-      </table>
-      <table>
+            <th>Check potential participants</th>
+          </thead>
+        </table>
+        <table>
           <thead>
-          <th>Available : {{course.actualCapacity}}</th>
-        </thead>
-      </table>
-      <table>
+            <th>Available : {{course.actualCapacity}}/{{course.capacity}}</th>
+          </thead>
+        </table>
+        <table>
           <thead>
-          <th>Starting Date: {{course.startDate}}</th>
-        </thead>
+            <th>Starting Date: {{course.startDate}}</th>
+          </thead>
         </table>
         <button type="button" class="btn btn-success" id="acceptAll" appPreventDoubleClick
           (throttledClick)="allYesClick(course)" [throttleTime]="1000" [disabled]="emptyCourses[i]">Accept All</button>
@@ -101,7 +102,7 @@
               (throttledClick)="yesClick(user, course)" [throttleTime]="1000" title="Accept user">&#10004;</button>
             <button type="button" class="btn btn-danger" id="xbtn" appPreventDoubleClick
               (throttledClick)="noClick(user, course)" [throttleTime]="1000" title="Reject user">&times;</button>
-              <button type="button" class="btn btn-info" id="xbtn" appPreventDoubleClick (throttledClick)="userInfo(user)"
+            <button type="button" class="btn btn-info" id="xbtn" appPreventDoubleClick (throttledClick)="userInfo(user)"
               [throttleTime]="1000">&#8505;</button>
           </td>
         </tr>

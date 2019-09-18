@@ -21,10 +21,10 @@ export class PmStatisticsComponent implements OnInit {
   ) {
     this.dataSource1 = {
       chart: {
-        caption: "Course enrollemnt",
+        caption: "Courses",
         subCaption: "per type of domain",
         xAxisName: "Type of domain",
-        yAxisName: "Participants",
+        yAxisName: "Courses",
         numberSuffix: "%",
         theme: "candy"
       },
@@ -65,10 +65,10 @@ export class PmStatisticsComponent implements OnInit {
 
       this.dataSource1 = {
         chart: {
-          caption: "Course enrollemnt",
+          caption: "Courses",
           subCaption: "per type of domain",
           xAxisName: "Type of domain",
-          yAxisName: "Participants",
+          yAxisName: "Courses",
           numberSuffix: "%",
           theme: "candy"
         },
