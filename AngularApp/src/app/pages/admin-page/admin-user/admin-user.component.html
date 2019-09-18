@@ -9,7 +9,6 @@
                 <th mat-sort-header="lastName">Last Name</th>
                 <th mat-sort-header="enable">Enable</th>
                 <th mat-sort-header="leader">Leader</th>
-                <th>Delete user</th>
             </tr>
         </thead>
         <tbody>
@@ -41,12 +40,6 @@
                             <mat-option *ngFor="let leader of leaders" [(value)]="leader">{{leader}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                </td>
-                <td>
-                    <button class="delete_button" appPreventDoubleClick (throttledClick)="deleteUser(user)"
-                        [throttleTime]="1000" title="Delete user">
-                        <i class="material-icons">delete_forever</i>
-                    </button>
                 </td>
             </tr>
         </tbody>

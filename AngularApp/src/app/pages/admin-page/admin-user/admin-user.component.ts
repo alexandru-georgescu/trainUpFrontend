@@ -111,24 +111,6 @@ export class AdminUserComponent implements OnInit {
     this.sortedDataUser[index].leader = newLeader;
     this.users = this.sortedDataUser;
   }
-
-  
-
-  deleteUser(user : User) {
-    if(confirm("User "+ user.email + " will be deleted. Are you sure?")) {
-      this.userService.removeUserById(user.id.toString()).subscribe(a => {this.ngOnInit()},
-      error => {
-        this.toastr.error("Failed request", "Fail!", {
-          timeOut: 3000,
-          positionClass: 'toast-bottom-right'
-        })
-      },
-      () => this.toastr.success("User has been deleted", "Success!", {
-        timeOut: 2000,
-        positionClass: 'toast-bottom-right'
-      }));
-    }
-  }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {

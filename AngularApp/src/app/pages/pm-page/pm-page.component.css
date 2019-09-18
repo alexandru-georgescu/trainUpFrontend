@@ -20,7 +20,7 @@
 
   .upperContainer {
     /* background-color:#b8e8f7; */
-    background-color: lightblue;
+    background-color: #d7e8fd;
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
@@ -112,6 +112,10 @@ button:focus {
   position: absolute;
   padding: 6.5px;
   pointer-events: none;
+}
+
+#new {
+  margin-right: 3px;   
 }
 
 #acceptAll {

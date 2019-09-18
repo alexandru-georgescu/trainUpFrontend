@@ -19,13 +19,6 @@ td {
     text-align: center;
     padding:0% !important;
 }
-
-.delete_button {
-    text-decoration: none !important;
-    background: none !important;
-    outline : 0 !important;
-    border: none !important;
-}
   
   .mat-stroked-button.mat-primary {
     color: black !important;
