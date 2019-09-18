@@ -18,6 +18,10 @@ table {
   margin-bottom: 5px;
 }
 
+#ac {
+  text-align: center !important;
+}
+
 .logoContainer {
   display: flex;
   justify-content: flex-start;

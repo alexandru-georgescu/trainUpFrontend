@@ -59,11 +59,9 @@ export class NextCoursesComponent implements OnInit {
         this.sortedData = this.courses.slice();
         this.userService.getCurrentCourses(this.user).subscribe(currentCourses => {
           this.unavailableCourses = new Array();
-          console.log(futureCourses);
           futureCourses.forEach(course => {
             this.filterUnavailableCourses(course, currentCourses)
           });
-          console.log(this.unavailableCourses);
 
           this.unavailableCourses.forEach(course => {
             const index: number = this.courses.indexOf(course);
@@ -110,7 +108,6 @@ export class NextCoursesComponent implements OnInit {
         (courseStart >= currCourseStart && courseStart <= currCourseEnd && courseEnd <= currCourseEnd && courseEnd >= currCourseStart) ||
         (courseStart >= currCourseStart && courseStart <= currCourseEnd && courseEnd >= currCourseEnd)) {
         this.unavailableCourses.push(course);
-        console.log(course);
         break;
       }
     };

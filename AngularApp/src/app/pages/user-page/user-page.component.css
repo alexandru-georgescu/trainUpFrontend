@@ -20,6 +20,10 @@
     border-bottom: none !important;
 }
 
+#ac {
+    text-align: center !important;
+  }
+
 .all-container {
     text-align: center;
     margin: 0 auto;
